@@ -234,30 +234,34 @@ const ModernProfileScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* Tabs */}
+        {/* Tabs with outline icons */}
         <div className="border-t border-gray-200">
           <div className="flex">
             <button
               onClick={() => setActiveTab('grid')}
-              className={`flex-1 py-3 flex items-center justify-center space-x-1 ${
+              className={`flex-1 py-4 flex flex-col items-center justify-center space-y-1 transition-colors ${
                 activeTab === 'grid'
-                  ? 'border-t-2 border-gray-900'
-                  : 'text-gray-400'
+                  ? 'border-t-2 border-blue-500 text-blue-600'
+                  : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
               </svg>
+              <span className="text-xs font-medium">POSTS</span>
             </button>
             <button
               onClick={() => setActiveTab('testimonials')}
-              className={`flex-1 py-3 flex items-center justify-center space-x-1 ${
+              className={`flex-1 py-4 flex flex-col items-center justify-center space-y-1 transition-colors ${
                 activeTab === 'testimonials'
-                  ? 'border-t-2 border-gray-900'
-                  : 'text-gray-400'
+                  ? 'border-t-2 border-pink-500 text-pink-600'
+                  : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              <span className="text-lg">💝</span>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+              <span className="text-xs font-medium">DEPOIMENTOS</span>
             </button>
           </div>
         </div>
