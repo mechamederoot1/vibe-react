@@ -3,13 +3,13 @@ import { Story } from '../services/storyService';
 import { User } from '../types/auth';
 import CreateStoryModal from './CreateStoryModal';
 
-interface InstagramStoriesBarProps {
+interface VibeStoriesBarProps {
   stories: Story[];
   onNewStory: (content: string) => Promise<void>;
   currentUser: User | null;
 }
 
-const InstagramStoriesBar: React.FC<InstagramStoriesBarProps> = ({ 
+const VibeStoriesBar: React.FC<VibeStoriesBarProps> = ({ 
   stories, 
   onNewStory, 
   currentUser 
@@ -126,4 +126,4 @@ const InstagramStoriesBar: React.FC<InstagramStoriesBarProps> = ({
   );
 };
 
-export default InstagramStoriesBar;
+export default VibeStoriesBar;

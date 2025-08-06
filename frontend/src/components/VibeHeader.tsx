@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-interface InstagramHeaderProps {
+interface VibeHeaderProps {
   onCreatePost: () => void;
 }
 
-const InstagramHeader: React.FC<InstagramHeaderProps> = ({ onCreatePost }) => {
+const VibeHeader: React.FC<VibeHeaderProps> = ({ onCreatePost }) => {
   return (
     <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-50">
       {/* Logo */}
@@ -45,4 +45,4 @@ const InstagramHeader: React.FC<InstagramHeaderProps> = ({ onCreatePost }) => {
   );
 };
 
-export default InstagramHeader;
+export default VibeHeader;
