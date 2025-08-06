@@ -44,7 +44,7 @@ const AppRoutes: React.FC = () => {
       ) : (
         <>
           <Route path="/login" element={<LoginScreen />} />
-          <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/register" element={<ModernRegisterScreen />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </>
       )}
