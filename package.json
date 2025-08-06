@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "echo 'No dev server configured yet'",
-    "start": "node index.js"
+    "dev": "npx http-server . -p 3000 -c-1",
+    "start": "npm run dev"
   },
   "keywords": [],
   "author": "",
