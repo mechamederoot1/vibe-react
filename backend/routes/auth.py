@@ -118,6 +118,7 @@ async def validate_step2(data: UserRegisterStep2, db: Session = Depends(get_db))
 @router.post("/validate-step3")
 async def validate_step3(data: UserRegisterStep3):
     """Validate registration step 3 - Gender and Birth Date"""
+    print(f"DEBUG - Dados recebidos no step 3: {data}")
     return {"message": "Dados válidos", "data": data}
 
 @router.post("/validate-step4")
