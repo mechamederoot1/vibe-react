@@ -17,6 +17,10 @@ const VibePostCard: React.FC<VibePostCardProps> = ({
   const [saved, setSaved] = useState(false);
   const [likesCount, setLikesCount] = useState(Math.floor(Math.random() * 100) + 5);
   const [showFullCaption, setShowFullCaption] = useState(false);
+  const [showReactionPicker, setShowReactionPicker] = useState(false);
+  const [selectedReaction, setSelectedReaction] = useState<string | null>(null);
+  const [showComments, setShowComments] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const isOwner = post.author_id === currentUserId;
   const isLongCaption = post.content.length > 200;
@@ -49,9 +53,35 @@ const VibePostCard: React.FC<VibePostCardProps> = ({
     });
   };
 
+  const reactions = [
+    { emoji: '👍', name: 'Curtir', color: 'text-blue-500' },
+    { emoji: '❤️', name: 'Amar', color: 'text-red-500' },
+    { emoji: '😊', name: 'Feliz', color: 'text-yellow-500' },
+    { emoji: '😮', name: 'Surpreso', color: 'text-orange-500' },
+    { emoji: '😢', name: 'Triste', color: 'text-blue-400' },
+    { emoji: '😡', name: 'Bravo', color: 'text-red-600' }
+  ];
+
   const handleLike = () => {
+    if (selectedReaction) {
+      setSelectedReaction(null);
+      setLikesCount(prev => prev - 1);
+    } else {
+      setSelectedReaction('👍');
+      setLikesCount(prev => prev + 1);
+    }
     setLiked(!liked);
-    setLikesCount(prev => liked ? prev - 1 : prev + 1);
+  };
+
+  const handleReaction = (reaction: string) => {
+    const wasReacted = selectedReaction !== null;
+    setSelectedReaction(reaction);
+    setShowReactionPicker(false);
+
+    if (!wasReacted) {
+      setLikesCount(prev => prev + 1);
+    }
+    setLiked(true);
   };
 
   const handleDelete = async () => {
