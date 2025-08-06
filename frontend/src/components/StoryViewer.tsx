@@ -221,14 +221,20 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
   if (!currentStory) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black">
+    <div className="fixed inset-0 z-50 bg-black w-screen h-screen">
       {/* Story Content */}
-      <div 
+      <div
         ref={containerRef}
-        className="relative w-full h-full"
+        className="relative w-full h-full overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onClick={handleScreenTap}
+        style={{
+          width: '100vw',
+          height: '100vh',
+          WebkitUserSelect: 'none',
+          userSelect: 'none'
+        }}
       >
         {getBackgroundContent()}
 
