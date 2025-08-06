@@ -33,7 +33,7 @@
     @apply h-screen w-full max-w-md mx-auto bg-white shadow-xl;
   }
 
-  /* Instagram-style button */
+  /* Vibe-style button */
   .ig-button {
     @apply inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 transform active:scale-95;
   }
