@@ -1,16 +1,6 @@
 import { LoginData, RegisterData, AuthResponse, User, RegisterStep1, RegisterStep2, RegisterStep3, RegisterStep4 } from '../types/auth';
 
-// Try to detect the environment and use appropriate API URL
-const getApiBaseUrl = () => {
-  // If running on fly.dev, use a placeholder backend URL or mock mode
-  if (window.location.hostname.includes('fly.dev')) {
-    return null; // Use mock mode
-  }
-  // Default to localhost for local development
-  return 'http://localhost:8000/api';
-};
-
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = 'http://localhost:8000/api';
 
 class AuthService {
   private async makeRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
