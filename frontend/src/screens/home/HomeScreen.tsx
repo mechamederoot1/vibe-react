@@ -29,8 +29,78 @@ const HomeScreen: React.FC = () => {
         postService.getFeed(),
         storyService.getActiveStories()
       ]);
+
+      // Add example stories for testing StoryViewer
+      const exampleStories = [
+        {
+          id: 1001,
+          content: 'Primeira story de exemplo! 🎉',
+          author_id: 1,
+          author_name: 'João Silva',
+          author_avatar: '',
+          background_color: '#3b82f6',
+          text_color: '#ffffff',
+          font_size: 28,
+          is_active: true,
+          created_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 min ago
+          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
+        },
+        {
+          id: 1002,
+          content: 'Segunda story com gradiente!',
+          author_id: 1,
+          author_name: 'João Silva',
+          author_avatar: '',
+          background_gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          text_color: '#ffffff',
+          font_size: 24,
+          is_active: true,
+          created_at: new Date(Date.now() - 1000 * 60 * 20).toISOString(), // 20 min ago
+          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
+        },
+        {
+          id: 1003,
+          content: 'Story da Maria! ✨',
+          author_id: 2,
+          author_name: 'Maria Santos',
+          author_avatar: '',
+          background_color: '#ec4899',
+          text_color: '#ffffff',
+          font_size: 32,
+          is_active: true,
+          created_at: new Date(Date.now() - 1000 * 60 * 10).toISOString(), // 10 min ago
+          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
+        },
+        {
+          id: 1004,
+          content: 'Mais uma story da Maria! 🌟',
+          author_id: 2,
+          author_name: 'Maria Santos',
+          author_avatar: '',
+          background_gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+          text_color: '#ffffff',
+          font_size: 26,
+          is_active: true,
+          created_at: new Date(Date.now() - 1000 * 60 * 5).toISOString(), // 5 min ago
+          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
+        },
+        {
+          id: 1005,
+          content: 'Story do Pedro! 🚀',
+          author_id: 3,
+          author_name: 'Pedro Costa',
+          author_avatar: '',
+          background_color: '#10b981',
+          text_color: '#ffffff',
+          font_size: 30,
+          is_active: true,
+          created_at: new Date(Date.now() - 1000 * 60 * 2).toISOString(), // 2 min ago
+          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
+        }
+      ];
+
       setPosts(feedPosts);
-      setStories(activeStories);
+      setStories([...activeStories, ...exampleStories]);
     } catch (error) {
       console.error('Erro ao carregar feed:', error);
     } finally {
