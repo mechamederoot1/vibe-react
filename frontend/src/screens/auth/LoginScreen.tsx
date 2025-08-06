@@ -42,6 +42,19 @@ const LoginScreen: React.FC = () => {
 
   return (
     <div className="h-screen w-full bg-gradient-to-br from-vibe-light to-white flex flex-col">
+      {/* Environment indicator */}
+      {window.location.hostname.includes('fly.dev') && (
+        <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-3 text-sm">
+          <div className="flex">
+            <div className="ml-3">
+              <p className="text-sm">
+                🚀 <strong>Demo Mode:</strong> Usando dados simulados para demonstração
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex-none pt-16 pb-8 px-6 text-center">
         <VibeLogoComponent size="large" />
