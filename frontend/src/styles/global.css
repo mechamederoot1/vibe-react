@@ -39,11 +39,11 @@
   }
 
   .ig-button-primary {
-    @apply bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 text-white shadow-md hover:shadow-lg;
+    @apply bg-blue-500 text-white shadow-md hover:bg-blue-600 hover:shadow-lg;
   }
 
   .ig-button-secondary {
-    @apply border border-gray-300 text-gray-700 bg-white hover:bg-gray-50;
+    @apply border border-blue-200 text-blue-600 bg-white hover:bg-blue-50;
   }
 
   .ig-button-follow {
@@ -52,7 +52,7 @@
 
   /* Modern input */
   .ig-input {
-    @apply w-full px-3 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all duration-200;
+    @apply w-full px-3 py-3 bg-blue-50 border border-blue-200 rounded-lg text-sm placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all duration-200;
   }
 
   /* Card styles */
@@ -62,7 +62,7 @@
 
   /* Story ring gradient */
   .story-ring {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #3b82f6 0%, #1d4ed8 25%, #1e40af 50%, #1e3a8a 75%, #1e3a8a 100%);
     @apply p-0.5 rounded-full;
   }
 
@@ -123,12 +123,12 @@
 
   /* Story viewer */
   .story-viewer {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #3b82f6 0%, #1d4ed8 25%, #1e40af 50%, #1e3a8a 75%, #1e3a8a 100%);
   }
 
   /* Text gradient */
   .text-gradient {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #3b82f6 0%, #1d4ed8 25%, #1e40af 50%, #1e3a8a 75%, #1e3a8a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
