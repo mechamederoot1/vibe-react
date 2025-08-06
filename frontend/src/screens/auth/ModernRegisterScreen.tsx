@@ -48,6 +48,10 @@ const ModernRegisterScreen: React.FC = () => {
           setCurrentStep(3);
           break;
         case 3:
+          console.log('DEBUG - Enviando dados step3:', step3Data);
+          if (!step3Data.gender || !step3Data.birth_date) {
+            throw new Error('Preencha todos os campos obrigatórios');
+          }
           await authService.validateStep3(step3Data);
           setCurrentStep(4);
           break;
