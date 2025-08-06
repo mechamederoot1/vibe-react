@@ -515,6 +515,26 @@ const ModernProfileScreen: React.FC = () => {
           onSubmit={handleNewTestimonial}
         />
       )}
+
+      {/* Avatar Editor */}
+      {showAvatarEditor && (
+        <ProfilePhotoEditor
+          currentPhoto={profile?.avatar_url}
+          onSave={handleSaveAvatar}
+          onClose={() => setShowAvatarEditor(false)}
+          type="avatar"
+        />
+      )}
+
+      {/* Cover Photo Editor */}
+      {showCoverEditor && (
+        <ProfilePhotoEditor
+          currentPhoto={profile?.cover_photo_url}
+          onSave={handleSaveCover}
+          onClose={() => setShowCoverEditor(false)}
+          type="cover"
+        />
+      )}
     </div>
   );
 };
