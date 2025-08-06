@@ -17,7 +17,7 @@ const CreateStoryModal: React.FC<CreateStoryModalProps> = ({
   const [error, setError] = useState('');
   const [selectedBackground, setSelectedBackground] = useState('gradient1');
 
-  const backgrounds = {
+  const backgrounds: Record<string, string> = {
     gradient1: 'bg-gradient-to-br from-purple-400 via-pink-500 to-red-500',
     gradient2: 'bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500',
     gradient3: 'bg-gradient-to-br from-green-400 via-blue-500 to-purple-600',
