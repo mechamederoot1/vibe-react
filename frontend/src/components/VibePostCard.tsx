@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Post } from '../services/postService';
 
-interface InstagramPostCardProps {
+interface VibePostCardProps {
   post: Post;
   currentUserId: number;
   onDelete: (postId: number) => void;
 }
 
-const InstagramPostCard: React.FC<InstagramPostCardProps> = ({ 
+const VibePostCard: React.FC<VibePostCardProps> = ({ 
   post, 
   currentUserId, 
   onDelete 
@@ -241,4 +241,4 @@ const InstagramPostCard: React.FC<InstagramPostCardProps> = ({
   );
 };
 
-export default InstagramPostCard;
+export default VibePostCard;
