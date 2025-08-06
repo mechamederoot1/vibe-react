@@ -17,22 +17,34 @@ class UserRegisterStep2(BaseModel):
     
 class UserRegisterStep3(BaseModel):
     gender: str
-    birth_date: date
-    
+    birth_date: str  # Accept as string from frontend
+
     @validator('gender')
     def validate_gender(cls, v):
         if v not in ['masculino', 'feminino', 'outro']:
             raise ValueError('Gênero deve ser: masculino, feminino ou outro')
         return v
-    
+
     @validator('birth_date')
     def validate_birth_date(cls, v):
-        from datetime import date, timedelta
+        from datetime import date, timedelta, datetime
+
+        # Parse string date to date object
+        try:
+            if isinstance(v, str):
+                birth_date = datetime.strptime(v, '%Y-%m-%d').date()
+            else:
+                birth_date = v
+        except ValueError:
+            raise ValueError('Formato de data inválido. Use YYYY-MM-DD')
+
+        # Check minimum age
         today = date.today()
         min_age_date = today - timedelta(days=13*365)
-        if v > min_age_date:
+        if birth_date > min_age_date:
             raise ValueError('Você deve ter pelo menos 13 anos')
-        return v
+
+        return birth_date
 
 class UserRegisterStep4(BaseModel):
     password: str
