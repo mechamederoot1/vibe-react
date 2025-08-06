@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { postService, Post } from '../../services/postService';
 import { storyService, Story } from '../../services/storyService';
 import VibePostCard from '../../components/VibePostCard';
-import VibeStoriesBar from '../../components/VibeStoriesBar';
+import GroupedVibeStoriesBar from '../../components/GroupedVibeStoriesBar';
 import CreatePostModal from '../../components/CreatePostModal';
 import VibeHeader from '../../components/VibeHeader';
 import BottomNavigation from '../../components/BottomNavigation';
@@ -99,7 +99,7 @@ const HomeScreen: React.FC = () => {
       <div className="flex-1 overflow-y-auto custom-scrollbar bg-gray-50">
         {/* Stories Section */}
         <div className="bg-white border-b border-gray-200">
-          <VibeStoriesBar
+          <GroupedVibeStoriesBar
             stories={stories}
             onNewStory={handleNewStory}
             currentUser={user}
