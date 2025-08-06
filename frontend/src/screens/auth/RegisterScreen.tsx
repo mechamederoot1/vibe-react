@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { RegisterData, RegisterStep1, RegisterStep2, RegisterStep3, RegisterStep4 } from '../../types/auth';
 import { authService } from '../../services/authService';
-import VibeButton from '../../components/VibeButton';
-import VibeInput from '../../components/VibeInput';
-import VibeLogoComponent from '../../components/VibeLogoComponent';
 import TermsModal from '../../components/TermsModal';
 
 const RegisterScreen: React.FC = () => {
