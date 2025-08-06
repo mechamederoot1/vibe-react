@@ -1,16 +1,25 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from contextlib import asynccontextmanager
 import os
 
 from database.database import create_tables
 from routes import auth, users, posts, stories
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    create_tables()
+    yield
+    # Shutdown (if needed)
+
 # Create FastAPI app
 app = FastAPI(
     title="Vibe Social Network API",
     description="Backend API for Vibe social media platform",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # CORS middleware
@@ -32,10 +41,6 @@ app.include_router(users.router, prefix="/api/users", tags=["Users"])
 app.include_router(posts.router, prefix="/api/posts", tags=["Posts"])
 app.include_router(stories.router, prefix="/api/stories", tags=["Stories"])
 
-@app.on_event("startup")
-async def startup():
-    create_tables()
-
 @app.get("/")
 async def root():
     return {"message": "Vibe Social Network API"}
@@ -46,4 +51,4 @@ async def health_check():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
