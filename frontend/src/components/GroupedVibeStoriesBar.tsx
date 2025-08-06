@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Story } from '../services/storyService';
 import { User } from '../types/auth';
 import EnhancedCreateStoryModal from './EnhancedCreateStoryModal';
+import StoryViewer from './StoryViewer';
 
 interface GroupedVibeStoriesBarProps {
   stories: Story[];
@@ -25,6 +26,9 @@ const GroupedVibeStoriesBar: React.FC<GroupedVibeStoriesBarProps> = ({
 }) => {
   const [showCreateStory, setShowCreateStory] = useState(false);
   const [selectedStoryGroup, setSelectedStoryGroup] = useState<GroupedStory | null>(null);
+  const [showStoryViewer, setShowStoryViewer] = useState(false);
+  const [viewerStories, setViewerStories] = useState<Story[]>([]);
+  const [initialStoryIndex, setInitialStoryIndex] = useState(0);
 
   // Group stories by user
   const groupedStories = useMemo(() => {
@@ -78,9 +82,16 @@ const GroupedVibeStoriesBar: React.FC<GroupedVibeStoriesBarProps> = ({
   };
 
   const handleStoryGroupClick = (group: GroupedStory) => {
-    setSelectedStoryGroup(group);
-    // TODO: Open story viewer modal
-    console.log('Opening story group:', group);
+    setViewerStories(group.stories);
+    setInitialStoryIndex(0);
+    setShowStoryViewer(true);
+
+    // Mark stories as read (optional)
+    groupedStories.forEach(g => {
+      if (g.userId === group.userId) {
+        g.hasUnread = false;
+      }
+    });
   };
 
   return (
@@ -198,52 +209,14 @@ const GroupedVibeStoriesBar: React.FC<GroupedVibeStoriesBarProps> = ({
         />
       )}
 
-      {/* Story Group Viewer Modal - TODO: Implement */}
-      {selectedStoryGroup && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">Stories de {selectedStoryGroup.userName}</h3>
-              <button
-                onClick={() => setSelectedStoryGroup(null)}
-                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            
-            <div className="space-y-3">
-              <p className="text-sm text-gray-600">
-                {selectedStoryGroup.stories.length} {selectedStoryGroup.stories.length === 1 ? 'story' : 'stories'}
-              </p>
-              
-              <div className="space-y-2">
-                {selectedStoryGroup.stories.map((story, index) => (
-                  <div key={story.id} className="p-3 bg-gray-50 rounded-lg">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium">Story {index + 1}</span>
-                      <span className="text-xs text-gray-500">
-                        {formatTimeAgo(story.created_at)}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-700 line-clamp-2">
-                      {story.content}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              
-              <button
-                onClick={() => setSelectedStoryGroup(null)}
-                className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Ver Stories
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* Story Viewer */}
+      {showStoryViewer && (
+        <StoryViewer
+          stories={viewerStories}
+          initialStoryIndex={initialStoryIndex}
+          onClose={() => setShowStoryViewer(false)}
+          currentUser={currentUser}
+        />
       )}
     </>
   );
