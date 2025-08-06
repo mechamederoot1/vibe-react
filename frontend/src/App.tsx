@@ -37,8 +37,8 @@ const AppRoutes: React.FC = () => {
       {user ? (
         <>
           <Route path="/" element={<HomeScreen />} />
-          <Route path="/profile" element={<ProfileScreen />} />
-          <Route path="/profile/:userId" element={<ProfileScreen />} />
+          <Route path="/profile" element={<ModernProfileScreen />} />
+          <Route path="/profile/:userId" element={<ModernProfileScreen />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </>
       ) : (
