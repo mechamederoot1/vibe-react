@@ -4,11 +4,6 @@ const API_BASE_URL = 'http://localhost:8000/api';
 
 class AuthService {
   private async makeRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    // If no API_BASE_URL (fly.dev deployment), use mock responses
-    if (!API_BASE_URL) {
-      return this.mockRequest<T>(endpoint, options);
-    }
-
     const url = `${API_BASE_URL}${endpoint}`;
 
     const defaultHeaders: Record<string, string> = {
@@ -28,86 +23,14 @@ class AuthService {
       },
     };
 
-    try {
-      const response = await fetch(url, config);
+    const response = await fetch(url, config);
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || 'Erro na requisição');
-      }
-
-      return response.json();
-    } catch (error) {
-      // If backend is not available, fallback to mock
-      console.warn('Backend not available, using mock data');
-      return this.mockRequest<T>(endpoint, options);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail || 'Erro na requisição');
     }
-  }
 
-  private async mockRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    const method = options.method || 'GET';
-    const body = options.body ? JSON.parse(options.body as string) : {};
-
-    // Mock responses for different endpoints
-    switch (endpoint) {
-      case '/auth/validate-step1':
-      case '/auth/validate-step2':
-      case '/auth/validate-step3':
-      case '/auth/validate-step4':
-        return { message: 'Dados válidos', data: body } as T;
-
-      case '/auth/register':
-        const mockUser: User = {
-          id: 1,
-          first_name: body.first_name,
-          last_name: body.last_name,
-          email: body.email,
-          gender: body.gender,
-          birth_date: body.birth_date,
-          created_at: new Date().toISOString()
-        };
-        const registerResponse: AuthResponse = {
-          access_token: 'mock_token_' + Math.random(),
-          token_type: 'bearer',
-          user: mockUser
-        };
-        return registerResponse as T;
-
-      case '/auth/login':
-        const loginUser: User = {
-          id: 1,
-          first_name: 'Demo',
-          last_name: 'User',
-          email: body.email,
-          gender: 'outro',
-          birth_date: '1990-01-01',
-          created_at: new Date().toISOString()
-        };
-        const loginResponse: AuthResponse = {
-          access_token: 'mock_token_' + Math.random(),
-          token_type: 'bearer',
-          user: loginUser
-        };
-        return loginResponse as T;
-
-      case '/auth/me':
-        const currentUser: User = {
-          id: 1,
-          first_name: 'Demo',
-          last_name: 'User',
-          email: 'demo@vibe.social',
-          gender: 'outro',
-          birth_date: '1990-01-01',
-          created_at: new Date().toISOString()
-        };
-        return currentUser as T;
-
-      default:
-        throw new Error('Endpoint não encontrado');
-    }
+    return response.json();
   }
 
   async login(data: LoginData): Promise<AuthResponse> {
