@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { User } from '../types/auth';
+import StoryTextEditor from './StoryTextEditor';
 
 interface EnhancedCreateStoryModalProps {
   onClose: () => void;
@@ -21,6 +22,8 @@ const EnhancedCreateStoryModal: React.FC<EnhancedCreateStoryModalProps> = ({
   const [mediaType, setMediaType] = useState<'image' | 'video' | null>(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [customColor, setCustomColor] = useState('#FF6B6B');
+  const [showTextEditor, setShowTextEditor] = useState(false);
+  const [textElements, setTextElements] = useState<any[]>([]);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
@@ -115,6 +118,11 @@ const EnhancedCreateStoryModal: React.FC<EnhancedCreateStoryModalProps> = ({
     setMediaType(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
     if (videoInputRef.current) videoInputRef.current.value = '';
+  };
+
+  const handleTextChange = (text: string, position: { x: number; y: number }, fontSize: number, color: string) => {
+    // Update text elements for story
+    console.log('Text changed:', { text, position, fontSize, color });
   };
 
   const getBackgroundStyle = () => {
@@ -231,8 +239,8 @@ const EnhancedCreateStoryModal: React.FC<EnhancedCreateStoryModalProps> = ({
             )}
           </div>
 
-          {/* Text input overlay */}
-          {!mediaFile && (
+          {/* Text input overlay for simple text mode */}
+          {!mediaFile && !showTextEditor && (
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -240,6 +248,15 @@ const EnhancedCreateStoryModal: React.FC<EnhancedCreateStoryModalProps> = ({
               maxLength={500}
               className="absolute inset-0 w-full h-full bg-transparent text-transparent resize-none focus:outline-none cursor-text"
               style={{ caretColor: 'white' }}
+            />
+          )}
+
+          {/* Advanced Text Editor */}
+          {showTextEditor && (
+            <StoryTextEditor
+              onTextChange={handleTextChange}
+              containerWidth={400}
+              containerHeight={600}
             />
           )}
         </div>
@@ -293,7 +310,17 @@ const EnhancedCreateStoryModal: React.FC<EnhancedCreateStoryModalProps> = ({
               </svg>
             </button>
 
-            <button 
+            <button
+              onClick={() => setShowTextEditor(!showTextEditor)}
+              className={`p-3 rounded-full text-white hover:bg-opacity-50 transition-colors ${
+                showTextEditor ? 'bg-blue-500' : 'bg-black bg-opacity-30'
+              }`}
+              title="Editor de texto avançado"
+            >
+              <span className="text-xl font-bold">T</span>
+            </button>
+
+            <button
               onClick={() => setShowColorPicker(!showColorPicker)}
               className="p-3 rounded-full bg-black bg-opacity-30 text-white hover:bg-opacity-50 transition-colors"
               title="Selecionar cor"
