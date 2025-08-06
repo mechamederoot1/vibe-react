@@ -36,8 +36,10 @@ module.exports = {
       directory: path.join(__dirname, 'public'),
     },
     compress: true,
+    host: '0.0.0.0',
     port: 3000,
     historyApiFallback: true,
+    allowedHosts: 'all',
   },
   output: {
     filename: 'bundle.js',
