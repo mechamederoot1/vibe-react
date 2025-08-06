@@ -20,8 +20,8 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
   const [showControls, setShowControls] = useState(true);
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
   
-  const progressInterval = useRef<NodeJS.Timeout | null>(null);
-  const hideControlsTimeout = useRef<NodeJS.Timeout | null>(null);
+  const progressInterval = useRef<number | null>(null);
+  const hideControlsTimeout = useRef<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +32,7 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
   useEffect(() => {
     if (!isPlaying) return;
 
-    progressInterval.current = setInterval(() => {
+    progressInterval.current = window.setInterval(() => {
       setProgress(prev => {
         const newProgress = prev + (100 / (STORY_DURATION / 100));
         if (newProgress >= 100) {
@@ -45,7 +45,7 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
 
     return () => {
       if (progressInterval.current) {
-        clearInterval(progressInterval.current);
+        window.clearInterval(progressInterval.current);
       }
     };
   }, [currentIndex, isPlaying]);
@@ -58,14 +58,14 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
   // Auto-hide controls
   useEffect(() => {
     if (showControls) {
-      hideControlsTimeout.current = setTimeout(() => {
+      hideControlsTimeout.current = window.setTimeout(() => {
         setShowControls(false);
       }, 3000);
     }
 
     return () => {
       if (hideControlsTimeout.current) {
-        clearTimeout(hideControlsTimeout.current);
+        window.clearTimeout(hideControlsTimeout.current);
       }
     };
   }, [showControls]);
