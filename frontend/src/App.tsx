@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginScreen from './screens/auth/LoginScreen';
 import ModernRegisterScreen from './screens/auth/ModernRegisterScreen';
 import HomeScreen from './screens/home/HomeScreen';
-import ProfileScreen from './screens/profile/ProfileScreen';
+import ModernProfileScreen from './screens/profile/ModernProfileScreen';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 const App: React.FC = () => {
