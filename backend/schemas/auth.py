@@ -73,10 +73,31 @@ class UserRegisterFinal(BaseModel):
     last_name: str
     email: EmailStr
     gender: str
-    birth_date: date
+    birth_date: str  # Accept as string
     password: str
     terms_accepted: bool
-    
+
+    @validator('birth_date')
+    def validate_birth_date(cls, v):
+        from datetime import date, timedelta, datetime
+
+        # Parse string date to date object
+        try:
+            if isinstance(v, str):
+                birth_date = datetime.strptime(v, '%Y-%m-%d').date()
+            else:
+                birth_date = v
+        except ValueError:
+            raise ValueError('Formato de data inválido. Use YYYY-MM-DD')
+
+        # Check minimum age
+        today = date.today()
+        min_age_date = today - timedelta(days=13*365)
+        if birth_date > min_age_date:
+            raise ValueError('Você deve ter pelo menos 13 anos')
+
+        return birth_date
+
     @validator('terms_accepted')
     def validate_terms(cls, v):
         if not v:
