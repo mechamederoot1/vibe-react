@@ -20,6 +20,7 @@ class UserProfileResponse(BaseModel):
     first_name: str
     last_name: str
     email: str
+    username: Optional[str] = None
     gender: str
     birth_date: date
     avatar_url: Optional[str] = None
