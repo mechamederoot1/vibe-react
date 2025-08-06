@@ -19,13 +19,21 @@ class AuthService:
         
         # Create new user
         hashed_password = get_password_hash(user_data.password)
+
+        # Convert birth_date string to date object if needed
+        from datetime import datetime
+        if isinstance(user_data.birth_date, str):
+            birth_date = datetime.strptime(user_data.birth_date, '%Y-%m-%d').date()
+        else:
+            birth_date = user_data.birth_date
+
         new_user = User(
             first_name=user_data.first_name,
             last_name=user_data.last_name,
             email=user_data.email,
             password_hash=hashed_password,
             gender=user_data.gender,
-            birth_date=user_data.birth_date,
+            birth_date=birth_date,
         )
         
         db.add(new_user)
