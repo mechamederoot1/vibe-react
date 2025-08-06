@@ -5,8 +5,8 @@ const API_BASE_URL = 'http://localhost:8000/api';
 class AuthService {
   private async makeRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const url = `${API_BASE_URL}${endpoint}`;
-    
-    const defaultHeaders = {
+
+    const defaultHeaders: Record<string, string> = {
       'Content-Type': 'application/json',
     };
 
