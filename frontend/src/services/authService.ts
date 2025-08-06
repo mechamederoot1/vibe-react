@@ -1,6 +1,19 @@
 import { LoginData, RegisterData, AuthResponse, User, RegisterStep1, RegisterStep2, RegisterStep3, RegisterStep4 } from '../types/auth';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+// Get the correct API URL based on current hostname
+const getApiBaseUrl = () => {
+  const hostname = window.location.hostname;
+
+  // If accessing via IP address or domain (not localhost), use same host for API
+  if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+    return `http://${hostname}:8000/api`;
+  }
+
+  // Default to localhost for local development
+  return 'http://localhost:8000/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 class AuthService {
   private async makeRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
