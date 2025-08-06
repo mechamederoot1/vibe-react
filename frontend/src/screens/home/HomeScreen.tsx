@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { postService, Post } from '../../services/postService';
 import { storyService, Story } from '../../services/storyService';
-import InstagramPostCard from '../../components/InstagramPostCard';
+import VibePostCard from '../../components/VibePostCard';
 import InstagramStoriesBar from '../../components/InstagramStoriesBar';
 import CreatePostModal from '../../components/CreatePostModal';
 import InstagramHeader from '../../components/InstagramHeader';
@@ -133,7 +133,7 @@ const HomeScreen: React.FC = () => {
           ) : (
             <div className="space-y-0">
               {posts.map((post) => (
-                <InstagramPostCard
+                <VibePostCard
                   key={post.id}
                   post={post}
                   currentUserId={user?.id || 0}
