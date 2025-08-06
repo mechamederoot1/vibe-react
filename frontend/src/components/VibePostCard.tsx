@@ -98,8 +98,11 @@ const VibePostCard: React.FC<VibePostCardProps> = ({
                   {post.author_name}
                 </h3>
                 {post.post_type === 'testimonial' && (
-                  <span className="text-xs bg-gradient-to-r from-pink-500 to-red-500 text-white px-2 py-0.5 rounded-full font-medium">
-                    💝 depoimento
+                  <span className="text-xs bg-blue-500 text-white px-2 py-0.5 rounded-full font-medium flex items-center space-x-1">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                    <span>depoimento</span>
                   </span>
                 )}
               </div>
@@ -170,13 +173,17 @@ const VibePostCard: React.FC<VibePostCardProps> = ({
       <div className="px-4 pb-3">
         <div className="text-gray-900 text-[15px] leading-relaxed">
           {post.post_type === 'testimonial' ? (
-            <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 rounded-xl p-6 border-l-4 border-pink-400 relative overflow-hidden">
-              <div className="absolute top-2 right-2 text-2xl opacity-30">💝</div>
-              <div className="relative">
-                <svg className="w-6 h-6 text-pink-400 mb-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"/>
+            <div className="bg-gradient-to-br from-blue-50 via-blue-50 to-blue-100 rounded-xl p-6 border-l-4 border-blue-400 relative overflow-hidden">
+              <div className="absolute top-2 right-2">
+                <svg className="w-6 h-6 text-blue-400 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                 </svg>
-                <p className="text-gray-800 font-medium italic">
+              </div>
+              <div className="relative">
+                <svg className="w-6 h-6 text-blue-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+                <p className="text-blue-800 font-medium italic">
                   "{displayCaption}"
                 </p>
                 {isLongCaption && !showFullCaption && (
@@ -204,10 +211,10 @@ const VibePostCard: React.FC<VibePostCardProps> = ({
               </p>
               
               {/* Text post visual representation */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-100">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
                 <div className="flex items-center space-x-2 text-blue-600">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                   </svg>
                   <span className="text-sm font-medium">Publicação de texto</span>
                 </div>
