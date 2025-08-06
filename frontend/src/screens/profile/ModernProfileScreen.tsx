@@ -6,6 +6,7 @@ import { postService, Post, Testimonial } from '../../services/postService';
 import BottomNavigation from '../../components/BottomNavigation';
 import CreatePostModal from '../../components/CreatePostModal';
 import TestimonialComposer from '../../components/TestimonialComposer';
+import ProfilePhotoEditor from '../../components/ProfilePhotoEditor';
 
 const ModernProfileScreen: React.FC = () => {
   const { user: currentUser } = useAuth();
@@ -17,6 +18,8 @@ const ModernProfileScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'grid' | 'testimonials'>('grid');
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [showTestimonialComposer, setShowTestimonialComposer] = useState(false);
+  const [showAvatarEditor, setShowAvatarEditor] = useState(false);
+  const [showCoverEditor, setShowCoverEditor] = useState(false);
 
   const profileUserId = userId ? parseInt(userId) : currentUser?.id || 0;
   const isOwnProfile = profileUserId === currentUser?.id;
@@ -71,6 +74,40 @@ const ModernProfileScreen: React.FC = () => {
       setShowTestimonialComposer(false);
     } catch (error) {
       console.error('Erro ao criar depoimento:', error);
+      throw error;
+    }
+  };
+
+  const handleSaveAvatar = async (croppedImage: string) => {
+    try {
+      // TODO: Implement API call to save avatar
+      console.log('Saving avatar:', croppedImage);
+
+      // For now, just update the profile locally
+      if (profile) {
+        setProfile({ ...profile, avatar_url: croppedImage });
+      }
+
+      setShowAvatarEditor(false);
+    } catch (error) {
+      console.error('Erro ao salvar avatar:', error);
+      throw error;
+    }
+  };
+
+  const handleSaveCover = async (croppedImage: string) => {
+    try {
+      // TODO: Implement API call to save cover photo
+      console.log('Saving cover photo:', croppedImage);
+
+      // For now, just update the profile locally
+      if (profile) {
+        setProfile({ ...profile, cover_photo_url: croppedImage });
+      }
+
+      setShowCoverEditor(false);
+    } catch (error) {
+      console.error('Erro ao salvar capa:', error);
       throw error;
     }
   };
