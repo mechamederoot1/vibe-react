@@ -14,8 +14,9 @@ const ModernProfileScreen: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [sharedPosts, setSharedPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'grid' | 'testimonials'>('grid');
+  const [activeTab, setActiveTab] = useState<'grid' | 'testimonials' | 'shared'>('grid');
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [showTestimonialComposer, setShowTestimonialComposer] = useState(false);
   const [showAvatarEditor, setShowAvatarEditor] = useState(false);
@@ -32,16 +33,31 @@ const ModernProfileScreen: React.FC = () => {
     try {
       setLoading(true);
       const [profileData, userPosts, userTestimonials] = await Promise.all([
-        isOwnProfile 
-          ? userService.getMyProfile() 
+        isOwnProfile
+          ? userService.getMyProfile()
           : userService.getUserProfile(profileUserId),
         postService.getUserPosts(profileUserId),
         postService.getUserTestimonials(profileUserId)
       ]);
-      
+
+      // Mock shared posts for now
+      const mockSharedPosts: Post[] = [
+        {
+          id: 999,
+          content: 'Este é um post compartilhado de outro usuário!',
+          post_type: 'shared',
+          author_id: 2,
+          author_name: 'João Silva',
+          author_avatar: '',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }
+      ];
+
       setProfile(profileData);
       setPosts(userPosts);
       setTestimonials(userTestimonials);
+      setSharedPosts(mockSharedPosts);
     } catch (error) {
       console.error('Erro ao carregar perfil:', error);
     } finally {
@@ -335,6 +351,19 @@ const ModernProfileScreen: React.FC = () => {
               <span className="text-xs font-medium">POSTS</span>
             </button>
             <button
+              onClick={() => setActiveTab('shared')}
+              className={`flex-1 py-4 flex flex-col items-center justify-center space-y-1 transition-colors ${
+                activeTab === 'shared'
+                  ? 'border-t-2 border-green-500 text-green-600'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+              </svg>
+              <span className="text-xs font-medium">COMPARTILHADOS</span>
+            </button>
+            <button
               onClick={() => setActiveTab('testimonials')}
               className={`flex-1 py-4 flex flex-col items-center justify-center space-y-1 transition-colors ${
                 activeTab === 'testimonials'
@@ -428,6 +457,64 @@ const ModernProfileScreen: React.FC = () => {
                           </span>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          ) : activeTab === 'shared' ? (
+            <div className="px-4 py-6 space-y-4">
+              {sharedPosts.length === 0 ? (
+                <div className="text-center py-16">
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-light text-gray-900 mb-2">
+                    Nenhum post compartilhado
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Posts compartilhados aparecerão aqui
+                  </p>
+                </div>
+              ) : (
+                sharedPosts.map((post) => (
+                  <div
+                    key={`shared-${post.id}`}
+                    className="bg-white rounded-lg border border-gray-200 p-4 modern-shadow"
+                  >
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 text-sm">
+                          {profile?.first_name} compartilhou
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {new Date(post.created_at).toLocaleDateString('pt-BR')}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Original post */}
+                    <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs">
+                            {post.author_name.split(' ').map(n => n[0]).join('')}
+                          </span>
+                        </div>
+                        <span className="text-sm font-medium text-gray-900">
+                          {post.author_name}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-700">
+                        {post.content}
+                      </p>
                     </div>
                   </div>
                 ))
