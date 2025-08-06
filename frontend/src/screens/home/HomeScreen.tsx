@@ -4,9 +4,9 @@ import { useAuth } from '../../contexts/AuthContext';
 import { postService, Post } from '../../services/postService';
 import { storyService, Story } from '../../services/storyService';
 import VibePostCard from '../../components/VibePostCard';
-import InstagramStoriesBar from '../../components/InstagramStoriesBar';
+import VibeStoriesBar from '../../components/VibeStoriesBar';
 import CreatePostModal from '../../components/CreatePostModal';
-import InstagramHeader from '../../components/InstagramHeader';
+import VibeHeader from '../../components/VibeHeader';
 import BottomNavigation from '../../components/BottomNavigation';
 import NetworkInfo from '../../components/NetworkInfo';
 
@@ -92,14 +92,14 @@ const HomeScreen: React.FC = () => {
 
   return (
     <div className="mobile-container flex flex-col">
-      {/* Instagram-style Header */}
-      <InstagramHeader onCreatePost={() => setShowCreatePost(true)} />
+      {/* Vibe Header */}
+      <VibeHeader onCreatePost={() => setShowCreatePost(true)} />
 
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto custom-scrollbar bg-gray-50">
         {/* Stories Section */}
         <div className="bg-white border-b border-gray-200">
-          <InstagramStoriesBar
+          <VibeStoriesBar
             stories={stories}
             onNewStory={handleNewStory}
             currentUser={user}
