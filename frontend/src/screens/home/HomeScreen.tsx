@@ -8,6 +8,7 @@ import InstagramStoriesBar from '../../components/InstagramStoriesBar';
 import CreatePostModal from '../../components/CreatePostModal';
 import InstagramHeader from '../../components/InstagramHeader';
 import BottomNavigation from '../../components/BottomNavigation';
+import NetworkInfo from '../../components/NetworkInfo';
 
 const HomeScreen: React.FC = () => {
   const { user, logout } = useAuth();
