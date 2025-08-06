@@ -7,6 +7,11 @@ export interface Story {
   author_name: string;
   author_avatar?: string;
   media_url?: string;
+  media_type?: 'image' | 'video';
+  background_color?: string;
+  background_gradient?: string;
+  text_color?: string;
+  font_size?: number;
   is_active: boolean;
   created_at: string;
   expires_at: string;
@@ -15,6 +20,11 @@ export interface Story {
 export interface StoryCreate {
   content: string;
   media_url?: string;
+  media_type?: 'image' | 'video';
+  background_color?: string;
+  background_gradient?: string;
+  text_color?: string;
+  font_size?: number;
 }
 
 class StoryService {
