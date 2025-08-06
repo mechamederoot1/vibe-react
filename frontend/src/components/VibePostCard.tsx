@@ -347,6 +347,124 @@ const VibePostCard: React.FC<VibePostCardProps> = ({
         </div>
       </div>
 
+      {/* Comments Section */}
+      {showComments && (
+        <div className="border-t border-gray-100 p-4 bg-gray-50">
+          <div className="space-y-3 mb-4">
+            {/* Sample comments */}
+            <div className="flex space-x-3">
+              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs font-medium">JP</span>
+              </div>
+              <div className="flex-1">
+                <div className="bg-white rounded-lg p-3">
+                  <p className="font-semibold text-sm text-blue-600">João Pedro</p>
+                  <p className="text-sm text-gray-800">Muito legal! 👏</p>
+                </div>
+                <div className="flex items-center space-x-4 mt-1 text-xs text-gray-500">
+                  <button className="hover:text-blue-600">Curtir</button>
+                  <button className="hover:text-blue-600">Responder</button>
+                  <span>2h</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex space-x-3">
+              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs font-medium">MS</span>
+              </div>
+              <div className="flex-1">
+                <div className="bg-white rounded-lg p-3">
+                  <p className="font-semibold text-sm text-green-600">Maria Silva</p>
+                  <p className="text-sm text-gray-800">Parabéns pelo post!</p>
+                </div>
+                <div className="flex items-center space-x-4 mt-1 text-xs text-gray-500">
+                  <button className="hover:text-blue-600">Curtir</button>
+                  <button className="hover:text-blue-600">Responder</button>
+                  <span>1h</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Comment input */}
+          <div className="flex space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+              <span className="text-white text-xs font-medium">EU</span>
+            </div>
+            <div className="flex-1 flex space-x-2">
+              <input
+                type="text"
+                placeholder="Escreva um comentário..."
+                className="flex-1 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              <button className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Share Modal */}
+      {showShareModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg w-full max-w-md mx-4">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h3 className="text-lg font-semibold">Compartilhar Post</h3>
+              <button
+                onClick={() => setShowShareModal(false)}
+                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="p-4 space-y-3">
+              <button className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                  </svg>
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-gray-900">Compartilhar no seu perfil</p>
+                  <p className="text-sm text-gray-500">Postar em sua timeline</p>
+                </div>
+              </button>
+
+              <button className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                  </svg>
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-gray-900">Enviar mensagem</p>
+                  <p className="text-sm text-gray-500">Compartilhar por mensagem privada</p>
+                </div>
+              </button>
+
+              <button className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="w-10 h-10 bg-gray-500 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-gray-900">Copiar link</p>
+                  <p className="text-sm text-gray-500">Copiar URL do post</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Click outside to close menu */}
       {showMenu && (
         <div
