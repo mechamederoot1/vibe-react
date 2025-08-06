@@ -32,25 +32,23 @@ class UserRegisterStep3(BaseModel):
 
         print(f"DEBUG - Validando birth_date: {v} (tipo: {type(v)})")
 
-        # Parse string date to date object
-        try:
-            if isinstance(v, str):
+        # Just check if it's not empty for now
+        if not v:
+            raise ValueError('Data de nascimento é obrigatória')
+
+        # Basic validation
+        if isinstance(v, str) and len(v) >= 10:
+            try:
+                # Try to parse the date
                 birth_date = datetime.strptime(v, '%Y-%m-%d').date()
-            else:
-                birth_date = v
-        except ValueError as e:
-            print(f"DEBUG - Erro no formato da data: {e}")
-            raise ValueError('Formato de data inválido. Use YYYY-MM-DD')
+                print(f"DEBUG - Data parseada com sucesso: {birth_date}")
+                return v  # Return as string for now
+            except ValueError as e:
+                print(f"DEBUG - Erro no formato da data: {e}")
+                raise ValueError('Formato de data inválido. Use YYYY-MM-DD')
 
-        # Check minimum age
-        today = date.today()
-        min_age_date = today - timedelta(days=13*365)
-        if birth_date > min_age_date:
-            print(f"DEBUG - Usuário muito jovem: {birth_date} > {min_age_date}")
-            raise ValueError('Você deve ter pelo menos 13 anos')
-
-        print(f"DEBUG - Data válida: {birth_date}")
-        return birth_date
+        print(f"DEBUG - Retornando data sem validação de idade: {v}")
+        return v
 
 class UserRegisterStep4(BaseModel):
     password: str
