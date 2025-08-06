@@ -286,27 +286,59 @@ const VibePostCard: React.FC<VibePostCardProps> = ({
         </div>
 
         {/* Action buttons */}
-        <div className="flex border-t border-gray-100 pt-1">
+        <div className="flex border-t border-gray-100 pt-1 relative">
+          {/* Reaction picker */}
+          {showReactionPicker && (
+            <div className="absolute bottom-full left-4 mb-2 bg-white rounded-full shadow-lg border border-gray-200 p-2 flex space-x-2 z-20">
+              {reactions.map((reaction) => (
+                <button
+                  key={reaction.name}
+                  onClick={() => handleReaction(reaction.emoji)}
+                  className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-all hover:scale-110"
+                  title={reaction.name}
+                >
+                  <span className="text-xl">{reaction.emoji}</span>
+                </button>
+              ))}
+            </div>
+          )}
+
+          <div className="flex-1 flex items-center justify-center relative">
+            <button
+              onClick={handleLike}
+              onMouseEnter={() => setShowReactionPicker(true)}
+              onMouseLeave={() => setShowReactionPicker(false)}
+              className={`flex items-center justify-center space-x-2 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors ${
+                liked ? 'text-blue-600' : 'text-gray-600'
+              }`}
+            >
+              {selectedReaction ? (
+                <span className="text-xl">{selectedReaction}</span>
+              ) : (
+                <svg className="w-5 h-5" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={liked ? 0 : 2} d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/>
+                </svg>
+              )}
+              <span className="font-medium text-sm">
+                {selectedReaction ? reactions.find(r => r.emoji === selectedReaction)?.name || 'Curtir' : 'Curtir'}
+              </span>
+            </button>
+          </div>
+
           <button
-            onClick={handleLike}
-            className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors ${
-              liked ? 'text-blue-600' : 'text-gray-600'
-            }`}
+            onClick={() => setShowComments(!showComments)}
+            className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors text-gray-600"
           >
-            <svg className="w-5 h-5" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={liked ? 0 : 2} d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/>
-            </svg>
-            <span className="font-medium text-sm">Curtir</span>
-          </button>
-          
-          <button className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors text-gray-600">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
             </svg>
             <span className="font-medium text-sm">Comentar</span>
           </button>
-          
-          <button className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors text-gray-600">
+
+          <button
+            onClick={() => setShowShareModal(true)}
+            className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors text-gray-600"
+          >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
             </svg>
