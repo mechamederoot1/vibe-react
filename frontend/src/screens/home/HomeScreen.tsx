@@ -178,6 +178,9 @@ const HomeScreen: React.FC = () => {
           currentUser={user}
         />
       )}
+
+      {/* Network Info for mobile debugging */}
+      <NetworkInfo />
     </div>
   );
 };
