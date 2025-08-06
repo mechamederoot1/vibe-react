@@ -21,6 +21,7 @@ class UserRegisterStep3(BaseModel):
 
     @validator('gender')
     def validate_gender(cls, v):
+        print(f"DEBUG - Validando gender: {v}")
         if v not in ['masculino', 'feminino', 'outro']:
             raise ValueError('Gênero deve ser: masculino, feminino ou outro')
         return v
@@ -29,21 +30,26 @@ class UserRegisterStep3(BaseModel):
     def validate_birth_date(cls, v):
         from datetime import date, timedelta, datetime
 
+        print(f"DEBUG - Validando birth_date: {v} (tipo: {type(v)})")
+
         # Parse string date to date object
         try:
             if isinstance(v, str):
                 birth_date = datetime.strptime(v, '%Y-%m-%d').date()
             else:
                 birth_date = v
-        except ValueError:
+        except ValueError as e:
+            print(f"DEBUG - Erro no formato da data: {e}")
             raise ValueError('Formato de data inválido. Use YYYY-MM-DD')
 
         # Check minimum age
         today = date.today()
         min_age_date = today - timedelta(days=13*365)
         if birth_date > min_age_date:
+            print(f"DEBUG - Usuário muito jovem: {birth_date} > {min_age_date}")
             raise ValueError('Você deve ter pelo menos 13 anos')
 
+        print(f"DEBUG - Data válida: {birth_date}")
         return birth_date
 
 class UserRegisterStep4(BaseModel):
