@@ -2414,6 +2414,25 @@
             alert(`👤 Perfil de ${username}\n\nAbrindo perfil do amigo...\n\n(Em uma versão completa, isso navegaria para o perfil do usuário)`);
         }
 
+        // Toggle friends visibility
+        let friendsVisible = true;
+        function toggleFriendsVisibility() {
+            const friendsGrid = document.getElementById('friendsGrid');
+            const toggleBtn = document.getElementById('friendsToggleBtn');
+
+            friendsVisible = !friendsVisible;
+
+            if (friendsVisible) {
+                friendsGrid.style.display = 'grid';
+                toggleBtn.classList.remove('expanded');
+                toggleBtn.childNodes[0].textContent = 'Ver todos';
+            } else {
+                friendsGrid.style.display = 'none';
+                toggleBtn.classList.add('expanded');
+                toggleBtn.childNodes[0].textContent = 'Ocultar';
+            }
+        }
+
         // Profile view switching
         function switchProfileView(viewType) {
             currentProfileView = viewType;
