@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Social Network</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f9fafb;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .mobile-frame {
+            width: 375px;
+            height: 667px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        .app-container {
+            width: 100%;
+            height: 100%;
+            background: white;
+        }
+        .header {
+            background: #3B82F6;
+            color: white;
+            padding: 20px 16px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .feature-list {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .feature-item {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .feature-icon {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        .qr-info {
+            background: #f0f9ff;
+            border: 1px solid #3B82F6;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .qr-title {
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+        .command {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 8px 0;
+        }
+        .status {
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-frame">
+        <div class="app-container">
+            <div class="header">
+                Vibe Social Network
+            </div>
+            <div class="content">
+                <div class="status">✅ React Native App Funcionando</div>
+                
+                <h3>📱 Como Visualizar o App:</h3>
+                
+                <div class="qr-info">
+                    <div class="qr-title">🚀 Opção 1: Metro Bundler (Atual)</div>
+                    <p style="font-size: 14px; margin: 8px 0;">O Metro bundler está rodando na porta 8081.</p>
+                    <div class="command">npm start</div>
+                    <p style="font-size: 12px; color: #6b7280;">Use emulador ou dispositivo físico conectado.</p>
+                </div>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">📱</span>
+                        <span><strong>Emulador Android:</strong> npm run android</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🍎</span>
+                        <span><strong>Emulador iOS:</strong> npm run ios</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📲</span>
+                        <span><strong>Expo (QR Code):</strong> npm run expo</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🌐</span>
+                        <span><strong>Versão Web:</strong> npm run web</span>
+                    </div>
+                </div>
+
+                <h4>✅ Funcionalidades Implementadas:</h4>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">🔐</span>
+                        <span>Sistema de Login/Cadastro</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📝</span>
+                        <span>Criação de Posts e Depoimentos</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📖</span>
+                        <span>Stories com Editor Avançado</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">👤</span>
+                        <span>Perfil Completo do Usuário</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎨</span>
+                        <span>Design Nativo Responsivo</span>
+                    </div>
+                </div>
+
+                <p style="font-size: 12px; color: #6b7280; margin-top: 20px;">
+                    💡 Para melhor experiência, use um emulador ou dispositivo físico
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
