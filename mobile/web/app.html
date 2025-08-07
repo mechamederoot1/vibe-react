@@ -2529,45 +2529,47 @@
                 <div class="modal-title">Nova publicação</div>
                 <button class="share-btn" onclick="createPost()" id="shareBtn" disabled>Compartilhar</button>
             </div>
-            
-            <div class="post-type-tabs">
-                <button class="type-tab active" onclick="selectType('text')" id="textTab">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14,2 14,8 20,8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10,9 9,9 8,9"/>
-                    </svg>
-                    Post
-                </button>
-                <button class="type-tab" onclick="selectType('testimonial')" id="testimonialTab">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                    Depoimento
-                </button>
-            </div>
-            
-            <textarea 
-                class="textarea" 
-                placeholder="O que você está pensando?"
-                maxlength="2200"
-                oninput="updateCharCount()"
-                id="postInput"
-            ></textarea>
-            
-            <div class="char-counter" id="charCount">2200 caracteres restantes</div>
-            
-            <div class="testimonial-info" id="testimonialInfo" style="display: none;">
-                <div class="testimonial-header">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                    Depoimento especial
+
+            <div class="modal-content-container">
+                <div class="post-type-tabs">
+                    <button class="type-tab active" onclick="selectType('text')" id="textTab">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                        Post
+                    </button>
+                    <button class="type-tab" onclick="selectType('testimonial')" id="testimonialTab">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        Depoimento
+                    </button>
                 </div>
-                <div class="testimonial-desc">
-                    Depoimentos são uma forma especial de demonstrar carinho e reconhecimento. Seja autêntico e positivo!
+
+                <textarea
+                    class="textarea"
+                    placeholder="O que você está pensando?"
+                    maxlength="2200"
+                    oninput="updateCharCount()"
+                    id="postInput"
+                ></textarea>
+
+                <div class="char-counter" id="charCount">2200 caracteres restantes</div>
+
+                <div class="testimonial-info" id="testimonialInfo" style="display: none;">
+                    <div class="testimonial-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        Depoimento especial
+                    </div>
+                    <div class="testimonial-desc">
+                        Depoimentos são uma forma especial de demonstrar carinho e reconhecimento. Seja autêntico e positivo!
+                    </div>
                 </div>
             </div>
         </div>
@@ -2598,7 +2600,7 @@
             { id: 4, content: 'Gratidão define o meu dia de hoje 🙏 Quando olhamos ao redor, sempre há motivos para agradecer. #gratidao #positividade #bem', likes: 73, comments: 18, time: '2d', image: 'https://images.pexels.com/photos/33280403/pexels-photo-33280403.jpeg' },
             { id: 5, content: 'Noite de estudos e muito aprendizado 📚💻 Investir em conhecimento é sempre o melhor caminho. #estudos #programacao #crescimento', likes: 92, comments: 15, time: '3d', image: 'https://images.pexels.com/photos/207732/pexels-photo-207732.jpeg' },
             { id: 6, content: 'Final de semana perfeito em contato com a natureza 🌿 Nada como recarregar as energias ao ar livre! #natureza #weekend #paz', likes: 128, comments: 27, time: '4d', image: 'https://images.pexels.com/photos/33280403/pexels-photo-33280403.jpeg' },
-            { id: 7, content: 'Time reunido para mais um brainstorm! ��✨ As melhores ideias surgem quando estamos juntos. #teamwork #inovacao #criatividade', likes: 64, comments: 9, time: '5d', image: 'https://images.pexels.com/photos/17382268/pexels-photo-17382268.jpeg' },
+            { id: 7, content: 'Time reunido para mais um brainstorm! 🧠✨ As melhores ideias surgem quando estamos juntos. #teamwork #inovacao #criatividade', likes: 64, comments: 9, time: '5d', image: 'https://images.pexels.com/photos/17382268/pexels-photo-17382268.jpeg' },
             { id: 8, content: 'Arte em cada detalhe do dia a dia 🎨 Inspiração está em todos os lugares, basta saber observar. #arte #inspiracao #criatividade', likes: 105, comments: 21, time: '6d', image: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg' },
             { id: 9, content: 'Novo desafio aceito! 💪 Sempre em busca de evolução e crescimento pessoal. #desafio #crescimento #determinacao', likes: 87, comments: 16, time: '1sem', image: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png' }
         ];
