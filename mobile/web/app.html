@@ -2437,11 +2437,13 @@
             friendsVisible = !friendsVisible;
 
             if (friendsVisible) {
-                friendsGrid.style.display = 'grid';
+                friendsGrid.classList.remove('collapsed');
+                friendsGrid.classList.add('expanded');
                 toggleBtn.classList.remove('expanded');
                 toggleBtn.childNodes[0].textContent = 'Ver todos';
             } else {
-                friendsGrid.style.display = 'none';
+                friendsGrid.classList.remove('expanded');
+                friendsGrid.classList.add('collapsed');
                 toggleBtn.classList.add('expanded');
                 toggleBtn.childNodes[0].textContent = 'Ocultar';
             }
