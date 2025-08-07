@@ -33,7 +33,7 @@ const HomeScreen: React.FC = () => {
       // Load real stories from API - no mock data
 
       setPosts(feedPosts);
-      setStories([...activeStories, ...exampleStories]);
+      setStories(activeStories);
     } catch (error) {
       console.error('Erro ao carregar feed:', error);
     } finally {
