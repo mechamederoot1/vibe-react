@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Social Network - React Native</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f9fafb;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-frame {
+            width: 375px;
+            height: 812px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+            border: 8px solid #1a1a1a;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .app-container {
+            height: calc(100% - 44px);
+            background: #f9fafb;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .app-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        .create-btn {
+            width: 32px;
+            height: 32px;
+            background: #3b82f6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+        
+        /* Stories Bar */
+        .stories-bar {
+            background: white;
+            padding: 12px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .stories-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 4px 0;
+        }
+        
+        .story-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+            cursor: pointer;
+        }
+        
+        .story-ring {
+            width: 66px;
+            height: 66px;
+            border: 2px solid #3b82f6;
+            border-radius: 33px;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .story-ring.create {
+            border-color: #d1d5db;
+        }
+        
+        .story-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .add-icon {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            background: #3b82f6;
+            border: 2px solid white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .story-label {
+            font-size: 12px;
+            margin-top: 4px;
+            text-align: center;
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* Feed */
+        .feed {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .post-card {
+            background: white;
+            margin-bottom: 1px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+        }
+        
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .post-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        .post-info p {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        
+        .post-menu {
+            color: #6b7280;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .post-content {
+            padding: 0 16px 12px;
+        }
+        
+        .testimonial-badge {
+            background: linear-gradient(to right, #dbeafe, #eff6ff);
+            border-left: 4px solid #3b82f6;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .testimonial-text {
+            font-size: 12px;
+            color: #1e40af;
+            font-weight: 600;
+        }
+        
+        .post-text {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #111827;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 24px;
+            padding: 12px 16px;
+            border-top: 1px solid #f3f4f6;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #6b7280;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        .action-btn:hover {
+            color: #3b82f6;
+        }
+        
+        /* Bottom Tab Bar */
+        .bottom-tabs {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 8px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            cursor: pointer;
+        }
+        
+        .tab-item.active {
+            color: #3b82f6;
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+        }
+        
+        .tab-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .empty-state {
+            background: white;
+            padding: 64px 32px;
+            text-align: center;
+        }
+        
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        
+        .empty-title {
+            font-size: 24px;
+            font-weight: 300;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+        
+        .empty-text {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+        
+        .empty-btn {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 320px;
+            max-height: 500px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #6b7280;
+            cursor: pointer;
+        }
+        
+        .btn-publish {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .type-selector {
+            display: flex;
+            margin: 16px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 4px;
+        }
+        
+        .type-btn {
+            flex: 1;
+            padding: 8px 16px;
+            border: none;
+            background: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .type-btn.active {
+            background: white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .post-input {
+            margin: 16px;
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            min-height: 120px;
+            resize: none;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        .char-count {
+            text-align: right;
+            margin: 0 16px 16px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>🔋 100%</span>
+        </div>
+        
+        <!-- App Container -->
+        <div class="app-container">
+            <!-- Header -->
+            <div class="header">
+                <div class="app-title">Vibe</div>
+                <button class="create-btn" onclick="openCreateModal()">+</button>
+            </div>
+            
+            <!-- Stories Bar -->
+            <div class="stories-bar">
+                <div class="stories-scroll">
+                    <!-- Your Story -->
+                    <div class="story-item" onclick="openStoryCreator()">
+                        <div class="story-ring create">
+                            <div class="story-avatar">VU</div>
+                            <div class="add-icon">+</div>
+                        </div>
+                        <div class="story-label">Seu story</div>
+                    </div>
+                    
+                    <!-- Friend Stories -->
+                    <div class="story-item">
+                        <div class="story-ring">
+                            <div class="story-avatar">AM</div>
+                        </div>
+                        <div class="story-label">Ana</div>
+                    </div>
+                    <div class="story-item">
+                        <div class="story-ring">
+                            <div class="story-avatar">JS</div>
+                        </div>
+                        <div class="story-label">João</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feed -->
+            <div class="feed" id="feed">
+                <!-- Empty State -->
+                <div class="empty-state">
+                    <div class="empty-icon">👋</div>
+                    <div class="empty-title">Bem-vindo ao Vibe!</div>
+                    <div class="empty-text">
+                        Quando você começar a seguir pessoas, verá o conteúdo delas aqui.
+                    </div>
+                    <button class="empty-btn" onclick="openCreateModal()">
+                        Criar sua primeira publicação
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Bottom Tabs -->
+            <div class="bottom-tabs">
+                <div class="tab-item active">
+                    <div class="tab-icon">🏠</div>
+                    <div class="tab-label">Início</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">👤</div>
+                    <div class="tab-label">Perfil</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Create Post Modal -->
+    <div class="modal-overlay" id="createModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="btn-close" onclick="closeCreateModal()">✕</button>
+                <div class="modal-title">Nova Publicação</div>
+                <button class="btn-publish" onclick="createPost()">Compartilhar</button>
+            </div>
+            
+            <div class="type-selector">
+                <button class="type-btn active" onclick="selectType('text')">
+                    ✏️ Post
+                </button>
+                <button class="type-btn" onclick="selectType('testimonial')">
+                    ❤️ Depoimento
+                </button>
+            </div>
+            
+            <textarea 
+                class="post-input" 
+                placeholder="O que você está pensando?"
+                maxlength="2200"
+                oninput="updateCharCount()"
+                id="postInput"
+            ></textarea>
+            
+            <div class="char-count" id="charCount">2200 caracteres restantes</div>
+        </div>
+    </div>
+    
+    <script>
+        let currentPostType = 'text';
+        let posts = [];
+        
+        function openCreateModal() {
+            document.getElementById('createModal').style.display = 'flex';
+        }
+        
+        function closeCreateModal() {
+            document.getElementById('createModal').style.display = 'none';
+            document.getElementById('postInput').value = '';
+            updateCharCount();
+        }
+        
+        function selectType(type) {
+            currentPostType = type;
+            const buttons = document.querySelectorAll('.type-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const input = document.getElementById('postInput');
+            input.placeholder = type === 'testimonial' 
+                ? 'Escreva um depoimento especial para alguém...'
+                : 'O que você está pensando?';
+                
+            input.maxLength = type === 'testimonial' ? 1000 : 2200;
+            updateCharCount();
+        }
+        
+        function updateCharCount() {
+            const input = document.getElementById('postInput');
+            const maxLength = currentPostType === 'testimonial' ? 1000 : 2200;
+            const remaining = maxLength - input.value.length;
+            document.getElementById('charCount').textContent = remaining + ' caracteres restantes';
+        }
+        
+        function createPost() {
+            const input = document.getElementById('postInput');
+            const content = input.value.trim();
+            
+            if (!content) {
+                alert('Digite algo para compartilhar');
+                return;
+            }
+            
+            const post = {
+                id: posts.length + 1,
+                content: content,
+                type: currentPostType,
+                author: 'Vibe User',
+                initials: 'VU',
+                time: 'agora'
+            };
+            
+            posts.unshift(post);
+            renderFeed();
+            closeCreateModal();
+        }
+        
+        function renderFeed() {
+            const feed = document.getElementById('feed');
+            
+            if (posts.length === 0) {
+                feed.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">👋</div>
+                        <div class="empty-title">Bem-vindo ao Vibe!</div>
+                        <div class="empty-text">
+                            Quando você começar a seguir pessoas, verá o conteúdo delas aqui.
+                        </div>
+                        <button class="empty-btn" onclick="openCreateModal()">
+                            Criar sua primeira publicação
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            feed.innerHTML = posts.map(post => `
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="post-avatar">${post.initials}</div>
+                            <div class="post-info">
+                                <h4>${post.author}</h4>
+                                <p>${post.time}</p>
+                            </div>
+                        </div>
+                        <div class="post-menu">⋮</div>
+                    </div>
+                    
+                    <div class="post-content">
+                        ${post.type === 'testimonial' ? `
+                            <div class="testimonial-badge">
+                                <span>❤️</span>
+                                <span class="testimonial-text">Depoimento</span>
+                            </div>
+                        ` : ''}
+                        <div class="post-text">${post.content}</div>
+                    </div>
+                    
+                    <div class="post-actions">
+                        <div class="action-btn">
+                            <span>❤️</span>
+                            <span>Curtir</span>
+                        </div>
+                        <div class="action-btn">
+                            <span>💬</span>
+                            <span>Comentar</span>
+                        </div>
+                        <div class="action-btn">
+                            <span>📤</span>
+                            <span>Compartilhar</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function openStoryCreator() {
+            alert('✨ Story Creator com editor avançado disponível no app nativo!\n\n📝 Funcionalidades:\n• Múltiplos textos\n• Slider de tamanho\n• Cores e fundos\n• Drag & drop\n• Formatação completa');
+        }
+        
+        // Initialize
+        renderFeed();
+    </script>
+</body>
+</html>
