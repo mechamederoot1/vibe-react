@@ -2256,6 +2256,19 @@
 
         let currentPostView = 'grid';
         let currentProfileView = 'grid';
+
+        // Profile visitors data (only visible to profile owner)
+        const profileVisitors = [
+            { name: 'Ana Silva', username: 'ana.silva', photo: 'https://images.pexels.com/photos/27603433/pexels-photo-27603433.jpeg', time: '2h' },
+            { name: 'Carlos Lima', username: 'carlos.lima', photo: 'https://images.pexels.com/photos/28442318/pexels-photo-28442318.jpeg', time: '5h' },
+            { name: 'Julia Santos', username: 'julia.santos', photo: 'https://images.pexels.com/photos/18459701/pexels-photo-18459701.jpeg', time: '1d' },
+            { name: 'Pedro Costa', username: 'pedro.costa', photo: 'https://images.pexels.com/photos/7752805/pexels-photo-7752805.jpeg', time: '2d' },
+            { name: 'Sofia Reis', username: 'sofia.reis', photo: 'https://images.pexels.com/photos/33282339/pexels-photo-33282339.jpeg', time: '3d' },
+            { name: 'Lucas Mendes', username: 'lucas.mendes', photo: 'https://images.pexels.com/photos/7752839/pexels-photo-7752839.jpeg', time: '1sem' }
+        ];
+
+        // Check if viewing own profile (in a real app this would be determined by authentication)
+        const isOwnProfile = true; // Simulating that this is the user's own profile
         
         // Open/Close Modal
         function openCreateModal() {
