@@ -40,6 +40,15 @@ module.exports = {
     port: 3000,
     historyApiFallback: true,
     allowedHosts: 'all',
+    client: {
+      webSocketURL: 'auto://0.0.0.0:0/ws',
+    },
+    setupMiddlewares: (middlewares, devServer) => {
+      console.log('Dev server running on:');
+      console.log(`Local: http://localhost:3000`);
+      console.log(`Network: http://${require('os').networkInterfaces()?.eth0?.[0]?.address || '0.0.0.0'}:3000`);
+      return middlewares;
+    },
   },
   output: {
     filename: 'bundle.js',
