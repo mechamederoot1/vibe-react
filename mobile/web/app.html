@@ -1663,6 +1663,14 @@
                 currentScreen = screenName;
             }
 
+            // Control stories visibility
+            const storiesContainer = document.getElementById('storiesContainer');
+            if (screenName === 'profile' || screenName === 'search' || screenName === 'notifications') {
+                storiesContainer.style.display = 'none';
+            } else {
+                storiesContainer.style.display = 'block';
+            }
+
             // Update navigation
             updateNavigation(screenName);
 
