@@ -2190,6 +2190,27 @@
             // Here you would open a post detail modal
         }
 
+        // Profile interaction functions
+        function openFriendsModal() {
+            alert('🤝 Lista de Amigos\n\n' + friends.map(f => `• ${f.name} (@${f.username})`).join('\n'));
+        }
+
+        function openFollowersModal() {
+            alert('👥 Seguidores\n\n2.8k pessoas seguem este perfil\n\nRecentes:\n• Ana Maria Silva\n• João Pedro Santos\n• Maria Fernanda Costa\n• Carlos Eduardo Lima\n• Sofia Rodrigues\n• Lucas Mendes');
+        }
+
+        function openFollowingModal() {
+            alert('👤 Seguindo\n\n1.2k perfis seguidos\n\nRecentes:\n• @techleader\n• @designstudio\n• @codinglife\n• @startupbrasil\n• @devcommunity\n• @creativeagency');
+        }
+
+        function openPostsModal() {
+            alert('📊 Estatísticas de Posts\n\n342 publicações no total\n\n• Posts com imagem: 298\n• Posts de texto: 44\n• Depoimentos: 12\n• Média de curtidas: 89\n• Post mais curtido: 342 ❤️');
+        }
+
+        function openFriendProfile(username) {
+            alert(`👤 Perfil de ${username}\n\nAbrindo perfil do amigo...\n\n(Em uma versão completa, isso navegaria para o perfil do usuário)`);
+        }
+
         // Render Feed (updated to work with screen system)
         function renderFeed() {
             const feed = document.getElementById('homeScreen');
