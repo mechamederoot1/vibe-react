@@ -199,6 +199,14 @@ const HomeScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
       />
 
+      {/* Create Post Modal */}
+      <CreatePostModal
+        visible={showCreatePost}
+        onClose={() => setShowCreatePost(false)}
+        onSubmit={handlePostSubmit}
+        currentUser={user}
+      />
+
       {/* Advanced Story Creator */}
       <AdvancedStoryCreator
         visible={showStoryCreator}
