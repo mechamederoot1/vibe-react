@@ -222,32 +222,32 @@ const Step1: React.FC<{
   onNext: () => void;
   loading: boolean;
 }> = ({ data, onChange, onNext, loading }) => (
-  <div className="space-y-6 animate-fade-in">
-    <div className="text-center mb-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">
+  <div className="space-y-8 animate-fade-in">
+    <div className="text-center mb-10">
+      <h2 className="text-3xl font-bold text-gray-900 mb-3">
         Como você se chama?
       </h2>
-      <p className="text-gray-600">
+      <p className="text-gray-600 text-lg">
         Vamos começar com seu nome
       </p>
     </div>
 
-    <div className="space-y-4">
+    <div className="space-y-6">
       <input
         type="text"
         value={data.first_name}
         onChange={(e) => onChange({ ...data, first_name: e.target.value })}
         placeholder="Nome"
-        className="ig-input"
+        className="ig-input text-lg py-4"
         required
       />
-      
+
       <input
         type="text"
         value={data.last_name}
         onChange={(e) => onChange({ ...data, last_name: e.target.value })}
         placeholder="Sobrenome"
-        className="ig-input"
+        className="ig-input text-lg py-4"
         required
       />
     </div>
@@ -255,7 +255,7 @@ const Step1: React.FC<{
     <button
       onClick={onNext}
       disabled={!data.first_name.trim() || !data.last_name.trim() || loading}
-      className="ig-button ig-button-primary w-full py-3 text-sm font-semibold disabled:opacity-50"
+      className="ig-button ig-button-primary w-full py-4 text-lg font-semibold disabled:opacity-50"
     >
       {loading ? 'Validando...' : 'Continuar'}
     </button>
