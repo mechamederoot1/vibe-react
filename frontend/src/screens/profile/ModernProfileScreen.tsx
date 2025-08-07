@@ -40,24 +40,13 @@ const ModernProfileScreen: React.FC = () => {
         postService.getUserTestimonials(profileUserId)
       ]);
 
-      // Mock shared posts for now
-      const mockSharedPosts: Post[] = [
-        {
-          id: 999,
-          content: 'Este é um post compartilhado de outro usuário!',
-          post_type: 'shared',
-          author_id: 2,
-          author_name: 'João Silva',
-          author_avatar: '',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }
-      ];
+      // Load real shared posts from API - no mock data
+      const sharedPosts: Post[] = [];
 
       setProfile(profileData);
       setPosts(userPosts);
       setTestimonials(userTestimonials);
-      setSharedPosts(mockSharedPosts);
+      setSharedPosts(sharedPosts);
     } catch (error) {
       console.error('Erro ao carregar perfil:', error);
     } finally {
