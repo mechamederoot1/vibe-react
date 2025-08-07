@@ -98,8 +98,22 @@ const HomeScreen: React.FC = () => {
   };
 
   const handleCreatePost = () => {
-    // TODO: Navigate to post creation screen
-    Alert.alert('Em breve', 'Criação de posts em desenvolvimento');
+    setShowCreatePost(true);
+  };
+
+  const handlePostSubmit = async (content: string, postType: string) => {
+    try {
+      const newPost = await postService.createPost({
+        content,
+        post_type: postType,
+      });
+      setPosts([newPost, ...posts]);
+      setShowCreatePost(false);
+    } catch (error) {
+      console.error('Erro ao criar post:', error);
+      Alert.alert('Erro', 'Não foi possível criar o post');
+      throw error;
+    }
   };
 
   const renderPost = ({ item }: { item: Post }) => (
