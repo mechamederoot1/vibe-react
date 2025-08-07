@@ -123,13 +123,13 @@ const HomeScreen: React.FC = () => {
                   Bem-vindo ao Vibe!
                 </h2>
                 <p className="text-gray-600 mb-6 text-sm leading-relaxed">
-                  Quando você começar a seguir pessoas, verá suas fotos e vídeos aqui.
+                  Quando você começar a seguir pessoas, verá o conteúdo delas aqui.
                 </p>
                 <button
                   onClick={() => setShowCreatePost(true)}
                   className="ig-button ig-button-primary text-sm px-8 py-2"
                 >
-                  Compartilhar sua primeira foto
+                  Criar sua primeira publicação
                 </button>
               </div>
             </div>
