@@ -3297,6 +3297,13 @@
                 closeCreateModal();
             }
         });
+
+        // Close edit profile modal when clicking outside
+        document.getElementById('editProfileModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditProfileModal();
+            }
+        });
     </script>
 </body>
 </html>
