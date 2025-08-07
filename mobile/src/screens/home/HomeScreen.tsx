@@ -26,6 +26,7 @@ const HomeScreen: React.FC = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [showStoryCreator, setShowStoryCreator] = useState(false);
 
   useEffect(() => {
     loadFeedData();
