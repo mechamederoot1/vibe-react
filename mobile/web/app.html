@@ -2610,6 +2610,21 @@
         // When isOwnProfile = true: user sees "Quem visitou meu perfil" section
         // When isOwnProfile = false: visitor sees only limited profile info
         const isOwnProfile = true; // Simulating that this is the user's own profile
+
+        // User profile data
+        let userProfile = {
+            displayName: 'Bruno Oliveira',
+            username: 'brunooliveira',
+            bio: '🚀 Desenvolvedor & Criador de Conteúdo\n🌟 Transformando ideias em realidade\n📍 São Paulo, Brasil',
+            city: 'São Paulo',
+            state: 'SP',
+            birthdate: '1995-03-15',
+            relationship: 'relationship',
+            showBirthdate: true,
+            showRelationship: true,
+            showLocation: true,
+            avatar: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png'
+        };
         
         // Open/Close Modal
         function openCreateModal() {
@@ -2726,7 +2741,7 @@
                     
                     <div class="post-content">
                         ${post.content}
-                        ${post.type === 'testimonial' ? '<br><br>��� Depoimento especial' : ''}
+                        ${post.type === 'testimonial' ? '<br><br>💝 Depoimento especial' : ''}
                     </div>
                     
                     <div class="post-actions">
