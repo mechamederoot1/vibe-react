@@ -1689,39 +1689,96 @@
             margin-bottom: 16px;
         }
 
-        /* Notifications Screen */
+        /* Notifications Screen - Modern Design */
         .notifications-container {
             padding: 0;
+            background: #fafafa;
         }
 
         .notifications-header {
             background: white;
             padding: 20px;
             border-bottom: 1px solid #dbdbdb;
+            position: relative;
         }
 
         .notifications-header h2 {
             font-size: 24px;
             font-weight: 700;
             color: #262626;
+            margin: 0;
+        }
+
+        .notifications-stats {
+            margin-top: 8px;
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+
+        .notification-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .notifications-list {
             background: white;
+            margin-top: 2px;
         }
 
         .notification-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
             padding: 16px 20px;
             border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            transition: background 0.2s ease;
+            cursor: pointer;
+        }
+
+        .notification-item:hover {
+            background: #f8f9fa;
+        }
+
+        .notification-item.unread {
+            background: #f0f8ff;
+            border-left: 3px solid #0095f6;
+        }
+
+        .notification-item.unread::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 8px;
+            height: 8px;
+            background: #0095f6;
+            border-radius: 50%;
+        }
+
+        .notification-avatar-container {
+            position: relative;
+            flex-shrink: 0;
         }
 
         .notification-avatar {
             width: 44px;
             height: 44px;
             border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #f0f0f0;
+        }
+
+        .notification-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .notification-avatar.initials {
             background: linear-gradient(45deg, #405de6, #833ab4);
             display: flex;
             align-items: center;
@@ -1731,8 +1788,81 @@
             font-size: 14px;
         }
 
+        .notification-icon {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .notification-icon.like {
+            background: #fff;
+        }
+
+        .notification-icon.like svg {
+            stroke: #ed4956;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notification-icon.follow {
+            background: #0095f6;
+        }
+
+        .notification-icon.follow svg {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notification-icon.comment {
+            background: #20c997;
+        }
+
+        .notification-icon.comment svg {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notification-icon.share {
+            background: #6f42c1;
+        }
+
+        .notification-icon.share svg {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notification-icon.visit {
+            background: #fd7e14;
+        }
+
+        .notification-icon.visit svg {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
         .notification-content {
             flex: 1;
+            min-width: 0;
+        }
+
+        .notification-text {
+            font-size: 14px;
+            color: #262626;
+            line-height: 1.4;
+            margin-bottom: 4px;
         }
 
         .notification-user {
@@ -1740,17 +1870,53 @@
             color: #262626;
         }
 
+        .notification-action {
+            color: #8e8e8e;
+        }
+
         .notification-time {
             font-size: 12px;
             color: #8e8e8e;
-            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .notification-time svg {
+            width: 12px;
+            height: 12px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .notification-media {
+            flex-shrink: 0;
+            margin-left: auto;
         }
 
         .notification-post-thumb {
             width: 44px;
             height: 44px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #dbdbdb;
+        }
+
+        .notification-post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .notification-post-thumb.placeholder {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .follow-back-btn {
@@ -1758,10 +1924,70 @@
             color: white;
             border: none;
             padding: 8px 16px;
-            border-radius: 6px;
+            border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .follow-back-btn:hover {
+            background: #1877f2;
+            transform: scale(1.05);
+        }
+
+        .follow-back-btn.following {
+            background: #f0f0f0;
+            color: #262626;
+            border: 1px solid #dbdbdb;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ed4956;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 16px;
+            text-align: center;
+        }
+
+        .notifications-filter {
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid #dbdbdb;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+
+        .filter-btn {
+            background: #f0f0f0;
+            border: none;
+            color: #8e8e8e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .filter-btn.active {
+            background: #0095f6;
+            color: white;
+        }
+
+        .filter-btn:hover:not(.active) {
+            background: #e0e0e0;
         }
 
         /* Edit Profile Modal */
@@ -2001,6 +2227,259 @@
         .save-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
+        }
+
+        /* Story Creator Modal */
+        .story-creator-modal {
+            background: #000;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            animation: modalSlideUp 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .story-creator-header {
+            padding: 16px 20px;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .story-creator-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .story-creator-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .story-creator-publish {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .story-creator-publish:hover {
+            transform: scale(1.05);
+        }
+
+        .story-creator-publish:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .story-canvas-container {
+            flex: 1;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .story-canvas {
+            width: 280px;
+            height: 497px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: text;
+            overflow: hidden;
+        }
+
+        .story-text-input {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            outline: none;
+            min-width: 200px;
+            max-width: 260px;
+            resize: none;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .story-text-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .story-tools {
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .story-tool-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .story-tool-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .background-colors {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+
+        .background-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .background-color.active {
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        .text-colors {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+
+        .text-color {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .text-color.active {
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        .font-size-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #333;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .font-size-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            cursor: pointer;
+        }
+
+        .font-size-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            cursor: pointer;
+            border: none;
+        }
+
+        .text-style-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .text-style-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .text-style-btn.active {
+            background: white;
+            color: #000;
+        }
+
+        .story-preview-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .story-action-btn {
+            flex: 1;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .story-action-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .story-action-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
         }
 
         /* Animations */
@@ -2355,32 +2834,33 @@
                     <div class="notifications-container">
                         <div class="notifications-header">
                             <h2>Atividades</h2>
+                            <div class="notifications-stats">
+                                <div class="notification-stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <circle cx="12" cy="12" r="10"/>
+                                    </svg>
+                                    <span>23 novas</span>
+                                </div>
+                                <div class="notification-stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                    <span>156 visualizações</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="notifications-list">
-                            <div class="notification-item">
-                                <div class="notification-avatar">AM</div>
-                                <div class="notification-content">
-                                    <span class="notification-user">ana.maria</span> curtiu sua foto
-                                    <div class="notification-time">2h</div>
-                                </div>
-                                <div class="notification-post-thumb"></div>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-avatar">JS</div>
-                                <div class="notification-content">
-                                    <span class="notification-user">joao.silva</span> começou a seguir você
-                                    <div class="notification-time">5h</div>
-                                </div>
-                                <button class="follow-back-btn">Seguir</button>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-avatar">MF</div>
-                                <div class="notification-content">
-                                    <span class="notification-user">maria.fernanda</span> comentou: "Que foto incrível! 😍"
-                                    <div class="notification-time">1d</div>
-                                </div>
-                                <div class="notification-post-thumb"></div>
-                            </div>
+
+                        <div class="notifications-filter">
+                            <button class="filter-btn active" data-filter="all">Todas</button>
+                            <button class="filter-btn" data-filter="likes">Curtidas</button>
+                            <button class="filter-btn" data-filter="follows">Seguidores</button>
+                            <button class="filter-btn" data-filter="comments">Comentários</button>
+                            <button class="filter-btn" data-filter="visits">Visitantes</button>
+                        </div>
+
+                        <div class="notifications-list" id="notificationsList">
+                            <!-- Notifications will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -2575,7 +3055,90 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Story Creator Modal -->
+    <div class="modal-overlay" id="storyCreatorModal">
+        <div class="story-creator-modal">
+            <div class="story-creator-header">
+                <button class="story-creator-close" onclick="closeStoryCreator()">✕</button>
+                <div class="story-creator-title">Criar Story</div>
+                <button class="story-creator-publish" onclick="publishStory()" id="publishStoryBtn" disabled>Publicar</button>
+            </div>
+
+            <div class="story-canvas-container">
+                <div class="story-canvas" id="storyCanvas" onclick="focusStoryText()">
+                    <textarea
+                        class="story-text-input"
+                        id="storyTextInput"
+                        placeholder="Digite sua mensagem..."
+                        maxlength="150"
+                        oninput="updateStoryText()"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="story-tools">
+                <div class="story-tool-group">
+                    <div class="story-tool-label">Fundo</div>
+                    <div class="background-colors">
+                        <div class="background-color active" data-bg="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #fa709a 0%, #fee140 100%)" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"></div>
+                        <div class="background-color" data-bg="#000000" style="background: #000000"></div>
+                        <div class="background-color" data-bg="#ffffff" style="background: #ffffff"></div>
+                    </div>
+                </div>
+
+                <div class="story-tool-group">
+                    <div class="story-tool-label">Cor do texto</div>
+                    <div class="text-colors">
+                        <div class="text-color active" data-color="#ffffff" style="background: #ffffff"></div>
+                        <div class="text-color" data-color="#000000" style="background: #000000"></div>
+                        <div class="text-color" data-color="#ff4757" style="background: #ff4757"></div>
+                        <div class="text-color" data-color="#2ed573" style="background: #2ed573"></div>
+                        <div class="text-color" data-color="#3742fa" style="background: #3742fa"></div>
+                        <div class="text-color" data-color="#ffa502" style="background: #ffa502"></div>
+                        <div class="text-color" data-color="#ff6b6b" style="background: #ff6b6b"></div>
+                        <div class="text-color" data-color="#a4b0be" style="background: #a4b0be"></div>
+                    </div>
+                </div>
+
+                <div class="story-tool-group">
+                    <div class="story-tool-label">Tamanho da fonte</div>
+                    <input type="range" class="font-size-slider" id="fontSizeSlider" min="16" max="48" value="24" oninput="updateFontSize()">
+                </div>
+
+                <div class="story-tool-group">
+                    <div class="story-tool-label">Estilo</div>
+                    <div class="text-style-buttons">
+                        <button class="text-style-btn" id="boldBtn" onclick="toggleBold()">B</button>
+                        <button class="text-style-btn" id="italicBtn" onclick="toggleItalic()">I</button>
+                        <button class="text-style-btn" id="underlineBtn" onclick="toggleUnderline()">U</button>
+                    </div>
+                </div>
+
+                <div class="story-preview-actions">
+                    <button class="story-action-btn" onclick="resetStory()">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
+                        </svg>
+                        Resetar
+                    </button>
+                    <button class="story-action-btn" onclick="previewStory()">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        Visualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentPostType = 'text';
         let posts = [];
@@ -2618,6 +3181,90 @@
             { name: 'Sofia Reis', username: 'sofia.reis', photo: 'https://images.pexels.com/photos/33282339/pexels-photo-33282339.jpeg', time: '3d' },
             { name: 'Lucas Mendes', username: 'lucas.mendes', photo: 'https://images.pexels.com/photos/7752839/pexels-photo-7752839.jpeg', time: '1sem' }
         ];
+
+        // Modern Notifications System
+        const notifications = [
+            {
+                id: 1,
+                type: 'visit',
+                user: { name: 'Ana Maria', username: 'ana.maria', photo: 'https://images.pexels.com/photos/27603433/pexels-photo-27603433.jpeg' },
+                action: 'visitou seu perfil',
+                time: '2 min',
+                timestamp: new Date(Date.now() - 2 * 60 * 1000),
+                unread: true
+            },
+            {
+                id: 2,
+                type: 'like',
+                user: { name: 'João Silva', username: 'joao.silva', photo: 'https://images.pexels.com/photos/28442318/pexels-photo-28442318.jpeg' },
+                action: 'curtiu sua foto',
+                time: '5 min',
+                timestamp: new Date(Date.now() - 5 * 60 * 1000),
+                unread: true,
+                postThumb: 'https://images.pexels.com/photos/251336/pexels-photo-251336.jpeg'
+            },
+            {
+                id: 3,
+                type: 'follow',
+                user: { name: 'Maria Fernanda', username: 'maria.fernanda', photo: 'https://images.pexels.com/photos/18459701/pexels-photo-18459701.jpeg' },
+                action: 'começou a seguir você',
+                time: '15 min',
+                timestamp: new Date(Date.now() - 15 * 60 * 1000),
+                unread: true,
+                isFollowing: false
+            },
+            {
+                id: 4,
+                type: 'comment',
+                user: { name: 'Rodrigo Costa', username: 'rodrigo.costa', photo: 'https://images.pexels.com/photos/7752805/pexels-photo-7752805.jpeg' },
+                action: 'comentou',
+                comment: 'Que foto incrível! 😍',
+                time: '30 min',
+                timestamp: new Date(Date.now() - 30 * 60 * 1000),
+                unread: false,
+                postThumb: 'https://images.pexels.com/photos/27610073/pexels-photo-27610073.jpeg'
+            },
+            {
+                id: 5,
+                type: 'share',
+                user: { name: 'Carla Santos', username: 'carla.santos', photo: 'https://images.pexels.com/photos/33282339/pexels-photo-33282339.jpeg' },
+                action: 'compartilhou seu post',
+                time: '1h',
+                timestamp: new Date(Date.now() - 60 * 60 * 1000),
+                unread: false,
+                postThumb: 'https://images.pexels.com/photos/12200696/pexels-photo-12200696.jpeg'
+            },
+            {
+                id: 6,
+                type: 'visit',
+                user: { name: 'Pedro Lima', username: 'pedro.lima', photo: 'https://images.pexels.com/photos/7752839/pexels-photo-7752839.jpeg' },
+                action: 'visitou seu perfil',
+                time: '2h',
+                timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
+                unread: false
+            },
+            {
+                id: 7,
+                type: 'like',
+                user: { name: 'Sofia Reis', username: 'sofia.reis', photo: 'https://images.pexels.com/photos/27603433/pexels-photo-27603433.jpeg' },
+                action: 'curtiu seu story',
+                time: '3h',
+                timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
+                unread: false
+            },
+            {
+                id: 8,
+                type: 'follow',
+                user: { name: 'Lucas Mendes', username: 'lucas.mendes', photo: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png' },
+                action: 'começou a seguir você',
+                time: '5h',
+                timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
+                unread: false,
+                isFollowing: true
+            }
+        ];
+
+        let currentNotificationFilter = 'all';
 
         // Check if viewing own profile (in a real app this would be determined by authentication)
         // When isOwnProfile = true: user sees "Quem visitou meu perfil" section
@@ -2806,9 +3453,137 @@
             }
         }
         
-        // Story Creator
+        // Story Creator Variables
+        let currentStoryBg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        let currentTextColor = '#ffffff';
+        let currentFontSize = 24;
+        let isBold = false;
+        let isItalic = false;
+        let isUnderline = false;
+        let stories = [];
+
+        // Story Creator Functions
         function openStoryCreator() {
-            alert('✨ Story Creator Avançado!\n\n🎨 Funcionalidades:\n• Editor split-screen\n• Múltiplos textos\n• Slider de tamanho da fonte\n• Drag & drop\n• Cores e fundos personalizáveis\n• Formatação completa\n\n📱 Disponível no app nativo React Native!');
+            document.getElementById('storyCreatorModal').style.display = 'flex';
+            resetStoryCreator();
+            focusStoryText();
+        }
+
+        function closeStoryCreator() {
+            document.getElementById('storyCreatorModal').style.display = 'none';
+            resetStoryCreator();
+        }
+
+        function resetStoryCreator() {
+            document.getElementById('storyTextInput').value = '';
+            currentStoryBg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            currentTextColor = '#ffffff';
+            currentFontSize = 24;
+            isBold = false;
+            isItalic = false;
+            isUnderline = false;
+            updateStoryCanvas();
+            updateStoryText();
+            resetStyleButtons();
+        }
+
+        function focusStoryText() {
+            document.getElementById('storyTextInput').focus();
+        }
+
+        function updateStoryText() {
+            const input = document.getElementById('storyTextInput');
+            const publishBtn = document.getElementById('publishStoryBtn');
+
+            publishBtn.disabled = !input.value.trim();
+            publishBtn.style.opacity = input.value.trim() ? '1' : '0.5';
+
+            updateStoryCanvas();
+        }
+
+        function updateStoryCanvas() {
+            const canvas = document.getElementById('storyCanvas');
+            const textInput = document.getElementById('storyTextInput');
+
+            canvas.style.background = currentStoryBg;
+            textInput.style.color = currentTextColor;
+            textInput.style.fontSize = currentFontSize + 'px';
+            textInput.style.fontWeight = isBold ? 'bold' : '600';
+            textInput.style.fontStyle = isItalic ? 'italic' : 'normal';
+            textInput.style.textDecoration = isUnderline ? 'underline' : 'none';
+        }
+
+        function updateFontSize() {
+            const slider = document.getElementById('fontSizeSlider');
+            currentFontSize = parseInt(slider.value);
+            updateStoryCanvas();
+        }
+
+        function toggleBold() {
+            isBold = !isBold;
+            document.getElementById('boldBtn').classList.toggle('active', isBold);
+            updateStoryCanvas();
+        }
+
+        function toggleItalic() {
+            isItalic = !isItalic;
+            document.getElementById('italicBtn').classList.toggle('active', isItalic);
+            updateStoryCanvas();
+        }
+
+        function toggleUnderline() {
+            isUnderline = !isUnderline;
+            document.getElementById('underlineBtn').classList.toggle('active', isUnderline);
+            updateStoryCanvas();
+        }
+
+        function resetStory() {
+            resetStoryCreator();
+        }
+
+        function previewStory() {
+            const text = document.getElementById('storyTextInput').value.trim();
+            if (!text) {
+                alert('Digite algum texto primeiro!');
+                return;
+            }
+
+            alert(`📱 Visualização do Story\n\n"${text}"\n\nFundo: ${currentStoryBg.includes('gradient') ? 'Gradiente' : 'Cor sólida'}\nCor do texto: ${currentTextColor}\nTamanho: ${currentFontSize}px\nEstilo: ${[isBold && 'Negrito', isItalic && 'Itálico', isUnderline && 'Sublinhado'].filter(Boolean).join(', ') || 'Normal'}`);
+        }
+
+        function publishStory() {
+            const text = document.getElementById('storyTextInput').value.trim();
+            if (!text) {
+                alert('Digite algum texto primeiro!');
+                return;
+            }
+
+            const story = {
+                id: stories.length + 1,
+                text: text,
+                background: currentStoryBg,
+                textColor: currentTextColor,
+                fontSize: currentFontSize,
+                bold: isBold,
+                italic: isItalic,
+                underline: isUnderline,
+                timestamp: new Date().toISOString(),
+                author: 'Você'
+            };
+
+            stories.unshift(story);
+
+            // Simulate adding to stories bar
+            alert(`✨ Story publicado com sucesso!\n\n"${text}"\n\nSeu story foi adicionado e ficará visível por 24 horas.`);
+
+            closeStoryCreator();
+        }
+
+        function resetStyleButtons() {
+            document.getElementById('boldBtn').classList.remove('active');
+            document.getElementById('italicBtn').classList.remove('active');
+            document.getElementById('underlineBtn').classList.remove('active');
+            document.getElementById('fontSizeSlider').value = 24;
         }
         
         // Navigation System
@@ -2839,6 +3614,8 @@
             // Load screen-specific content
             if (screenName === 'profile') {
                 renderProfile();
+            } else if (screenName === 'notifications') {
+                renderNotifications();
             }
         }
 
@@ -3108,6 +3885,179 @@
             alert(`👤 Visitante: ${username}\n\nAbrindo perfil do visitante...\n\n(Em uma versão completa, isso navegaria para o perfil do usuário)`);
         }
 
+        // Modern Notifications Functions
+        function renderNotifications() {
+            const filteredNotifications = filterNotifications();
+            const notificationsList = document.getElementById('notificationsList');
+
+            if (filteredNotifications.length === 0) {
+                notificationsList.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: #8e8e8e;">
+                        <svg viewBox="0 0 24 24" width="48" height="48" style="stroke: currentColor; stroke-width: 1; fill: none; margin-bottom: 16px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
+                        </svg>
+                        <p>Nenhuma notificação encontrada</p>
+                    </div>
+                `;
+                return;
+            }
+
+            notificationsList.innerHTML = filteredNotifications.map(notification => `
+                <div class="notification-item ${notification.unread ? 'unread' : ''}" onclick="handleNotificationClick('${notification.id}')">
+                    <div class="notification-avatar-container">
+                        <div class="notification-avatar ${notification.user.photo ? '' : 'initials'}">
+                            ${notification.user.photo ?
+                                `<img src="${notification.user.photo}" alt="${notification.user.name}">` :
+                                notification.user.name.split(' ').map(n => n[0]).join('')
+                            }
+                        </div>
+                        <div class="notification-icon ${notification.type}">
+                            ${getNotificationIcon(notification.type)}
+                        </div>
+                    </div>
+
+                    <div class="notification-content">
+                        <div class="notification-text">
+                            <span class="notification-user">${notification.user.username}</span>
+                            <span class="notification-action"> ${notification.action}</span>
+                            ${notification.comment ? `<br><em>"${notification.comment}"</em>` : ''}
+                        </div>
+                        <div class="notification-time">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                            ${notification.time}
+                        </div>
+                    </div>
+
+                    ${getNotificationAction(notification)}
+                </div>
+            `).join('');
+
+            // Setup filter buttons
+            setupNotificationFilters();
+        }
+
+        function getNotificationIcon(type) {
+            const icons = {
+                like: `<svg viewBox="0 0 24 24" width="12" height="12">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                </svg>`,
+                follow: `<svg viewBox="0 0 24 24" width="12" height="12">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"/>
+                </svg>`,
+                comment: `<svg viewBox="0 0 24 24" width="12" height="12">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+                </svg>`,
+                share: `<svg viewBox="0 0 24 24" width="12" height="12">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935-2.186 2.25 2.25 0 00-3.935 2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/>
+                </svg>`,
+                visit: `<svg viewBox="0 0 24 24" width="12" height="12">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>`
+            };
+            return icons[type] || '';
+        }
+
+        function getNotificationAction(notification) {
+            if (notification.type === 'follow') {
+                return `
+                    <button class="follow-back-btn ${notification.isFollowing ? 'following' : ''}"
+                            onclick="event.stopPropagation(); toggleFollow('${notification.id}')"
+                            id="followBtn${notification.id}">
+                        ${notification.isFollowing ? 'Seguindo' : 'Seguir'}
+                    </button>
+                `;
+            } else if (notification.postThumb) {
+                return `
+                    <div class="notification-media">
+                        <div class="notification-post-thumb">
+                            <img src="${notification.postThumb}" alt="Post">
+                        </div>
+                    </div>
+                `;
+            }
+            return '';
+        }
+
+        function filterNotifications() {
+            if (currentNotificationFilter === 'all') {
+                return notifications;
+            }
+
+            const filterMap = {
+                'likes': ['like'],
+                'follows': ['follow'],
+                'comments': ['comment'],
+                'visits': ['visit']
+            };
+
+            const allowedTypes = filterMap[currentNotificationFilter] || [];
+            return notifications.filter(n => allowedTypes.includes(n.type));
+        }
+
+        function setupNotificationFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentNotificationFilter = this.dataset.filter;
+                    renderNotifications();
+                });
+            });
+        }
+
+        function handleNotificationClick(id) {
+            const notification = notifications.find(n => n.id == id);
+            if (!notification) return;
+
+            // Mark as read
+            notification.unread = false;
+
+            // Handle different notification types
+            switch (notification.type) {
+                case 'visit':
+                    alert(`👁️ ${notification.user.name} visitou seu perfil há ${notification.time}`);
+                    break;
+                case 'like':
+                    alert(`❤️ ${notification.user.name} curtiu ${notification.action.includes('story') ? 'seu story' : 'sua foto'} há ${notification.time}`);
+                    break;
+                case 'follow':
+                    alert(`👤 ${notification.user.name} começou a seguir você há ${notification.time}`);
+                    break;
+                case 'comment':
+                    alert(`💬 ${notification.user.name} comentou: "${notification.comment}" há ${notification.time}`);
+                    break;
+                case 'share':
+                    alert(`🔄 ${notification.user.name} compartilhou seu post há ${notification.time}`);
+                    break;
+            }
+
+            // Re-render to update unread status
+            renderNotifications();
+        }
+
+        function toggleFollow(notificationId) {
+            const notification = notifications.find(n => n.id == notificationId);
+            if (!notification) return;
+
+            notification.isFollowing = !notification.isFollowing;
+            const btn = document.getElementById(`followBtn${notificationId}`);
+
+            if (notification.isFollowing) {
+                btn.textContent = 'Seguindo';
+                btn.classList.add('following');
+                alert(`✅ Agora você está seguindo ${notification.user.name}!`);
+            } else {
+                btn.textContent = 'Seguir';
+                btn.classList.remove('following');
+                alert(`❌ Você parou de seguir ${notification.user.name}.`);
+            }
+        }
+
         // Edit Profile Modal Functions
         function openEditProfileModal() {
             const modal = document.getElementById('editProfileModal');
@@ -3216,6 +4166,27 @@
             if (bioInput) {
                 bioInput.addEventListener('input', updateBioCharCount);
             }
+
+            // Story Creator Event listeners
+            // Background color selection
+            document.querySelectorAll('.background-color').forEach(color => {
+                color.addEventListener('click', function() {
+                    document.querySelectorAll('.background-color').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentStoryBg = this.dataset.bg;
+                    updateStoryCanvas();
+                });
+            });
+
+            // Text color selection
+            document.querySelectorAll('.text-color').forEach(color => {
+                color.addEventListener('click', function() {
+                    document.querySelectorAll('.text-color').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTextColor = this.dataset.color;
+                    updateStoryCanvas();
+                });
+            });
         });
 
         // Render Feed (updated to work with screen system)
@@ -3304,6 +4275,7 @@
         renderFeed();
         renderProfile();
         updateProfileDisplay();
+        renderNotifications();
 
         // Close modal when clicking outside
         document.getElementById('createModal').addEventListener('click', function(e) {
@@ -3316,6 +4288,13 @@
         document.getElementById('editProfileModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeEditProfileModal();
+            }
+        });
+
+        // Close story creator modal when clicking outside
+        document.getElementById('storyCreatorModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeStoryCreator();
             }
         });
     </script>
