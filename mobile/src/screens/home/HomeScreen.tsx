@@ -76,8 +76,18 @@ const HomeScreen: React.FC = () => {
   };
 
   const handleCreateStory = () => {
-    // TODO: Navigate to story creation screen
-    Alert.alert('Em breve', 'Criação de stories em desenvolvimento');
+    setShowStoryCreator(true);
+  };
+
+  const handleStorySubmit = async (content: string) => {
+    try {
+      const newStory = await storyService.createStory({ content });
+      setStories([newStory, ...stories]);
+    } catch (error) {
+      console.error('Erro ao criar story:', error);
+      Alert.alert('Erro', 'Não foi possível criar o story');
+      throw error;
+    }
   };
 
   const handleViewStory = (story: Story) => {
