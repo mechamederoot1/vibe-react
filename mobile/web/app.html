@@ -3803,6 +3803,13 @@
                 closeEditProfileModal();
             }
         });
+
+        // Close story creator modal when clicking outside
+        document.getElementById('storyCreatorModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeStoryCreator();
+            }
+        });
     </script>
 </body>
 </html>
