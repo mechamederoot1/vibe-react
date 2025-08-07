@@ -3142,9 +3142,137 @@
             }
         }
         
-        // Story Creator
+        // Story Creator Variables
+        let currentStoryBg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        let currentTextColor = '#ffffff';
+        let currentFontSize = 24;
+        let isBold = false;
+        let isItalic = false;
+        let isUnderline = false;
+        let stories = [];
+
+        // Story Creator Functions
         function openStoryCreator() {
-            alert('✨ Story Creator Avançado!\n\n🎨 Funcionalidades:\n• Editor split-screen\n• Múltiplos textos\n• Slider de tamanho da fonte\n• Drag & drop\n• Cores e fundos personalizáveis\n• Formatação completa\n\n📱 Disponível no app nativo React Native!');
+            document.getElementById('storyCreatorModal').style.display = 'flex';
+            resetStoryCreator();
+            focusStoryText();
+        }
+
+        function closeStoryCreator() {
+            document.getElementById('storyCreatorModal').style.display = 'none';
+            resetStoryCreator();
+        }
+
+        function resetStoryCreator() {
+            document.getElementById('storyTextInput').value = '';
+            currentStoryBg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            currentTextColor = '#ffffff';
+            currentFontSize = 24;
+            isBold = false;
+            isItalic = false;
+            isUnderline = false;
+            updateStoryCanvas();
+            updateStoryText();
+            resetStyleButtons();
+        }
+
+        function focusStoryText() {
+            document.getElementById('storyTextInput').focus();
+        }
+
+        function updateStoryText() {
+            const input = document.getElementById('storyTextInput');
+            const publishBtn = document.getElementById('publishStoryBtn');
+
+            publishBtn.disabled = !input.value.trim();
+            publishBtn.style.opacity = input.value.trim() ? '1' : '0.5';
+
+            updateStoryCanvas();
+        }
+
+        function updateStoryCanvas() {
+            const canvas = document.getElementById('storyCanvas');
+            const textInput = document.getElementById('storyTextInput');
+
+            canvas.style.background = currentStoryBg;
+            textInput.style.color = currentTextColor;
+            textInput.style.fontSize = currentFontSize + 'px';
+            textInput.style.fontWeight = isBold ? 'bold' : '600';
+            textInput.style.fontStyle = isItalic ? 'italic' : 'normal';
+            textInput.style.textDecoration = isUnderline ? 'underline' : 'none';
+        }
+
+        function updateFontSize() {
+            const slider = document.getElementById('fontSizeSlider');
+            currentFontSize = parseInt(slider.value);
+            updateStoryCanvas();
+        }
+
+        function toggleBold() {
+            isBold = !isBold;
+            document.getElementById('boldBtn').classList.toggle('active', isBold);
+            updateStoryCanvas();
+        }
+
+        function toggleItalic() {
+            isItalic = !isItalic;
+            document.getElementById('italicBtn').classList.toggle('active', isItalic);
+            updateStoryCanvas();
+        }
+
+        function toggleUnderline() {
+            isUnderline = !isUnderline;
+            document.getElementById('underlineBtn').classList.toggle('active', isUnderline);
+            updateStoryCanvas();
+        }
+
+        function resetStory() {
+            resetStoryCreator();
+        }
+
+        function previewStory() {
+            const text = document.getElementById('storyTextInput').value.trim();
+            if (!text) {
+                alert('Digite algum texto primeiro!');
+                return;
+            }
+
+            alert(`📱 Visualização do Story\n\n"${text}"\n\nFundo: ${currentStoryBg.includes('gradient') ? 'Gradiente' : 'Cor sólida'}\nCor do texto: ${currentTextColor}\nTamanho: ${currentFontSize}px\nEstilo: ${[isBold && 'Negrito', isItalic && 'Itálico', isUnderline && 'Sublinhado'].filter(Boolean).join(', ') || 'Normal'}`);
+        }
+
+        function publishStory() {
+            const text = document.getElementById('storyTextInput').value.trim();
+            if (!text) {
+                alert('Digite algum texto primeiro!');
+                return;
+            }
+
+            const story = {
+                id: stories.length + 1,
+                text: text,
+                background: currentStoryBg,
+                textColor: currentTextColor,
+                fontSize: currentFontSize,
+                bold: isBold,
+                italic: isItalic,
+                underline: isUnderline,
+                timestamp: new Date().toISOString(),
+                author: 'Você'
+            };
+
+            stories.unshift(story);
+
+            // Simulate adding to stories bar
+            alert(`✨ Story publicado com sucesso!\n\n"${text}"\n\nSeu story foi adicionado e ficará visível por 24 horas.`);
+
+            closeStoryCreator();
+        }
+
+        function resetStyleButtons() {
+            document.getElementById('boldBtn').classList.remove('active');
+            document.getElementById('italicBtn').classList.remove('active');
+            document.getElementById('underlineBtn').classList.remove('active');
+            document.getElementById('fontSizeSlider').value = 24;
         }
         
         // Navigation System
