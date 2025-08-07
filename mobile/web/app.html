@@ -2006,7 +2006,7 @@
                     
                     <div class="post-content">
                         ${post.content}
-                        ${post.type === 'testimonial' ? '<br><br>���� Depoimento especial' : ''}
+                        ${post.type === 'testimonial' ? '<br><br>💝 Depoimento especial' : ''}
                     </div>
                     
                     <div class="post-actions">
@@ -2110,7 +2110,23 @@
         // Render Profile Content
         function renderProfile() {
             renderPostsGrid();
+            renderFriendsGrid();
             setupProfileTabs();
+        }
+
+        // Render Friends Grid
+        function renderFriendsGrid() {
+            const friendsGrid = document.getElementById('friendsGrid');
+            const friendsToShow = friends.slice(0, 6);
+
+            friendsGrid.innerHTML = friendsToShow.map(friend => `
+                <div class="friend-item" onclick="openFriendProfile('${friend.username}')">
+                    <div class="friend-avatar">
+                        <img src="https://images.pexels.com/photos/31422830/pexels-photo-31422830.png" alt="${friend.name}">
+                    </div>
+                    <div class="friend-name">${friend.name.split(' ')[0]}</div>
+                </div>
+            `).join('');
         }
 
         function renderPostsGrid() {
