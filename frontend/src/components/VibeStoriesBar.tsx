@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Story } from '../services/storyService';
 import { User } from '../types/auth';
-import EnhancedCreateStoryModal from './EnhancedCreateStoryModal';
+import AdvancedStoryCreator from './AdvancedStoryCreator';
 
 interface VibeStoriesBarProps {
   stories: Story[];
-  onNewStory: (content: string, mediaFile?: File, background?: string) => Promise<void>;
+  onNewStory: (content: string) => Promise<void>;
   currentUser: User | null;
 }
 
@@ -27,9 +27,9 @@ const VibeStoriesBar: React.FC<VibeStoriesBarProps> = ({
     return '1d';
   };
 
-  const handleCreateStory = async (content: string, mediaFile?: File, background?: string) => {
+  const handleCreateStory = async (content: string) => {
     try {
-      await onNewStory(content, mediaFile, background);
+      await onNewStory(content);
       setShowCreateStory(false);
     } catch (error) {
       console.error('Erro ao criar story:', error);
@@ -114,9 +114,9 @@ const VibeStoriesBar: React.FC<VibeStoriesBarProps> = ({
         </div>
       </div>
 
-      {/* Enhanced Create Story Modal */}
+      {/* Advanced Story Creator */}
       {showCreateStory && (
-        <EnhancedCreateStoryModal
+        <AdvancedStoryCreator
           onClose={() => setShowCreateStory(false)}
           onSubmit={handleCreateStory}
           currentUser={currentUser}
