@@ -1014,19 +1014,32 @@
 
         .profile-post-item {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f0f0f0;
             display: flex;
-            align-items: center;
+            align-items: end;
             justify-content: center;
             color: white;
             font-size: 12px;
             text-align: center;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
         }
 
         .profile-post-item:hover {
-            opacity: 0.8;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .profile-post-item > div {
+            margin: 8px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .profile-post-item:hover > div {
+            opacity: 1;
         }
 
         /* Profile Posts List View */
@@ -1658,7 +1671,7 @@
             { id: 6, content: 'Final de semana perfeito em contato com a natureza 🌿 Nada como recarregar as energias ao ar livre! #natureza #weekend #paz', likes: 128, comments: 27, time: '4d', image: 'https://images.pexels.com/photos/33280403/pexels-photo-33280403.jpeg' },
             { id: 7, content: 'Time reunido para mais um brainstorm! 🧠✨ As melhores ideias surgem quando estamos juntos. #teamwork #inovacao #criatividade', likes: 64, comments: 9, time: '5d', image: 'https://images.pexels.com/photos/17382268/pexels-photo-17382268.jpeg' },
             { id: 8, content: 'Arte em cada detalhe do dia a dia 🎨 Inspiração está em todos os lugares, basta saber observar. #arte #inspiracao #criatividade', likes: 105, comments: 21, time: '6d', image: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg' },
-            { id: 9, content: 'Novo desafio aceito! 💪 Sempre em busca de evolução e crescimento pessoal. #desafio #crescimento #determinacao', likes: 87, comments: 16, time: '1sem', image: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png' }
+            { id: 9, content: 'Novo desafio aceito! ���� Sempre em busca de evolução e crescimento pessoal. #desafio #crescimento #determinacao', likes: 87, comments: 16, time: '1sem', image: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png' }
         ];
 
         let currentPostView = 'grid';
