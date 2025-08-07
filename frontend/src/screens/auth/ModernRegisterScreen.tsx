@@ -132,7 +132,7 @@ const ModernRegisterScreen: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 px-6 overflow-y-auto">
+        <div className="flex-none px-6">
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 animate-fade-in">
               <p className="text-red-600 text-sm text-center">{error}</p>
