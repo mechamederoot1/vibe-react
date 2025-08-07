@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'vibe-blue': '#90CAF9',
-        'vibe-blue-dark': '#1976D2',
-        'vibe-light': '#E3F2FD',
+        'vibe-blue': '#3b82f6',
+        'vibe-blue-dark': '#2563eb',
+        'vibe-light': '#dbeafe',
         'vibe-white': '#FFFFFF',
         'instagram-blue': '#405DE6',
         'instagram-purple': '#5851DB',
