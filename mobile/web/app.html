@@ -1691,22 +1691,44 @@
 
                     <!-- Profile Tabs -->
                     <div class="profile-tabs">
-                        <button class="tab-btn active" data-tab="posts">
-                            <svg viewBox="0 0 24 24" width="12" height="12">
-                                <rect x="3" y="3" width="7" height="7"/>
-                                <rect x="14" y="3" width="7" height="7"/>
-                                <rect x="14" y="14" width="7" height="7"/>
-                                <rect x="3" y="14" width="7" height="7"/>
-                            </svg>
-                            PUBLICAÇÕES
-                        </button>
-                        <button class="tab-btn" data-tab="tagged">
-                            <svg viewBox="0 0 24 24" width="12" height="12">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/>
-                            </svg>
-                            MARCAÇÕES
-                        </button>
+                        <div class="tabs-left">
+                            <button class="tab-btn active" data-tab="posts">
+                                <svg viewBox="0 0 24 24" width="12" height="12">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                                PUBLICAÇÕES
+                            </button>
+                            <button class="tab-btn" data-tab="tagged">
+                                <svg viewBox="0 0 24 24" width="12" height="12">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/>
+                                </svg>
+                                MARCAÇÕES
+                            </button>
+                        </div>
+                        <div class="view-toggle-container">
+                            <button class="view-toggle-btn active" data-view="grid" onclick="switchProfileView('grid')" title="Visualização em grade">
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                            </button>
+                            <button class="view-toggle-btn" data-view="feed" onclick="switchProfileView('feed')" title="Visualização em cascata">
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <line x1="8" y1="6" x2="21" y2="6"/>
+                                    <line x1="8" y1="12" x2="21" y2="12"/>
+                                    <line x1="8" y1="18" x2="21" y2="18"/>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Posts Grid -->
