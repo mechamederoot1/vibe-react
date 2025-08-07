@@ -182,6 +182,14 @@ const HomeScreen: React.FC = () => {
         style={styles.container}
         showsVerticalScrollIndicator={false}
       />
+
+      {/* Advanced Story Creator */}
+      <AdvancedStoryCreator
+        visible={showStoryCreator}
+        onClose={() => setShowStoryCreator(false)}
+        onSubmit={handleStorySubmit}
+        currentUser={user}
+      />
     </SafeAreaView>
   );
 };
