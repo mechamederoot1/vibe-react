@@ -43,21 +43,18 @@ const LoginScreen: React.FC = () => {
         {/* Logo with custom Vibe icon */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            {/* Vibe Logo SVG - Modern connection/wave design */}
+            {/* Vibe Logo SVG - Sound wave/vibration design */}
             <svg width="50" height="50" viewBox="0 0 50 50" className="mr-4">
-              {/* Three connected circles representing social connection */}
-              <circle cx="15" cy="25" r="8" fill="#3b82f6" opacity="0.8" />
-              <circle cx="25" cy="15" r="8" fill="#3b82f6" opacity="0.9" />
-              <circle cx="35" cy="25" r="8" fill="#3b82f6" />
+              {/* Central circle representing the source */}
+              <circle cx="25" cy="25" r="6" fill="#3b82f6" />
 
-              {/* Connection lines between circles */}
-              <line x1="22" y1="22" x2="18" y2="26" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" />
-              <line x1="28" y1="22" x2="32" y2="26" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" />
+              {/* Concentric vibration rings */}
+              <circle cx="25" cy="25" r="12" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.7" />
+              <circle cx="25" cy="25" r="18" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.4" />
+              <circle cx="25" cy="25" r="24" fill="none" stroke="#3b82f6" strokeWidth="1.5" opacity="0.2" />
 
-              {/* Small pulse dots for "vibe" effect */}
-              <circle cx="15" cy="25" r="3" fill="white" opacity="0.9" />
-              <circle cx="25" cy="15" r="3" fill="white" opacity="0.9" />
-              <circle cx="35" cy="25" r="3" fill="white" opacity="0.9" />
+              {/* Small accent dots */}
+              <circle cx="25" cy="25" r="2" fill="white" />
             </svg>
             <h1 className="text-5xl font-bold text-blue-500">
               Vibe
