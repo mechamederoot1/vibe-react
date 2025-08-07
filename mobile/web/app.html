@@ -3680,6 +3680,27 @@
             if (bioInput) {
                 bioInput.addEventListener('input', updateBioCharCount);
             }
+
+            // Story Creator Event listeners
+            // Background color selection
+            document.querySelectorAll('.background-color').forEach(color => {
+                color.addEventListener('click', function() {
+                    document.querySelectorAll('.background-color').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentStoryBg = this.dataset.bg;
+                    updateStoryCanvas();
+                });
+            });
+
+            // Text color selection
+            document.querySelectorAll('.text-color').forEach(color => {
+                color.addEventListener('click', function() {
+                    document.querySelectorAll('.text-color').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTextColor = this.dataset.color;
+                    updateStoryCanvas();
+                });
+            });
         });
 
         // Render Feed (updated to work with screen system)
