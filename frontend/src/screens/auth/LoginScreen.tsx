@@ -40,25 +40,13 @@ const LoginScreen: React.FC = () => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Logo with custom Vibe icon */}
+        {/* Simple elegant logo */}
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-6">
-            {/* Vibe Logo SVG - Sound wave/vibration design */}
-            <svg width="50" height="50" viewBox="0 0 50 50" className="mr-4">
-              {/* Central circle representing the source */}
-              <circle cx="25" cy="25" r="6" fill="#3b82f6" />
-
-              {/* Concentric vibration rings */}
-              <circle cx="25" cy="25" r="12" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.7" />
-              <circle cx="25" cy="25" r="18" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.4" />
-              <circle cx="25" cy="25" r="24" fill="none" stroke="#3b82f6" strokeWidth="1.5" opacity="0.2" />
-
-              {/* Small accent dots */}
-              <circle cx="25" cy="25" r="2" fill="white" />
-            </svg>
-            <h1 className="text-5xl font-bold text-blue-500">
-              Vibe
+          <div className="mb-6">
+            <h1 className="text-6xl font-light text-blue-500 tracking-wider">
+              vibe
             </h1>
+            <div className="w-16 h-1 bg-blue-500 mx-auto mt-2 rounded-full"></div>
           </div>
           <p className="text-gray-600 text-lg">
             Conecte-se com seus amigos
