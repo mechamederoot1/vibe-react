@@ -43,27 +43,23 @@ const LoginScreen: React.FC = () => {
         {/* Logo with custom Vibe icon */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            {/* Vibe Logo SVG */}
-            <svg width="60" height="60" viewBox="0 0 60 60" className="mr-3">
-              <defs>
-                <linearGradient id="vibeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3b82f6" />
-                  <stop offset="25%" stopColor="#1d4ed8" />
-                  <stop offset="50%" stopColor="#1e40af" />
-                  <stop offset="75%" stopColor="#1e3a8a" />
-                  <stop offset="100%" stopColor="#312e81" />
-                </linearGradient>
-              </defs>
-              {/* Outer circle */}
-              <circle cx="30" cy="30" r="28" fill="url(#vibeGradient)" />
-              {/* Inner design - stylized "V" */}
-              <path d="M18 20 L30 40 L42 20" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-              {/* Three dots representing connection */}
-              <circle cx="15" cy="45" r="2" fill="white" />
-              <circle cx="30" cy="45" r="2" fill="white" />
-              <circle cx="45" cy="45" r="2" fill="white" />
+            {/* Vibe Logo SVG - Modern connection/wave design */}
+            <svg width="50" height="50" viewBox="0 0 50 50" className="mr-4">
+              {/* Three connected circles representing social connection */}
+              <circle cx="15" cy="25" r="8" fill="#3b82f6" opacity="0.8" />
+              <circle cx="25" cy="15" r="8" fill="#3b82f6" opacity="0.9" />
+              <circle cx="35" cy="25" r="8" fill="#3b82f6" />
+
+              {/* Connection lines between circles */}
+              <line x1="22" y1="22" x2="18" y2="26" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" />
+              <line x1="28" y1="22" x2="32" y2="26" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" />
+
+              {/* Small pulse dots for "vibe" effect */}
+              <circle cx="15" cy="25" r="3" fill="white" opacity="0.9" />
+              <circle cx="25" cy="15" r="3" fill="white" opacity="0.9" />
+              <circle cx="35" cy="25" r="3" fill="white" opacity="0.9" />
             </svg>
-            <h1 className="text-5xl font-bold text-gradient">
+            <h1 className="text-5xl font-bold text-blue-500">
               Vibe
             </h1>
           </div>
