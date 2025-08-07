@@ -268,12 +268,12 @@ const Step2: React.FC<{
   onNext: () => void;
   loading: boolean;
 }> = ({ data, onChange, onNext, loading }) => (
-  <div className="space-y-6 animate-fade-in">
-    <div className="text-center mb-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">
+  <div className="space-y-8 animate-fade-in">
+    <div className="text-center mb-10">
+      <h2 className="text-3xl font-bold text-gray-900 mb-3">
         Qual seu e-mail?
       </h2>
-      <p className="text-gray-600">
+      <p className="text-gray-600 text-lg">
         Usaremos para entrar em contato e para login
       </p>
     </div>
@@ -283,14 +283,14 @@ const Step2: React.FC<{
       value={data.email}
       onChange={(e) => onChange({ ...data, email: e.target.value })}
       placeholder="seu@email.com"
-      className="ig-input"
+      className="ig-input text-lg py-4"
       required
     />
 
     <button
       onClick={onNext}
       disabled={!data.email.trim() || loading}
-      className="ig-button ig-button-primary w-full py-3 text-sm font-semibold disabled:opacity-50"
+      className="ig-button ig-button-primary w-full py-4 text-lg font-semibold disabled:opacity-50"
     >
       {loading ? 'Verificando...' : 'Continuar'}
     </button>
