@@ -2828,7 +2828,90 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Story Creator Modal -->
+    <div class="modal-overlay" id="storyCreatorModal">
+        <div class="story-creator-modal">
+            <div class="story-creator-header">
+                <button class="story-creator-close" onclick="closeStoryCreator()">✕</button>
+                <div class="story-creator-title">Criar Story</div>
+                <button class="story-creator-publish" onclick="publishStory()" id="publishStoryBtn" disabled>Publicar</button>
+            </div>
+
+            <div class="story-canvas-container">
+                <div class="story-canvas" id="storyCanvas" onclick="focusStoryText()">
+                    <textarea
+                        class="story-text-input"
+                        id="storyTextInput"
+                        placeholder="Digite sua mensagem..."
+                        maxlength="150"
+                        oninput="updateStoryText()"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="story-tools">
+                <div class="story-tool-group">
+                    <div class="story-tool-label">Fundo</div>
+                    <div class="background-colors">
+                        <div class="background-color active" data-bg="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #fa709a 0%, #fee140 100%)" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"></div>
+                        <div class="background-color" data-bg="linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"></div>
+                        <div class="background-color" data-bg="#000000" style="background: #000000"></div>
+                        <div class="background-color" data-bg="#ffffff" style="background: #ffffff"></div>
+                    </div>
+                </div>
+
+                <div class="story-tool-group">
+                    <div class="story-tool-label">Cor do texto</div>
+                    <div class="text-colors">
+                        <div class="text-color active" data-color="#ffffff" style="background: #ffffff"></div>
+                        <div class="text-color" data-color="#000000" style="background: #000000"></div>
+                        <div class="text-color" data-color="#ff4757" style="background: #ff4757"></div>
+                        <div class="text-color" data-color="#2ed573" style="background: #2ed573"></div>
+                        <div class="text-color" data-color="#3742fa" style="background: #3742fa"></div>
+                        <div class="text-color" data-color="#ffa502" style="background: #ffa502"></div>
+                        <div class="text-color" data-color="#ff6b6b" style="background: #ff6b6b"></div>
+                        <div class="text-color" data-color="#a4b0be" style="background: #a4b0be"></div>
+                    </div>
+                </div>
+
+                <div class="story-tool-group">
+                    <div class="story-tool-label">Tamanho da fonte</div>
+                    <input type="range" class="font-size-slider" id="fontSizeSlider" min="16" max="48" value="24" oninput="updateFontSize()">
+                </div>
+
+                <div class="story-tool-group">
+                    <div class="story-tool-label">Estilo</div>
+                    <div class="text-style-buttons">
+                        <button class="text-style-btn" id="boldBtn" onclick="toggleBold()">B</button>
+                        <button class="text-style-btn" id="italicBtn" onclick="toggleItalic()">I</button>
+                        <button class="text-style-btn" id="underlineBtn" onclick="toggleUnderline()">U</button>
+                    </div>
+                </div>
+
+                <div class="story-preview-actions">
+                    <button class="story-action-btn" onclick="resetStory()">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
+                        </svg>
+                        Resetar
+                    </button>
+                    <button class="story-action-btn" onclick="previewStory()">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        Visualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentPostType = 'text';
         let posts = [];
@@ -3460,7 +3543,7 @@
         }
 
         function selectNewAvatar() {
-            alert('📷 Seleção de Avatar\n\nEm uma versão completa, isso abriria:\n�� Galeria de fotos\n• Câmera\n• Avatares pré-definidos\n• Editor de imagem');
+            alert('📷 Seleção de Avatar\n\nEm uma versão completa, isso abriria:\n• Galeria de fotos\n• Câmera\n• Avatares pré-definidos\n• Editor de imagem');
         }
 
         // Add bio character count listener
