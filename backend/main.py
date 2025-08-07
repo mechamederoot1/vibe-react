@@ -28,6 +28,10 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://0.0.0.0:3000",
+        "http://192.168.*:3000",
+        "http://10.*:3000",
+        "http://172.*:3000",
         "https://fb4f7066b46c4e4788fec33649b4a7e0-de66ff095850483b99cf15b0c.fly.dev",
         "https://*.fly.dev",
         "*"  # Allow all origins for development
