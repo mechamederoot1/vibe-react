@@ -1028,6 +1028,99 @@
             opacity: 0.8;
         }
 
+        /* Profile Posts List View */
+        .profile-posts-list {
+            padding: 0;
+        }
+
+        .profile-post-list-item {
+            background: white;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 16px 20px;
+        }
+
+        .profile-post-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-list-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .post-list-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #405de6, #833ab4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .post-list-info {
+            flex: 1;
+        }
+
+        .post-list-username {
+            font-weight: 600;
+            color: #262626;
+            font-size: 14px;
+        }
+
+        .post-list-time {
+            color: #8e8e8e;
+            font-size: 12px;
+        }
+
+        .post-list-content {
+            color: #262626;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .post-list-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .post-list-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #8e8e8e;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .post-list-action:hover {
+            color: #262626;
+        }
+
+        .post-list-action svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .post-list-action.liked {
+            color: #ed4956;
+        }
+
+        .post-list-action.liked svg {
+            fill: currentColor;
+        }
+
         /* Search Screen */
         .search-container {
             padding: 16px;
