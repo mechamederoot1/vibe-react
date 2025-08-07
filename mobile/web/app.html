@@ -1754,6 +1754,244 @@
             cursor: pointer;
         }
 
+        /* Edit Profile Modal */
+        .edit-profile-modal {
+            background: white;
+            border-radius: 16px;
+            width: 340px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: modalSlideUp 0.3s ease-out;
+        }
+
+        .edit-profile-content {
+            max-height: calc(90vh - 80px);
+            overflow-y: auto;
+            padding: 0 20px 20px;
+        }
+
+        .edit-profile-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .edit-profile-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+
+        .edit-profile-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 2px;
+        }
+
+        .edit-avatar-section {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #dbdbdb;
+            margin-bottom: 20px;
+        }
+
+        .edit-avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .edit-avatar-container img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #dbdbdb;
+        }
+
+        .edit-avatar-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #0095f6;
+            border: 2px solid white;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .edit-avatar-btn:hover {
+            background: #1877f2;
+        }
+
+        .edit-avatar-btn svg {
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .edit-avatar-text {
+            font-size: 14px;
+            color: #0095f6;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .edit-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.half {
+            flex: 1;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0095f6;
+            box-shadow: 0 0 0 2px rgba(0, 149, 246, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            max-height: 120px;
+        }
+
+        .char-counter {
+            font-size: 12px;
+            color: #8e8e8e;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .privacy-settings {
+            border-top: 1px solid #dbdbdb;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .privacy-settings h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #262626;
+            margin: 0 0 16px 0;
+        }
+
+        .privacy-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+
+        .privacy-label {
+            font-size: 14px;
+            color: #262626;
+            flex: 1;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            margin-left: 12px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #0095f6;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .save-btn {
+            background: #0095f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .save-btn:hover {
+            background: #1877f2;
+        }
+
+        .save-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
         /* Animations */
         .fade-in {
             animation: fadeIn 0.3s ease-out;
@@ -2680,7 +2918,7 @@
         }
 
         function openFollowersModal() {
-            alert('👥 Seguidores\n\n2.8k pessoas seguem este perfil\n\nRecentes:\n• Ana Maria Silva\n• João Pedro Santos\n• Maria Fernanda Costa\n• Carlos Eduardo Lima\n• Sofia Rodrigues\n• Lucas Mendes');
+            alert('👥 Seguidores\n\n2.8k pessoas seguem este perfil\n\nRecentes:\n• Ana Maria Silva\n• João Pedro Santos\n• Maria Fernanda Costa\n• Carlos Eduardo Lima\n• Sofia Rodrigues\n��� Lucas Mendes');
         }
 
         function openFollowingModal() {
