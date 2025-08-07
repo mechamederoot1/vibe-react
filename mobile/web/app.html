@@ -1689,39 +1689,96 @@
             margin-bottom: 16px;
         }
 
-        /* Notifications Screen */
+        /* Notifications Screen - Modern Design */
         .notifications-container {
             padding: 0;
+            background: #fafafa;
         }
 
         .notifications-header {
             background: white;
             padding: 20px;
             border-bottom: 1px solid #dbdbdb;
+            position: relative;
         }
 
         .notifications-header h2 {
             font-size: 24px;
             font-weight: 700;
             color: #262626;
+            margin: 0;
+        }
+
+        .notifications-stats {
+            margin-top: 8px;
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+
+        .notification-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .notifications-list {
             background: white;
+            margin-top: 2px;
         }
 
         .notification-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
             padding: 16px 20px;
             border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            transition: background 0.2s ease;
+            cursor: pointer;
+        }
+
+        .notification-item:hover {
+            background: #f8f9fa;
+        }
+
+        .notification-item.unread {
+            background: #f0f8ff;
+            border-left: 3px solid #0095f6;
+        }
+
+        .notification-item.unread::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 8px;
+            height: 8px;
+            background: #0095f6;
+            border-radius: 50%;
+        }
+
+        .notification-avatar-container {
+            position: relative;
+            flex-shrink: 0;
         }
 
         .notification-avatar {
             width: 44px;
             height: 44px;
             border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #f0f0f0;
+        }
+
+        .notification-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .notification-avatar.initials {
             background: linear-gradient(45deg, #405de6, #833ab4);
             display: flex;
             align-items: center;
@@ -1731,8 +1788,81 @@
             font-size: 14px;
         }
 
+        .notification-icon {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .notification-icon.like {
+            background: #fff;
+        }
+
+        .notification-icon.like svg {
+            stroke: #ed4956;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notification-icon.follow {
+            background: #0095f6;
+        }
+
+        .notification-icon.follow svg {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notification-icon.comment {
+            background: #20c997;
+        }
+
+        .notification-icon.comment svg {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notification-icon.share {
+            background: #6f42c1;
+        }
+
+        .notification-icon.share svg {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notification-icon.visit {
+            background: #fd7e14;
+        }
+
+        .notification-icon.visit svg {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
         .notification-content {
             flex: 1;
+            min-width: 0;
+        }
+
+        .notification-text {
+            font-size: 14px;
+            color: #262626;
+            line-height: 1.4;
+            margin-bottom: 4px;
         }
 
         .notification-user {
@@ -1740,17 +1870,53 @@
             color: #262626;
         }
 
+        .notification-action {
+            color: #8e8e8e;
+        }
+
         .notification-time {
             font-size: 12px;
             color: #8e8e8e;
-            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .notification-time svg {
+            width: 12px;
+            height: 12px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .notification-media {
+            flex-shrink: 0;
+            margin-left: auto;
         }
 
         .notification-post-thumb {
             width: 44px;
             height: 44px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #dbdbdb;
+        }
+
+        .notification-post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .notification-post-thumb.placeholder {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .follow-back-btn {
@@ -1758,10 +1924,70 @@
             color: white;
             border: none;
             padding: 8px 16px;
-            border-radius: 6px;
+            border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .follow-back-btn:hover {
+            background: #1877f2;
+            transform: scale(1.05);
+        }
+
+        .follow-back-btn.following {
+            background: #f0f0f0;
+            color: #262626;
+            border: 1px solid #dbdbdb;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ed4956;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 16px;
+            text-align: center;
+        }
+
+        .notifications-filter {
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid #dbdbdb;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+
+        .filter-btn {
+            background: #f0f0f0;
+            border: none;
+            color: #8e8e8e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .filter-btn.active {
+            background: #0095f6;
+            color: white;
+        }
+
+        .filter-btn:hover:not(.active) {
+            background: #e0e0e0;
         }
 
         /* Edit Profile Modal */
@@ -2608,32 +2834,33 @@
                     <div class="notifications-container">
                         <div class="notifications-header">
                             <h2>Atividades</h2>
+                            <div class="notifications-stats">
+                                <div class="notification-stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <circle cx="12" cy="12" r="10"/>
+                                    </svg>
+                                    <span>23 novas</span>
+                                </div>
+                                <div class="notification-stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                    <span>156 visualizações</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="notifications-list">
-                            <div class="notification-item">
-                                <div class="notification-avatar">AM</div>
-                                <div class="notification-content">
-                                    <span class="notification-user">ana.maria</span> curtiu sua foto
-                                    <div class="notification-time">2h</div>
-                                </div>
-                                <div class="notification-post-thumb"></div>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-avatar">JS</div>
-                                <div class="notification-content">
-                                    <span class="notification-user">joao.silva</span> começou a seguir você
-                                    <div class="notification-time">5h</div>
-                                </div>
-                                <button class="follow-back-btn">Seguir</button>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-avatar">MF</div>
-                                <div class="notification-content">
-                                    <span class="notification-user">maria.fernanda</span> comentou: "Que foto incrível! 😍"
-                                    <div class="notification-time">1d</div>
-                                </div>
-                                <div class="notification-post-thumb"></div>
-                            </div>
+
+                        <div class="notifications-filter">
+                            <button class="filter-btn active" data-filter="all">Todas</button>
+                            <button class="filter-btn" data-filter="likes">Curtidas</button>
+                            <button class="filter-btn" data-filter="follows">Seguidores</button>
+                            <button class="filter-btn" data-filter="comments">Comentários</button>
+                            <button class="filter-btn" data-filter="visits">Visitantes</button>
+                        </div>
+
+                        <div class="notifications-list" id="notificationsList">
+                            <!-- Notifications will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
