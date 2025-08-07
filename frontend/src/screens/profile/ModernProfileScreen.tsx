@@ -40,24 +40,13 @@ const ModernProfileScreen: React.FC = () => {
         postService.getUserTestimonials(profileUserId)
       ]);
 
-      // Mock shared posts for now
-      const mockSharedPosts: Post[] = [
-        {
-          id: 999,
-          content: 'Este é um post compartilhado de outro usuário!',
-          post_type: 'shared',
-          author_id: 2,
-          author_name: 'João Silva',
-          author_avatar: '',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }
-      ];
+      // Load real shared posts from API - no mock data
+      const sharedPosts: Post[] = [];
 
       setProfile(profileData);
       setPosts(userPosts);
       setTestimonials(userTestimonials);
-      setSharedPosts(mockSharedPosts);
+      setSharedPosts(sharedPosts);
     } catch (error) {
       console.error('Erro ao carregar perfil:', error);
     } finally {
@@ -392,12 +381,12 @@ const ModernProfileScreen: React.FC = () => {
                     </svg>
                   </div>
                   <h3 className="text-xl font-light text-gray-900 mb-2">
-                    {isOwnProfile ? 'Compartilhe fotos' : 'Nenhuma publicação ainda'}
+                    {isOwnProfile ? 'Compartilhe seu conteúdo' : 'Nenhuma publicação ainda'}
                   </h3>
                   <p className="text-sm text-gray-600">
-                    {isOwnProfile 
-                      ? 'Quando você compartilhar fotos e vídeos, eles aparecerão no seu perfil.'
-                      : 'Quando eles compartilharem fotos e vídeos, você poderá vê-las aqui.'
+                    {isOwnProfile
+                      ? 'Quando você criar posts, fotos, vídeos ou depoimentos, eles aparecerão no seu perfil.'
+                      : 'Quando eles compartilharem conteúdo, você poderá vê-lo aqui.'
                     }
                   </p>
                   {isOwnProfile && (
@@ -405,7 +394,7 @@ const ModernProfileScreen: React.FC = () => {
                       onClick={() => setShowCreatePost(true)}
                       className="mt-4 text-blue-500 font-semibold text-sm"
                     >
-                      Compartilhar sua primeira foto
+                      Criar sua primeira publicação
                     </button>
                   )}
                 </div>

@@ -30,77 +30,10 @@ const HomeScreen: React.FC = () => {
         storyService.getActiveStories()
       ]);
 
-      // Add example stories for testing StoryViewer
-      const exampleStories = [
-        {
-          id: 1001,
-          content: 'Primeira story de exemplo! 🎉',
-          author_id: 1,
-          author_name: 'João Silva',
-          author_avatar: '',
-          background_color: '#3b82f6',
-          text_color: '#ffffff',
-          font_size: 28,
-          is_active: true,
-          created_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 min ago
-          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
-        },
-        {
-          id: 1002,
-          content: 'Segunda story com gradiente!',
-          author_id: 1,
-          author_name: 'João Silva',
-          author_avatar: '',
-          background_gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          text_color: '#ffffff',
-          font_size: 24,
-          is_active: true,
-          created_at: new Date(Date.now() - 1000 * 60 * 20).toISOString(), // 20 min ago
-          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
-        },
-        {
-          id: 1003,
-          content: 'Story da Maria! ✨',
-          author_id: 2,
-          author_name: 'Maria Santos',
-          author_avatar: '',
-          background_color: '#ec4899',
-          text_color: '#ffffff',
-          font_size: 32,
-          is_active: true,
-          created_at: new Date(Date.now() - 1000 * 60 * 10).toISOString(), // 10 min ago
-          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
-        },
-        {
-          id: 1004,
-          content: 'Mais uma story da Maria! 🌟',
-          author_id: 2,
-          author_name: 'Maria Santos',
-          author_avatar: '',
-          background_gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-          text_color: '#ffffff',
-          font_size: 26,
-          is_active: true,
-          created_at: new Date(Date.now() - 1000 * 60 * 5).toISOString(), // 5 min ago
-          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
-        },
-        {
-          id: 1005,
-          content: 'Story do Pedro! 🚀',
-          author_id: 3,
-          author_name: 'Pedro Costa',
-          author_avatar: '',
-          background_color: '#10b981',
-          text_color: '#ffffff',
-          font_size: 30,
-          is_active: true,
-          created_at: new Date(Date.now() - 1000 * 60 * 2).toISOString(), // 2 min ago
-          expires_at: new Date(Date.now() + 1000 * 60 * 60 * 23).toISOString()
-        }
-      ];
+      // Load real stories from API - no mock data
 
       setPosts(feedPosts);
-      setStories([...activeStories, ...exampleStories]);
+      setStories(activeStories);
     } catch (error) {
       console.error('Erro ao carregar feed:', error);
     } finally {
@@ -181,7 +114,7 @@ const HomeScreen: React.FC = () => {
           {posts.length === 0 ? (
             <div className="bg-white">
               <div className="text-center py-16 px-8">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-blue-500 flex items-center justify-center">
                   <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
@@ -190,13 +123,13 @@ const HomeScreen: React.FC = () => {
                   Bem-vindo ao Vibe!
                 </h2>
                 <p className="text-gray-600 mb-6 text-sm leading-relaxed">
-                  Quando você começar a seguir pessoas, verá suas fotos e vídeos aqui.
+                  Quando você começar a seguir pessoas, verá o conteúdo delas aqui.
                 </p>
                 <button
                   onClick={() => setShowCreatePost(true)}
                   className="ig-button ig-button-primary text-sm px-8 py-2"
                 >
-                  Compartilhar sua primeira foto
+                  Criar sua primeira publicação
                 </button>
               </div>
             </div>

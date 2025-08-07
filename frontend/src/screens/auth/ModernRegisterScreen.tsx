@@ -93,112 +93,117 @@ const ModernRegisterScreen: React.FC = () => {
   const progressPercentage = ((currentStep - 1) / 4) * 100;
 
   return (
-    <div className="mobile-container bg-white">
-      <div className="flex flex-col h-full">
-        {/* Header */}
-        <div className="flex-none px-6 py-4">
-          <div className="flex items-center justify-between mb-6">
-            {currentStep > 1 ? (
-              <button
-                onClick={goBack}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-            ) : (
-              <div className="w-10 h-10"></div>
-            )}
-            
-            <h1 className="text-2xl font-bold text-gradient">
-              Vibe
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col">
+      {/* Header */}
+      <div className="flex-none px-6 py-6 bg-white/80 backdrop-blur-sm">
+        <div className="flex items-center justify-between mb-6">
+          {currentStep > 1 ? (
+            <button
+              onClick={goBack}
+              className="p-3 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          ) : (
+            <div className="w-12 h-12"></div>
+          )}
+
+          <div className="text-center">
+            <h1 className="text-3xl font-light text-blue-500 tracking-wider">
+              vibe
             </h1>
-            
-            <div className="w-10 h-10"></div>
+            <div className="w-12 h-0.5 bg-blue-500 mx-auto mt-1 rounded-full"></div>
           </div>
-          
-          {/* Progress bar */}
-          <div className="w-full bg-gray-200 rounded-full h-1 mb-4">
-            <div 
-              className="bg-gradient-to-r from-purple-500 to-pink-500 h-1 rounded-full transition-all duration-500 ease-out"
-              style={{ width: `${progressPercentage}%` }}
-            ></div>
-          </div>
-          
-          <p className="text-center text-sm text-gray-500 font-medium">
-            {currentStep} de 5
-          </p>
+
+          <div className="w-12 h-12"></div>
         </div>
 
-        {/* Content */}
-        <div className="flex-1 px-6 overflow-y-auto">
+        {/* Progress bar */}
+        <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+          <div
+            className="bg-blue-500 h-2 rounded-full transition-all duration-500 ease-out"
+            style={{ width: `${progressPercentage}%` }}
+          ></div>
+        </div>
+
+        <p className="text-center text-base text-gray-600 font-medium">
+          Etapa {currentStep} de 5
+        </p>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 flex items-center justify-center px-6 py-8">
+        <div className="w-full max-w-md">
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 animate-fade-in">
-              <p className="text-red-600 text-sm text-center">{error}</p>
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-8 animate-fade-in">
+              <p className="text-red-600 text-base text-center">{error}</p>
             </div>
           )}
 
-          {currentStep === 1 && (
-            <Step1 
-              data={step1Data}
-              onChange={setStep1Data}
-              onNext={() => validateAndProceed(1)}
-              loading={loading}
-            />
-          )}
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            {currentStep === 1 && (
+              <Step1
+                data={step1Data}
+                onChange={setStep1Data}
+                onNext={() => validateAndProceed(1)}
+                loading={loading}
+              />
+            )}
 
-          {currentStep === 2 && (
-            <Step2
-              data={step2Data}
-              onChange={setStep2Data}
-              onNext={() => validateAndProceed(2)}
-              loading={loading}
-            />
-          )}
+            {currentStep === 2 && (
+              <Step2
+                data={step2Data}
+                onChange={setStep2Data}
+                onNext={() => validateAndProceed(2)}
+                loading={loading}
+              />
+            )}
 
-          {currentStep === 3 && (
-            <Step3
-              data={step3Data}
-              onChange={setStep3Data}
-              onNext={() => validateAndProceed(3)}
-              loading={loading}
-            />
-          )}
+            {currentStep === 3 && (
+              <Step3
+                data={step3Data}
+                onChange={setStep3Data}
+                onNext={() => validateAndProceed(3)}
+                loading={loading}
+              />
+            )}
 
-          {currentStep === 4 && (
-            <Step4
-              data={step4Data}
-              onChange={setStep4Data}
-              onNext={() => validateAndProceed(4)}
-              loading={loading}
-            />
-          )}
+            {currentStep === 4 && (
+              <Step4
+                data={step4Data}
+                onChange={setStep4Data}
+                onNext={() => validateAndProceed(4)}
+                loading={loading}
+              />
+            )}
 
-          {currentStep === 5 && (
-            <Step5
-              termsAccepted={termsAccepted}
-              onTermsChange={setTermsAccepted}
-              onShowTerms={() => setShowTerms(true)}
-              onFinish={() => validateAndProceed(5)}
-              loading={loading}
-            />
-          )}
-        </div>
-
-        {/* Footer */}
-        <div className="flex-none px-6 pb-6">
-          <div className="text-center">
-            <p className="text-sm text-gray-600">
-              Já tem uma conta?{' '}
-              <Link
-                to="/login"
-                className="text-blue-500 font-semibold hover:text-blue-600"
-              >
-                Faça login
-              </Link>
-            </p>
+            {currentStep === 5 && (
+              <Step5
+                termsAccepted={termsAccepted}
+                onTermsChange={setTermsAccepted}
+                onShowTerms={() => setShowTerms(true)}
+                onFinish={() => validateAndProceed(5)}
+                loading={loading}
+              />
+            )}
           </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="flex-none px-6 py-6 bg-white/80 backdrop-blur-sm">
+        <div className="text-center">
+          <p className="text-base text-gray-600">
+            Já tem uma conta?{' '}
+            <Link
+              to="/login"
+              className="text-blue-500 font-semibold hover:text-blue-600 text-lg"
+            >
+              Faça login
+            </Link>
+          </p>
         </div>
       </div>
 
@@ -217,32 +222,32 @@ const Step1: React.FC<{
   onNext: () => void;
   loading: boolean;
 }> = ({ data, onChange, onNext, loading }) => (
-  <div className="space-y-6 animate-fade-in">
-    <div className="text-center mb-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">
+  <div className="space-y-8 animate-fade-in">
+    <div className="text-center mb-10">
+      <h2 className="text-3xl font-bold text-gray-900 mb-3">
         Como você se chama?
       </h2>
-      <p className="text-gray-600">
+      <p className="text-gray-600 text-lg">
         Vamos começar com seu nome
       </p>
     </div>
 
-    <div className="space-y-4">
+    <div className="space-y-6">
       <input
         type="text"
         value={data.first_name}
         onChange={(e) => onChange({ ...data, first_name: e.target.value })}
         placeholder="Nome"
-        className="ig-input"
+        className="ig-input text-lg py-4"
         required
       />
-      
+
       <input
         type="text"
         value={data.last_name}
         onChange={(e) => onChange({ ...data, last_name: e.target.value })}
         placeholder="Sobrenome"
-        className="ig-input"
+        className="ig-input text-lg py-4"
         required
       />
     </div>
@@ -250,7 +255,7 @@ const Step1: React.FC<{
     <button
       onClick={onNext}
       disabled={!data.first_name.trim() || !data.last_name.trim() || loading}
-      className="ig-button ig-button-primary w-full py-3 text-sm font-semibold disabled:opacity-50"
+      className="ig-button ig-button-primary w-full py-4 text-lg font-semibold disabled:opacity-50"
     >
       {loading ? 'Validando...' : 'Continuar'}
     </button>
@@ -263,12 +268,12 @@ const Step2: React.FC<{
   onNext: () => void;
   loading: boolean;
 }> = ({ data, onChange, onNext, loading }) => (
-  <div className="space-y-6 animate-fade-in">
-    <div className="text-center mb-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">
+  <div className="space-y-8 animate-fade-in">
+    <div className="text-center mb-10">
+      <h2 className="text-3xl font-bold text-gray-900 mb-3">
         Qual seu e-mail?
       </h2>
-      <p className="text-gray-600">
+      <p className="text-gray-600 text-lg">
         Usaremos para entrar em contato e para login
       </p>
     </div>
@@ -278,14 +283,14 @@ const Step2: React.FC<{
       value={data.email}
       onChange={(e) => onChange({ ...data, email: e.target.value })}
       placeholder="seu@email.com"
-      className="ig-input"
+      className="ig-input text-lg py-4"
       required
     />
 
     <button
       onClick={onNext}
       disabled={!data.email.trim() || loading}
-      className="ig-button ig-button-primary w-full py-3 text-sm font-semibold disabled:opacity-50"
+      className="ig-button ig-button-primary w-full py-4 text-lg font-semibold disabled:opacity-50"
     >
       {loading ? 'Verificando...' : 'Continuar'}
     </button>

@@ -351,39 +351,10 @@ const VibePostCard: React.FC<VibePostCardProps> = ({
       {showComments && (
         <div className="border-t border-gray-100 p-4 bg-gray-50">
           <div className="space-y-3 mb-4">
-            {/* Sample comments */}
-            <div className="flex space-x-3">
-              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs font-medium">JP</span>
-              </div>
-              <div className="flex-1">
-                <div className="bg-white rounded-lg p-3">
-                  <p className="font-semibold text-sm text-blue-600">João Pedro</p>
-                  <p className="text-sm text-gray-800">Muito legal! 👏</p>
-                </div>
-                <div className="flex items-center space-x-4 mt-1 text-xs text-gray-500">
-                  <button className="hover:text-blue-600">Curtir</button>
-                  <button className="hover:text-blue-600">Responder</button>
-                  <span>2h</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex space-x-3">
-              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs font-medium">MS</span>
-              </div>
-              <div className="flex-1">
-                <div className="bg-white rounded-lg p-3">
-                  <p className="font-semibold text-sm text-green-600">Maria Silva</p>
-                  <p className="text-sm text-gray-800">Parabéns pelo post!</p>
-                </div>
-                <div className="flex items-center space-x-4 mt-1 text-xs text-gray-500">
-                  <button className="hover:text-blue-600">Curtir</button>
-                  <button className="hover:text-blue-600">Responder</button>
-                  <span>1h</span>
-                </div>
-              </div>
+            {/* Real comments will be loaded from API */}
+            <div className="text-center py-4">
+              <p className="text-gray-500 text-sm">Ainda não há comentários.</p>
+              <p className="text-gray-400 text-xs">Seja o primeiro a comentar!</p>
             </div>
           </div>
 
