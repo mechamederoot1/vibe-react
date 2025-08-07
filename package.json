@@ -4,12 +4,14 @@
   "description": "Vibe Social Network - Modern social media platform",
   "main": "index.js",
   "scripts": {
-    "dev": "cd frontend && npm run dev",
+    "android": "cd mobile && npx react-native run-android",
+    "ios": "cd mobile && npx react-native run-ios",
+    "start": "cd mobile && npx react-native start",
     "dev:backend": "cd backend && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000",
-    "install:frontend": "cd frontend && npm install",
+    "install:mobile": "cd mobile && npm install",
     "install:backend": "cd backend && pip install -r requirements.txt",
-    "install:all": "npm run install:frontend && npm run install:backend",
-    "start": "npm run dev"
+    "install:all": "npm run install:mobile && npm run install:backend",
+    "pod-install": "cd mobile/ios && pod install"
   },
   "keywords": ["social network", "react", "fastapi", "vibe"],
   "author": "Vibe Team",
