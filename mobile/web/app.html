@@ -865,18 +865,18 @@
         .friends-section {
             background: white;
             margin-bottom: 8px;
-            padding: 20px;
+            padding: 16px 20px;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .section-header h3 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: #262626;
         }
@@ -886,44 +886,57 @@
             border: none;
             color: #0095f6;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
         }
 
-        .friends-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+        .friends-preview {
+            display: flex;
+            gap: -8px;
+            align-items: center;
         }
 
-        .friend-item {
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .friend-avatar {
-            width: 70px;
-            height: 70px;
+        .friend-avatar-small {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
+            border: 3px solid white;
             background: linear-gradient(45deg, #405de6, #833ab4);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
-            font-size: 16px;
-            margin: 0 auto 8px;
-            transition: transform 0.2s;
-        }
-
-        .friend-item:hover .friend-avatar {
-            transform: scale(1.05);
-        }
-
-        .friend-name {
             font-size: 12px;
-            color: #262626;
-            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-left: -8px;
+        }
+
+        .friend-avatar-small:first-child {
+            margin-left: 0;
+        }
+
+        .friend-avatar-small:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            position: relative;
+        }
+
+        .friends-more {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8e8e8e;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: -8px;
         }
 
         /* Profile Posts */
