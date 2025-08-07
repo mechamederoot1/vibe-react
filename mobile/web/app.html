@@ -3182,6 +3182,90 @@
             { name: 'Lucas Mendes', username: 'lucas.mendes', photo: 'https://images.pexels.com/photos/7752839/pexels-photo-7752839.jpeg', time: '1sem' }
         ];
 
+        // Modern Notifications System
+        const notifications = [
+            {
+                id: 1,
+                type: 'visit',
+                user: { name: 'Ana Maria', username: 'ana.maria', photo: 'https://images.pexels.com/photos/27603433/pexels-photo-27603433.jpeg' },
+                action: 'visitou seu perfil',
+                time: '2 min',
+                timestamp: new Date(Date.now() - 2 * 60 * 1000),
+                unread: true
+            },
+            {
+                id: 2,
+                type: 'like',
+                user: { name: 'João Silva', username: 'joao.silva', photo: 'https://images.pexels.com/photos/28442318/pexels-photo-28442318.jpeg' },
+                action: 'curtiu sua foto',
+                time: '5 min',
+                timestamp: new Date(Date.now() - 5 * 60 * 1000),
+                unread: true,
+                postThumb: 'https://images.pexels.com/photos/251336/pexels-photo-251336.jpeg'
+            },
+            {
+                id: 3,
+                type: 'follow',
+                user: { name: 'Maria Fernanda', username: 'maria.fernanda', photo: 'https://images.pexels.com/photos/18459701/pexels-photo-18459701.jpeg' },
+                action: 'começou a seguir você',
+                time: '15 min',
+                timestamp: new Date(Date.now() - 15 * 60 * 1000),
+                unread: true,
+                isFollowing: false
+            },
+            {
+                id: 4,
+                type: 'comment',
+                user: { name: 'Rodrigo Costa', username: 'rodrigo.costa', photo: 'https://images.pexels.com/photos/7752805/pexels-photo-7752805.jpeg' },
+                action: 'comentou',
+                comment: 'Que foto incrível! 😍',
+                time: '30 min',
+                timestamp: new Date(Date.now() - 30 * 60 * 1000),
+                unread: false,
+                postThumb: 'https://images.pexels.com/photos/27610073/pexels-photo-27610073.jpeg'
+            },
+            {
+                id: 5,
+                type: 'share',
+                user: { name: 'Carla Santos', username: 'carla.santos', photo: 'https://images.pexels.com/photos/33282339/pexels-photo-33282339.jpeg' },
+                action: 'compartilhou seu post',
+                time: '1h',
+                timestamp: new Date(Date.now() - 60 * 60 * 1000),
+                unread: false,
+                postThumb: 'https://images.pexels.com/photos/12200696/pexels-photo-12200696.jpeg'
+            },
+            {
+                id: 6,
+                type: 'visit',
+                user: { name: 'Pedro Lima', username: 'pedro.lima', photo: 'https://images.pexels.com/photos/7752839/pexels-photo-7752839.jpeg' },
+                action: 'visitou seu perfil',
+                time: '2h',
+                timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
+                unread: false
+            },
+            {
+                id: 7,
+                type: 'like',
+                user: { name: 'Sofia Reis', username: 'sofia.reis', photo: 'https://images.pexels.com/photos/27603433/pexels-photo-27603433.jpeg' },
+                action: 'curtiu seu story',
+                time: '3h',
+                timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
+                unread: false
+            },
+            {
+                id: 8,
+                type: 'follow',
+                user: { name: 'Lucas Mendes', username: 'lucas.mendes', photo: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png' },
+                action: 'começou a seguir você',
+                time: '5h',
+                timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
+                unread: false,
+                isFollowing: true
+            }
+        ];
+
+        let currentNotificationFilter = 'all';
+
         // Check if viewing own profile (in a real app this would be determined by authentication)
         // When isOwnProfile = true: user sees "Quem visitou meu perfil" section
         // When isOwnProfile = false: visitor sees only limited profile info
