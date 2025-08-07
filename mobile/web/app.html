@@ -3095,6 +3095,116 @@
             alert(`👤 Visitante: ${username}\n\nAbrindo perfil do visitante...\n\n(Em uma versão completa, isso navegaria para o perfil do usuário)`);
         }
 
+        // Edit Profile Modal Functions
+        function openEditProfileModal() {
+            const modal = document.getElementById('editProfileModal');
+            populateEditForm();
+            modal.style.display = 'flex';
+        }
+
+        function closeEditProfileModal() {
+            const modal = document.getElementById('editProfileModal');
+            modal.style.display = 'none';
+        }
+
+        function populateEditForm() {
+            document.getElementById('editDisplayName').value = userProfile.displayName;
+            document.getElementById('editUsername').value = userProfile.username;
+            document.getElementById('editBio').value = userProfile.bio;
+            document.getElementById('editCity').value = userProfile.city;
+            document.getElementById('editState').value = userProfile.state;
+            document.getElementById('editBirthdate').value = userProfile.birthdate;
+            document.getElementById('editRelationship').value = userProfile.relationship;
+            document.getElementById('showBirthdate').checked = userProfile.showBirthdate;
+            document.getElementById('showRelationship').checked = userProfile.showRelationship;
+            document.getElementById('showLocation').checked = userProfile.showLocation;
+            document.getElementById('editAvatarPreview').src = userProfile.avatar;
+
+            updateBioCharCount();
+        }
+
+        function updateBioCharCount() {
+            const bioInput = document.getElementById('editBio');
+            const charCount = document.getElementById('bioCharCount');
+            const remaining = 150 - bioInput.value.length;
+            charCount.textContent = remaining + ' caracteres restantes';
+            charCount.style.color = remaining < 20 ? '#ed4956' : '#8e8e8e';
+        }
+
+        function saveProfileChanges() {
+            // Get form values
+            userProfile.displayName = document.getElementById('editDisplayName').value.trim();
+            userProfile.username = document.getElementById('editUsername').value.trim();
+            userProfile.bio = document.getElementById('editBio').value.trim();
+            userProfile.city = document.getElementById('editCity').value.trim();
+            userProfile.state = document.getElementById('editState').value.trim();
+            userProfile.birthdate = document.getElementById('editBirthdate').value;
+            userProfile.relationship = document.getElementById('editRelationship').value;
+            userProfile.showBirthdate = document.getElementById('showBirthdate').checked;
+            userProfile.showRelationship = document.getElementById('showRelationship').checked;
+            userProfile.showLocation = document.getElementById('showLocation').checked;
+
+            // Validate required fields
+            if (!userProfile.displayName || !userProfile.username) {
+                alert('Nome completo e nome de usuário são obrigatórios!');
+                return;
+            }
+
+            // Update profile display
+            updateProfileDisplay();
+            closeEditProfileModal();
+
+            // Show success message
+            alert('✅ Perfil atualizado com sucesso!');
+        }
+
+        function updateProfileDisplay() {
+            // Update profile name and username
+            document.querySelector('.profile-display-name').textContent = userProfile.displayName;
+            document.querySelector('.profile-username').textContent = '@' + userProfile.username;
+
+            // Update bio with location and relationship info
+            let bioText = userProfile.bio;
+
+            if (userProfile.showLocation && (userProfile.city || userProfile.state)) {
+                bioText += '\n📍 ' + [userProfile.city, userProfile.state].filter(Boolean).join(', ');
+            }
+
+            if (userProfile.showRelationship && userProfile.relationship) {
+                const relationshipLabels = {
+                    'single': '💙 Solteiro(a)',
+                    'relationship': '❤️ Em um relacionamento',
+                    'married': '💍 Casado(a)',
+                    'divorced': '💔 Divorciado(a)',
+                    'widowed': '🖤 Viúvo(a)'
+                };
+                bioText += '\n' + relationshipLabels[userProfile.relationship];
+            }
+
+            if (userProfile.showBirthdate && userProfile.birthdate) {
+                const birthDate = new Date(userProfile.birthdate);
+                const age = new Date().getFullYear() - birthDate.getFullYear();
+                bioText += '\n🎂 ' + age + ' anos';
+            }
+
+            document.querySelector('.profile-bio').innerHTML = bioText.replace(/\n/g, '<br>');
+
+            // Update avatar
+            document.querySelector('.avatar-image').src = userProfile.avatar;
+        }
+
+        function selectNewAvatar() {
+            alert('📷 Seleção de Avatar\n\nEm uma versão completa, isso abriria:\n• Galeria de fotos\n• Câmera\n• Avatares pré-definidos\n• Editor de imagem');
+        }
+
+        // Add bio character count listener
+        document.addEventListener('DOMContentLoaded', function() {
+            const bioInput = document.getElementById('editBio');
+            if (bioInput) {
+                bioInput.addEventListener('input', updateBioCharCount);
+            }
+        });
+
         // Render Feed (updated to work with screen system)
         function renderFeed() {
             const feed = document.getElementById('homeScreen');
