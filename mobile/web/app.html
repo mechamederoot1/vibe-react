@@ -1451,6 +1451,30 @@
     <script>
         let currentPostType = 'text';
         let posts = [];
+        let currentScreen = 'home';
+
+        // Sample friends data
+        const friends = [
+            { name: 'Ana Maria', username: 'ana.maria', initials: 'AM' },
+            { name: 'João Silva', username: 'joao.silva', initials: 'JS' },
+            { name: 'Maria F.', username: 'maria.fernanda', initials: 'MF' },
+            { name: 'Rodrigo C.', username: 'rodrigo.costa', initials: 'RC' },
+            { name: 'Carla S.', username: 'carla.santos', initials: 'CS' },
+            { name: 'Pedro L.', username: 'pedro.lima', initials: 'PL' }
+        ];
+
+        // Sample profile posts
+        const profilePosts = [
+            { id: 1, content: 'Momento incrível no pôr do sol 🌅' },
+            { id: 2, content: 'Café da manhã perfeito ☕' },
+            { id: 3, content: 'Nova aventura começando! 🎯' },
+            { id: 4, content: 'Gratidão por mais um dia 🙏' },
+            { id: 5, content: 'Trabalhando nos sonhos 💻' },
+            { id: 6, content: 'Final de semana relaxante 🌿' },
+            { id: 7, content: 'Amigos que são família ❤️' },
+            { id: 8, content: 'Conhecimento nunca é demais 📚' },
+            { id: 9, content: 'Arte em cada detalhe 🎨' }
+        ];
         
         // Open/Close Modal
         function openCreateModal() {
