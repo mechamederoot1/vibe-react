@@ -436,6 +436,44 @@
         .nav-item.active svg {
             fill: #262626;
         }
+
+        .profile-nav-avatar {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-nav-ring {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #405de6, #833ab4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .nav-item.active .profile-nav-ring {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            box-shadow: 0 0 0 3px rgba(188, 24, 136, 0.3);
+        }
+
+        .profile-nav-image {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: url('https://images.pexels.com/photos/31422830/pexels-photo-31422830.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: #405de6;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
         
         /* Empty State */
         .empty-feed {
@@ -447,23 +485,26 @@
             text-align: center;
             padding: 40px 20px;
         }
-        
+
         .empty-icon {
             width: 96px;
             height: 96px;
-            border: 3px solid #262626;
+            background: linear-gradient(135deg, #87CEEB 0%, #0095f6 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0, 149, 246, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.9);
         }
-        
+
         .empty-icon svg {
             width: 48px;
             height: 48px;
-            stroke: #262626;
-            stroke-width: 1.5;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
         }
         
         .empty-title {
@@ -503,31 +544,30 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.9);
             display: none;
-            align-items: center;
-            justify-content: center;
             z-index: 1000;
             backdrop-filter: blur(4px);
         }
         
         .modal {
             background: white;
-            border-radius: 16px;
-            width: 340px;
-            max-height: 600px;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             animation: modalSlideUp 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
         }
         
         @keyframes modalSlideUp {
             from {
                 opacity: 0;
-                transform: translateY(50px) scale(0.9);
+                transform: translateY(100%);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
             }
         }
         
@@ -537,6 +577,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: white;
+            min-height: 60px;
         }
         
         .modal-title {
@@ -602,14 +644,15 @@
         }
         
         .textarea {
-            margin: 0 20px 16px;
+            margin: 16px 20px;
             padding: 16px;
             border: 1px solid #dbdbdb;
             border-radius: 12px;
             font-size: 16px;
             font-family: inherit;
             resize: none;
-            min-height: 120px;
+            min-height: 200px;
+            flex: 1;
             background: #fafafa;
         }
         
@@ -647,21 +690,1333 @@
             opacity: 0.9;
             line-height: 1.4;
         }
+
+        /* Modal Content Container */
+        .modal-content-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
         
+        /* Screen Navigation */
+        .screen {
+            height: 100%;
+            overflow-y: auto;
+            background: white;
+        }
+
+        .screen::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Modern Profile Screen */
+        .profile-screen {
+            background: white;
+            position: relative;
+        }
+
+        /* Profile Cover Photo */
+        .profile-cover {
+            position: relative;
+            height: 140px;
+            overflow: hidden;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+        }
+
+        .cover-actions {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+        }
+
+        .cover-edit-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s ease;
+        }
+
+        .cover-edit-btn:hover {
+            background: rgba(0,0,0,0.7);
+            transform: scale(1.05);
+        }
+
+        .cover-edit-btn svg {
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            padding: 12px 16px;
+            position: relative;
+            margin-top: -40px;
+        }
+
+        .profile-avatar-section {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .profile-avatar-large {
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
+
+        .avatar-edit-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #0095f6;
+            border: 2px solid white;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .avatar-edit-btn:hover {
+            background: #1877f2;
+            transform: scale(1.1);
+        }
+
+        .avatar-edit-btn svg {
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Profile Info */
+        .profile-info {
+            text-align: center;
+        }
+
+        .profile-name-section {
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .profile-display-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #262626;
+            margin: 0 0 4px 0;
+        }
+
+        .profile-username {
+            font-size: 16px;
+            color: #8e8e8e;
+            margin: 0 0 8px 0;
+        }
+
+        .profile-menu-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: #262626;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        .profile-menu-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .profile-menu-btn svg {
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .profile-bio {
+            font-size: 14px;
+            color: #262626;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Profile Stats */
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: #fafafa;
+            border-radius: 12px;
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .stat-item:hover {
+            background: white;
+            transform: translateY(-1px);
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #262626;
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #8e8e8e;
+            font-weight: 500;
+        }
+
+        /* Profile Actions */
+        .profile-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 1px solid #dbdbdb;
+        }
+
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .action-btn.primary {
+            background: #0095f6;
+            color: white;
+            border-color: #0095f6;
+        }
+
+        .action-btn.primary:hover {
+            background: #1877f2;
+        }
+
+        .action-btn.secondary {
+            background: white;
+            color: #262626;
+        }
+
+        .action-btn.secondary:hover {
+            background: #f8f8f8;
+        }
+
+        .action-btn.icon {
+            flex: none;
+            width: 44px;
+            padding: 10px;
+        }
+
+        .action-btn svg {
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* Friends Section */
+        .friends-section {
+            padding: 16px;
+            border-top: 1px solid #dbdbdb;
+            border-bottom: 1px solid #dbdbdb;
+            margin-bottom: 2px;
+        }
+
+        .friends-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .friends-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #262626;
+            margin: 0;
+        }
+
+        .friends-count {
+            font-size: 14px;
+            color: #8e8e8e;
+            flex: 1;
+            margin-left: 8px;
+        }
+
+        .friends-see-all {
+            background: none;
+            border: none;
+            color: #0095f6;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .friends-see-all:hover {
+            background: rgba(0, 149, 246, 0.1);
+        }
+
+        .friends-arrow {
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .friends-see-all.expanded .friends-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Visitors Section */
+        .visitors-section {
+            padding: 16px;
+            border-top: 1px solid #dbdbdb;
+            border-bottom: 1px solid #dbdbdb;
+            margin-bottom: 2px;
+            background: #f8f9ff;
+        }
+
+        .visitors-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .visitors-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #262626;
+            margin: 0;
+        }
+
+        .visitors-count {
+            font-size: 14px;
+            color: #8e8e8e;
+            flex: 1;
+            margin-left: 8px;
+        }
+
+        .visitors-see-all {
+            background: none;
+            border: none;
+            color: #0095f6;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .visitors-see-all:hover {
+            background: rgba(0, 149, 246, 0.1);
+        }
+
+        .visitors-arrow {
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .visitors-see-all.expanded .visitors-arrow {
+            transform: rotate(180deg);
+        }
+
+        .visitors-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .visitors-grid.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .visitors-grid.expanded {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        .visitor-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            background: white;
+            padding: 12px 8px;
+            border-radius: 8px;
+            border: 1px solid #e3e3e3;
+        }
+
+        .visitor-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .visitor-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 6px;
+            border: 2px solid #0095f6;
+        }
+
+        .visitor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .visitor-info {
+            text-align: center;
+        }
+
+        .visitor-name {
+            font-size: 11px;
+            color: #262626;
+            font-weight: 600;
+            margin-bottom: 2px;
+            max-width: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .visitor-time {
+            font-size: 10px;
+            color: #8e8e8e;
+        }
+
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .friends-grid.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .friends-grid.expanded {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        .friend-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .friend-item:hover {
+            transform: scale(1.05);
+        }
+
+        .friend-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 4px;
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                       linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) border-box;
+        }
+
+        .friend-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .friend-name {
+            font-size: 10px;
+            color: #262626;
+            text-align: center;
+            max-width: 48px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        /* Highlights Section */
+        .highlights-section {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 12px 16px;
+            margin-bottom: 2px;
+        }
+
+        .highlights-section::-webkit-scrollbar {
+            display: none;
+        }
+
+        .highlight-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+            cursor: pointer;
+        }
+
+        .highlight-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #dbdbdb;
+            overflow: hidden;
+            margin-bottom: 4px;
+            transition: transform 0.2s ease;
+        }
+
+        .highlight-circle:active {
+            transform: scale(0.95);
+        }
+
+        .highlight-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .highlight-name {
+            font-size: 12px;
+            color: #262626;
+            text-align: center;
+            max-width: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        /* Profile Tabs */
+        .profile-tabs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 0 16px;
+        }
+
+        .tabs-left {
+            display: flex;
+        }
+
+        .tab-btn {
+            padding: 12px 16px;
+            border: none;
+            background: none;
+            color: #8e8e8e;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+            margin-bottom: -1px;
+        }
+
+        .tab-btn.active {
+            color: #262626;
+            border-bottom-color: #262626;
+        }
+
+        .tab-btn svg {
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .view-toggle-container {
+            display: flex;
+            gap: 4px;
+        }
+
+        .view-toggle-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #dbdbdb;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #8e8e8e;
+        }
+
+        .view-toggle-btn.active {
+            background: #262626;
+            border-color: #262626;
+            color: white;
+        }
+
+        .view-toggle-btn:hover:not(.active) {
+            background: #f8f8f8;
+            border-color: #c7c7c7;
+        }
+
+        .view-toggle-btn svg {
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* Posts Container */
+        .posts-container {
+            padding: 0;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+        }
+
+        .post-item {
+            aspect-ratio: 1;
+            background: #f8f8f8;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: opacity 0.2s ease;
+        }
+
+        .post-item:active {
+            opacity: 0.8;
+        }
+
+        .post-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .post-item:hover .post-overlay {
+            opacity: 1;
+        }
+
+        .post-stats {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .post-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .post-stat svg {
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: currentColor;
+        }
+
+        /* Posts Feed View */
+        .posts-feed {
+            padding: 0;
+        }
+
+        .feed-post {
+            background: white;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 16px;
+        }
+
+        .feed-post:last-child {
+            border-bottom: none;
+        }
+
+        .feed-post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .feed-post-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .feed-post-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feed-post-info {
+            flex: 1;
+        }
+
+        .feed-post-username {
+            font-weight: 600;
+            color: #262626;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .feed-post-time {
+            color: #8e8e8e;
+            font-size: 12px;
+        }
+
+        .feed-post-content {
+            margin-bottom: 12px;
+        }
+
+        .feed-post-text {
+            color: #262626;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .feed-post-image {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .feed-post-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .feed-post-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .feed-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #8e8e8e;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            background: none;
+            border: none;
+            padding: 4px 0;
+        }
+
+        .feed-action-btn:hover {
+            color: #262626;
+        }
+
+        .feed-action-btn.liked {
+            color: #ed4956;
+        }
+
+        .feed-action-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .feed-action-btn.liked svg {
+            fill: currentColor;
+        }
+
+        /* Profile Posts List View */
+        .profile-posts-list {
+            padding: 0;
+        }
+
+        .profile-post-list-item {
+            background: white;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 16px 20px;
+        }
+
+        .profile-post-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-list-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .post-list-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: url('https://images.pexels.com/photos/31422830/pexels-photo-31422830.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            border: 1px solid #dbdbdb;
+        }
+
+        .post-list-info {
+            flex: 1;
+        }
+
+        .post-list-username {
+            font-weight: 600;
+            color: #262626;
+            font-size: 14px;
+        }
+
+        .post-list-time {
+            color: #8e8e8e;
+            font-size: 12px;
+        }
+
+        .post-list-content {
+            color: #262626;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .post-list-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .post-list-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #8e8e8e;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .post-list-action:hover {
+            color: #262626;
+        }
+
+        .post-list-action svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .post-list-action.liked {
+            color: #ed4956;
+        }
+
+        .post-list-action.liked svg {
+            fill: currentColor;
+        }
+
+        /* Search Screen */
+        .search-container {
+            padding: 16px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #dbdbdb;
+            margin-bottom: 20px;
+        }
+
+        .search-bar svg {
+            stroke: #8e8e8e;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #262626;
+        }
+
+        .search-bar input::placeholder {
+            color: #8e8e8e;
+        }
+
+        .search-results {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 20px;
+        }
+
+        .search-empty {
+            text-align: center;
+            color: #8e8e8e;
+        }
+
+        .search-empty svg {
+            stroke: #8e8e8e;
+            stroke-width: 1.5;
+            fill: none;
+            margin-bottom: 16px;
+        }
+
+        /* Notifications Screen */
+        .notifications-container {
+            padding: 0;
+        }
+
+        .notifications-header {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        .notifications-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #262626;
+        }
+
+        .notifications-list {
+            background: white;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .notification-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #405de6, #833ab4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-user {
+            font-weight: 600;
+            color: #262626;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: #8e8e8e;
+            margin-top: 4px;
+        }
+
+        .notification-post-thumb {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+        }
+
+        .follow-back-btn {
+            background: #0095f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Edit Profile Modal */
+        .edit-profile-modal {
+            background: white;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            animation: modalSlideUp 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edit-profile-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px 20px;
+        }
+
+        .edit-profile-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .edit-profile-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+
+        .edit-profile-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 2px;
+        }
+
+        .edit-avatar-section {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #dbdbdb;
+            margin-bottom: 20px;
+        }
+
+        .edit-avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .edit-avatar-container img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #dbdbdb;
+        }
+
+        .edit-avatar-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #0095f6;
+            border: 2px solid white;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .edit-avatar-btn:hover {
+            background: #1877f2;
+        }
+
+        .edit-avatar-btn svg {
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .edit-avatar-text {
+            font-size: 14px;
+            color: #0095f6;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .edit-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.half {
+            flex: 1;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0095f6;
+            box-shadow: 0 0 0 2px rgba(0, 149, 246, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            max-height: 120px;
+        }
+
+        .char-counter {
+            font-size: 12px;
+            color: #8e8e8e;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .privacy-settings {
+            border-top: 1px solid #dbdbdb;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .privacy-settings h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #262626;
+            margin: 0 0 16px 0;
+        }
+
+        .privacy-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+
+        .privacy-label {
+            font-size: 14px;
+            color: #262626;
+            flex: 1;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            margin-left: 12px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #0095f6;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .save-btn {
+            background: #0095f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .save-btn:hover {
+            background: #1877f2;
+        }
+
+        .save-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
         /* Animations */
         .fade-in {
             animation: fadeIn 0.3s ease-out;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        
+
         .scale-in {
             animation: scaleIn 0.2s ease-out;
         }
-        
+
         @keyframes scaleIn {
             from { transform: scale(0.9); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
@@ -715,7 +2070,7 @@
                 </div>
                 
                 <!-- Stories -->
-                <div class="stories-container">
+                <div class="stories-container" id="storiesContainer">
                     <div class="stories-scroll">
                         <!-- Your Story -->
                         <div class="story-item" onclick="openStoryCreator()">
@@ -758,13 +2113,12 @@
                 </div>
                 
                 <!-- Feed -->
-                <div class="feed" id="feed">
+                <div class="feed screen" id="homeScreen">
                     <!-- Empty State -->
                     <div class="empty-feed">
                         <div class="empty-icon">
                             <svg viewBox="0 0 24 24" fill="none">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
                             </svg>
                         </div>
                         <div class="empty-title">Bem-vindo ao Vibe</div>
@@ -773,43 +2127,401 @@
                             verá as publicações delas aqui.
                         </div>
                         <button class="empty-button" onclick="openCreateModal()">
-                            Compartilhar primeira foto
+                            Compartilhar primeiro post
                         </button>
+                    </div>
+                </div>
+
+                <!-- Profile Screen -->
+                <div class="screen profile-screen" id="profileScreen" style="display: none;">
+                    <!-- Profile Cover Photo -->
+                    <div class="profile-cover">
+                        <img src="https://images.pexels.com/photos/1458759/pexels-photo-1458759.jpeg" alt="Cover" class="cover-image">
+                        <div class="cover-overlay"></div>
+                        <div class="cover-actions">
+                            <button class="cover-edit-btn">
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Profile Header Info -->
+                    <div class="profile-header">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar-large">
+                                <img src="https://images.pexels.com/photos/31422830/pexels-photo-31422830.png" alt="Bruno Oliveira" class="avatar-image">
+                                <button class="avatar-edit-btn">
+                                    <svg viewBox="0 0 24 24" width="14" height="14">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="profile-info">
+                            <div class="profile-name-section">
+                                <h1 class="profile-display-name">Bruno Oliveira</h1>
+                                <p class="profile-username">@brunooliveira</p>
+                                <button class="profile-menu-btn">
+                                    <svg viewBox="0 0 24 24" width="20" height="20">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="profile-bio">
+                                🚀 Desenvolvedor & Criador de Conteúdo<br>
+                                🌟 Transformando ideias em realidade<br>
+                                📍 São Paulo, Brasil
+                            </div>
+
+                            <div class="profile-stats">
+                                <div class="stat-item" onclick="openPostsModal()">
+                                    <span class="stat-number">342</span>
+                                    <span class="stat-label">Publicações</span>
+                                </div>
+                                <div class="stat-item" onclick="openFollowersModal()">
+                                    <span class="stat-number">2.8k</span>
+                                    <span class="stat-label">Seguidores</span>
+                                </div>
+                                <div class="stat-item" onclick="openFollowingModal()">
+                                    <span class="stat-number">1.2k</span>
+                                    <span class="stat-label">Seguindo</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-actions">
+                                <button class="action-btn primary" onclick="openEditProfileModal()">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+                                    </svg>
+                                    Editar Perfil
+                                </button>
+                                <button class="action-btn secondary">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935-2.186 2.25 2.25 0 00-3.935 2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/>
+                                    </svg>
+                                    Compartilhar
+                                </button>
+                                <button class="action-btn icon">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Friends Section -->
+                    <div class="friends-section">
+                        <div class="friends-header">
+                            <h3>Amigos</h3>
+                            <span class="friends-count">127 amigos</span>
+                            <button class="friends-see-all expanded" onclick="toggleFriendsVisibility()" id="friendsToggleBtn">
+                                Ver todos
+                                <svg class="friends-arrow" viewBox="0 0 24 24" width="16" height="16">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="friends-grid collapsed" id="friendsGrid">
+                            <!-- Friends will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Profile Visitors Section (only visible to profile owner) -->
+                    <div class="visitors-section" id="visitorsSection">
+                        <div class="visitors-header">
+                            <h3>Quem visitou meu perfil</h3>
+                            <span class="visitors-count">23 visualizações</span>
+                            <button class="visitors-see-all expanded" onclick="toggleVisitorsVisibility()" id="visitorsToggleBtn">
+                                Ver todos
+                                <svg class="visitors-arrow" viewBox="0 0 24 24" width="16" height="16">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="visitors-grid collapsed" id="visitorsGrid">
+                            <!-- Visitors will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Highlights -->
+                    <div class="highlights-section">
+                        <div class="highlight-item">
+                            <div class="highlight-circle">
+                                <img src="https://images.pexels.com/photos/12200696/pexels-photo-12200696.jpeg" alt="Trabalho">
+                            </div>
+                            <span class="highlight-name">Trabalho</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-circle">
+                                <img src="https://images.pexels.com/photos/33280403/pexels-photo-33280403.jpeg" alt="Viagens">
+                            </div>
+                            <span class="highlight-name">Viagens</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-circle">
+                                <img src="https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg" alt="Arte">
+                            </div>
+                            <span class="highlight-name">Arte</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-circle">
+                                <img src="https://images.pexels.com/photos/17382268/pexels-photo-17382268.jpeg" alt="Equipe">
+                            </div>
+                            <span class="highlight-name">Equipe</span>
+                        </div>
+                    </div>
+
+                    <!-- Profile Tabs -->
+                    <div class="profile-tabs">
+                        <div class="tabs-left">
+                            <button class="tab-btn active" data-tab="posts">
+                                <svg viewBox="0 0 24 24" width="12" height="12">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                                PUBLICAÇÕES
+                            </button>
+                            <button class="tab-btn" data-tab="tagged">
+                                <svg viewBox="0 0 24 24" width="12" height="12">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/>
+                                </svg>
+                                MARCAÇÕES
+                            </button>
+                        </div>
+                        <div class="view-toggle-container">
+                            <button class="view-toggle-btn active" data-view="grid" onclick="switchProfileView('grid')" title="Visualização em grade">
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                            </button>
+                            <button class="view-toggle-btn" data-view="feed" onclick="switchProfileView('feed')" title="Visualização em cascata">
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <line x1="8" y1="6" x2="21" y2="6"/>
+                                    <line x1="8" y1="12" x2="21" y2="12"/>
+                                    <line x1="8" y1="18" x2="21" y2="18"/>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Posts Container -->
+                    <div class="posts-container">
+                        <div class="posts-grid" id="postsGrid">
+                            <!-- Posts will be populated by JavaScript -->
+                        </div>
+                        <div class="posts-feed" id="postsFeed" style="display: none;">
+                            <!-- Feed view posts will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Screen -->
+                <div class="screen" id="searchScreen" style="display: none;">
+                    <div class="search-container">
+                        <div class="search-bar">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                            </svg>
+                            <input type="text" placeholder="Pesquisar usuários, posts..." />
+                        </div>
+                        <div class="search-results">
+                            <div class="search-empty">
+                                <svg viewBox="0 0 24 24" width="48" height="48">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                                </svg>
+                                <p>Digite algo para pesquisar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Screen -->
+                <div class="screen" id="notificationsScreen" style="display: none;">
+                    <div class="notifications-container">
+                        <div class="notifications-header">
+                            <h2>Atividades</h2>
+                        </div>
+                        <div class="notifications-list">
+                            <div class="notification-item">
+                                <div class="notification-avatar">AM</div>
+                                <div class="notification-content">
+                                    <span class="notification-user">ana.maria</span> curtiu sua foto
+                                    <div class="notification-time">2h</div>
+                                </div>
+                                <div class="notification-post-thumb"></div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-avatar">JS</div>
+                                <div class="notification-content">
+                                    <span class="notification-user">joao.silva</span> começou a seguir você
+                                    <div class="notification-time">5h</div>
+                                </div>
+                                <button class="follow-back-btn">Seguir</button>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-avatar">MF</div>
+                                <div class="notification-content">
+                                    <span class="notification-user">maria.fernanda</span> comentou: "Que foto incrível! 😍"
+                                    <div class="notification-time">1d</div>
+                                </div>
+                                <div class="notification-post-thumb"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Bottom Navigation -->
                 <div class="bottom-nav">
-                    <div class="nav-item active">
+                    <div class="nav-item active" data-screen="home" onclick="navigateToScreen('home')">
                         <svg viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75v9a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 18.75v-9z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 21V12h6v9"/>
                         </svg>
                     </div>
-                    <div class="nav-item">
+                    <div class="nav-item" data-screen="search" onclick="navigateToScreen('search')">
                         <svg viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                         </svg>
                     </div>
-                    <div class="nav-item" onclick="openCreateModal()">
+                    <div class="nav-item" data-screen="create" onclick="openCreateModal()">
                         <svg viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8"/>
                         </svg>
                     </div>
-                    <div class="nav-item">
+                    <div class="nav-item" data-screen="notifications" onclick="navigateToScreen('notifications')">
                         <svg viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
                         </svg>
                     </div>
-                    <div class="nav-item">
-                        <svg viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275"/>
-                        </svg>
+                    <div class="nav-item" data-screen="profile" onclick="navigateToScreen('profile')">
+                        <div class="profile-nav-avatar">
+                            <div class="profile-nav-ring">
+                                <div class="profile-nav-image"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
+    <!-- Edit Profile Modal -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="edit-profile-modal">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeEditProfileModal()">✕</button>
+                <div class="modal-title">Editar Perfil</div>
+                <button class="save-btn" onclick="saveProfileChanges()" id="saveProfileBtn">Salvar</button>
+            </div>
+
+            <div class="edit-profile-content">
+                <!-- Avatar Edit Section -->
+                <div class="edit-avatar-section">
+                    <div class="edit-avatar-container">
+                        <img src="https://images.pexels.com/photos/31422830/pexels-photo-31422830.png" alt="Avatar" id="editAvatarPreview">
+                        <button class="edit-avatar-btn" onclick="selectNewAvatar()">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="edit-avatar-text">Alterar foto do perfil</p>
+                </div>
+
+                <!-- Form Fields -->
+                <div class="edit-form">
+                    <div class="form-group">
+                        <label for="editDisplayName">Nome completo</label>
+                        <input type="text" id="editDisplayName" value="Bruno Oliveira" maxlength="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editUsername">Nome de usuário</label>
+                        <input type="text" id="editUsername" value="brunooliveira" maxlength="30">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editBio">Biografia</label>
+                        <textarea id="editBio" maxlength="150" placeholder="Conte um pouco sobre você...">🚀 Desenvolvedor & Criador de Conteúdo
+🌟 Transformando ideias em realidade
+📍 São Paulo, Brasil</textarea>
+                        <div class="char-counter" id="bioCharCount">150 caracteres restantes</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="editCity">Cidade</label>
+                            <input type="text" id="editCity" value="São Paulo" maxlength="50">
+                        </div>
+                        <div class="form-group half">
+                            <label for="editState">Estado</label>
+                            <input type="text" id="editState" value="SP" maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editBirthdate">Data de nascimento</label>
+                        <input type="date" id="editBirthdate" value="1995-03-15">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editRelationship">Estado civil</label>
+                        <select id="editRelationship">
+                            <option value="">Não informado</option>
+                            <option value="single">Solteiro(a)</option>
+                            <option value="relationship" selected>Em um relacionamento</option>
+                            <option value="married">Casado(a)</option>
+                            <option value="divorced">Divorciado(a)</option>
+                            <option value="widowed">Viúvo(a)</option>
+                        </select>
+                    </div>
+
+                    <div class="privacy-settings">
+                        <h4>Configurações de Privacidade</h4>
+                        <div class="privacy-option">
+                            <label class="switch">
+                                <input type="checkbox" id="showBirthdate" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="privacy-label">Mostrar data de nascimento</span>
+                        </div>
+                        <div class="privacy-option">
+                            <label class="switch">
+                                <input type="checkbox" id="showRelationship" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="privacy-label">Mostrar estado civil</span>
+                        </div>
+                        <div class="privacy-option">
+                            <label class="switch">
+                                <input type="checkbox" id="showLocation" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="privacy-label">Mostrar localização</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Create Post Modal -->
     <div class="modal-overlay" id="createModal">
         <div class="modal">
@@ -818,45 +2530,47 @@
                 <div class="modal-title">Nova publicação</div>
                 <button class="share-btn" onclick="createPost()" id="shareBtn" disabled>Compartilhar</button>
             </div>
-            
-            <div class="post-type-tabs">
-                <button class="type-tab active" onclick="selectType('text')" id="textTab">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14,2 14,8 20,8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10,9 9,9 8,9"/>
-                    </svg>
-                    Post
-                </button>
-                <button class="type-tab" onclick="selectType('testimonial')" id="testimonialTab">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                    Depoimento
-                </button>
-            </div>
-            
-            <textarea 
-                class="textarea" 
-                placeholder="O que você está pensando?"
-                maxlength="2200"
-                oninput="updateCharCount()"
-                id="postInput"
-            ></textarea>
-            
-            <div class="char-counter" id="charCount">2200 caracteres restantes</div>
-            
-            <div class="testimonial-info" id="testimonialInfo" style="display: none;">
-                <div class="testimonial-header">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                    Depoimento especial
+
+            <div class="modal-content-container">
+                <div class="post-type-tabs">
+                    <button class="type-tab active" onclick="selectType('text')" id="textTab">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                        Post
+                    </button>
+                    <button class="type-tab" onclick="selectType('testimonial')" id="testimonialTab">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        Depoimento
+                    </button>
                 </div>
-                <div class="testimonial-desc">
-                    Depoimentos são uma forma especial de demonstrar carinho e reconhecimento. Seja autêntico e positivo!
+
+                <textarea
+                    class="textarea"
+                    placeholder="O que você está pensando?"
+                    maxlength="2200"
+                    oninput="updateCharCount()"
+                    id="postInput"
+                ></textarea>
+
+                <div class="char-counter" id="charCount">2200 caracteres restantes</div>
+
+                <div class="testimonial-info" id="testimonialInfo" style="display: none;">
+                    <div class="testimonial-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        Depoimento especial
+                    </div>
+                    <div class="testimonial-desc">
+                        Depoimentos são uma forma especial de demonstrar carinho e reconhecimento. Seja autêntico e positivo!
+                    </div>
                 </div>
             </div>
         </div>
@@ -865,6 +2579,65 @@
     <script>
         let currentPostType = 'text';
         let posts = [];
+        let currentScreen = 'home';
+
+        // Sample friends data
+        const friends = [
+            { name: 'Ana Maria', username: 'ana.maria', photo: 'https://images.pexels.com/photos/27603433/pexels-photo-27603433.jpeg' },
+            { name: 'João Silva', username: 'joao.silva', photo: 'https://images.pexels.com/photos/28442318/pexels-photo-28442318.jpeg' },
+            { name: 'Maria Fernanda', username: 'maria.fernanda', photo: 'https://images.pexels.com/photos/18459701/pexels-photo-18459701.jpeg' },
+            { name: 'Rodrigo Costa', username: 'rodrigo.costa', photo: 'https://images.pexels.com/photos/7752805/pexels-photo-7752805.jpeg' },
+            { name: 'Carla Santos', username: 'carla.santos', photo: 'https://images.pexels.com/photos/33282339/pexels-photo-33282339.jpeg' },
+            { name: 'Pedro Lima', username: 'pedro.lima', photo: 'https://images.pexels.com/photos/7752839/pexels-photo-7752839.jpeg' },
+            { name: 'Lucas Mendes', username: 'lucas.mendes', photo: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png' },
+            { name: 'Sofia Reis', username: 'sofia.reis', photo: 'https://images.pexels.com/photos/27603433/pexels-photo-27603433.jpeg' }
+        ];
+
+        // Sample profile posts
+        const profilePosts = [
+            { id: 1, content: 'Começando a semana com energia total! 💪 Nada como um bom café para dar aquela motivação extra. #segunda #café #energia', likes: 47, comments: 12, time: '2h', image: 'https://images.pexels.com/photos/251336/pexels-photo-251336.jpeg' },
+            { id: 2, content: 'Momento de reflexão no pôr do sol de hoje 🌅 Às vezes precisamos parar e apreciar as pequenas coisas da vida. #sunset #reflexao #vida', likes: 89, comments: 23, time: '5h', image: 'https://images.pexels.com/photos/27610073/pexels-photo-27610073.jpeg' },
+            { id: 3, content: 'Projeto novo saindo do forno! 🚀 Muito animado para compartilhar o que estamos construindo. Em breve mais novidades! #projeto #inovacao #tecnologia', likes: 156, comments: 34, time: '1d', image: 'https://images.pexels.com/photos/12200696/pexels-photo-12200696.jpeg' },
+            { id: 4, content: 'Gratidão define o meu dia de hoje 🙏 Quando olhamos ao redor, sempre há motivos para agradecer. #gratidao #positividade #bem', likes: 73, comments: 18, time: '2d', image: 'https://images.pexels.com/photos/33280403/pexels-photo-33280403.jpeg' },
+            { id: 5, content: 'Noite de estudos e muito aprendizado 📚💻 Investir em conhecimento é sempre o melhor caminho. #estudos #programacao #crescimento', likes: 92, comments: 15, time: '3d', image: 'https://images.pexels.com/photos/207732/pexels-photo-207732.jpeg' },
+            { id: 6, content: 'Final de semana perfeito em contato com a natureza 🌿 Nada como recarregar as energias ao ar livre! #natureza #weekend #paz', likes: 128, comments: 27, time: '4d', image: 'https://images.pexels.com/photos/33280403/pexels-photo-33280403.jpeg' },
+            { id: 7, content: 'Time reunido para mais um brainstorm! 🧠✨ As melhores ideias surgem quando estamos juntos. #teamwork #inovacao #criatividade', likes: 64, comments: 9, time: '5d', image: 'https://images.pexels.com/photos/17382268/pexels-photo-17382268.jpeg' },
+            { id: 8, content: 'Arte em cada detalhe do dia a dia 🎨 Inspiração está em todos os lugares, basta saber observar. #arte #inspiracao #criatividade', likes: 105, comments: 21, time: '6d', image: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg' },
+            { id: 9, content: 'Novo desafio aceito! 💪 Sempre em busca de evolução e crescimento pessoal. #desafio #crescimento #determinacao', likes: 87, comments: 16, time: '1sem', image: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png' }
+        ];
+
+        let currentPostView = 'grid';
+        let currentProfileView = 'grid';
+
+        // Profile visitors data (only visible to profile owner)
+        const profileVisitors = [
+            { name: 'Ana Silva', username: 'ana.silva', photo: 'https://images.pexels.com/photos/27603433/pexels-photo-27603433.jpeg', time: '2h' },
+            { name: 'Carlos Lima', username: 'carlos.lima', photo: 'https://images.pexels.com/photos/28442318/pexels-photo-28442318.jpeg', time: '5h' },
+            { name: 'Julia Santos', username: 'julia.santos', photo: 'https://images.pexels.com/photos/18459701/pexels-photo-18459701.jpeg', time: '1d' },
+            { name: 'Pedro Costa', username: 'pedro.costa', photo: 'https://images.pexels.com/photos/7752805/pexels-photo-7752805.jpeg', time: '2d' },
+            { name: 'Sofia Reis', username: 'sofia.reis', photo: 'https://images.pexels.com/photos/33282339/pexels-photo-33282339.jpeg', time: '3d' },
+            { name: 'Lucas Mendes', username: 'lucas.mendes', photo: 'https://images.pexels.com/photos/7752839/pexels-photo-7752839.jpeg', time: '1sem' }
+        ];
+
+        // Check if viewing own profile (in a real app this would be determined by authentication)
+        // When isOwnProfile = true: user sees "Quem visitou meu perfil" section
+        // When isOwnProfile = false: visitor sees only limited profile info
+        const isOwnProfile = true; // Simulating that this is the user's own profile
+
+        // User profile data
+        let userProfile = {
+            displayName: 'Bruno Oliveira',
+            username: 'brunooliveira',
+            bio: '🚀 Desenvolvedor & Criador de Conteúdo\n🌟 Transformando ideias em realidade\n📍 São Paulo, Brasil',
+            city: 'São Paulo',
+            state: 'SP',
+            birthdate: '1995-03-15',
+            relationship: 'relationship',
+            showBirthdate: true,
+            showRelationship: true,
+            showLocation: true,
+            avatar: 'https://images.pexels.com/photos/31422830/pexels-photo-31422830.png'
+        };
         
         // Open/Close Modal
         function openCreateModal() {
@@ -950,9 +2723,8 @@
                     <div class="empty-feed">
                         <div class="empty-icon">
                             <svg viewBox="0 0 24 24" fill="none">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
-                            </svg>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                        </svg>
                         </div>
                         <div class="empty-title">Bem-vindo ao Vibe</div>
                         <div class="empty-subtitle">
@@ -960,7 +2732,7 @@
                             verá as publicações delas aqui.
                         </div>
                         <button class="empty-button" onclick="openCreateModal()">
-                            Compartilhar primeira foto
+                            Compartilhar primeiro post
                         </button>
                     </div>
                 `;
@@ -1039,13 +2811,511 @@
             alert('✨ Story Creator Avançado!\n\n🎨 Funcionalidades:\n• Editor split-screen\n• Múltiplos textos\n• Slider de tamanho da fonte\n• Drag & drop\n• Cores e fundos personalizáveis\n• Formatação completa\n\n📱 Disponível no app nativo React Native!');
         }
         
+        // Navigation System
+        function navigateToScreen(screenName) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+
+            // Show selected screen
+            const targetScreen = document.getElementById(screenName + 'Screen');
+            if (targetScreen) {
+                targetScreen.style.display = 'block';
+                currentScreen = screenName;
+            }
+
+            // Control stories visibility
+            const storiesContainer = document.getElementById('storiesContainer');
+            if (screenName === 'profile' || screenName === 'search' || screenName === 'notifications') {
+                storiesContainer.style.display = 'none';
+            } else {
+                storiesContainer.style.display = 'block';
+            }
+
+            // Update navigation
+            updateNavigation(screenName);
+
+            // Load screen-specific content
+            if (screenName === 'profile') {
+                renderProfile();
+            }
+        }
+
+        function updateNavigation(activeScreen) {
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Add active class to current screen
+            const activeNavItem = document.querySelector(`[data-screen="${activeScreen}"]`);
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+        }
+
+        // Render Profile Content
+        function renderProfile() {
+            renderPostsGrid();
+            renderFriendsGrid();
+            renderVisitorsGrid();
+            setupProfileTabs();
+            setupProfileVisibility();
+        }
+
+        // Render Friends Grid
+        function renderFriendsGrid() {
+            const friendsGrid = document.getElementById('friendsGrid');
+            const friendsToShow = friends.slice(0, 6);
+
+            friendsGrid.innerHTML = friendsToShow.map(friend => `
+                <div class="friend-item" onclick="openFriendProfile('${friend.username}')">
+                    <div class="friend-avatar">
+                        <img src="${friend.photo}" alt="${friend.name}">
+                    </div>
+                    <div class="friend-name">${friend.name.split(' ')[0]}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderPostsGrid() {
+            const postsGrid = document.getElementById('postsGrid');
+            postsGrid.innerHTML = profilePosts.map(post => `
+                <div class="post-item" onclick="openPost(${post.id})">
+                    <img src="${post.image}" alt="Post" />
+                    <div class="post-overlay">
+                        <div class="post-stats">
+                            <div class="post-stat">
+                                <svg viewBox="0 0 24 24" width="18" height="18">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                </svg>
+                                ${post.likes}
+                            </div>
+                            <div class="post-stat">
+                                <svg viewBox="0 0 24 24" width="18" height="18">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+                                </svg>
+                                ${post.comments}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupProfileTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active from all tabs
+                    tabBtns.forEach(t => t.classList.remove('active'));
+                    // Add active to clicked tab
+                    btn.classList.add('active');
+
+                    const tab = btn.dataset.tab;
+                    console.log('Switched to tab:', tab);
+
+                    // Here you would load different content based on tab
+                    if (tab === 'tagged') {
+                        // Show tagged posts or different content
+                        document.getElementById('postsGrid').innerHTML = `
+                            <div style="grid-column: 1/-1; padding: 40px 20px; text-align: center; color: #8e8e8e;">
+                                <svg viewBox="0 0 24 24" width="48" height="48" style="stroke: currentColor; stroke-width: 1; fill: none; margin-bottom: 16px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/>
+                                </svg>
+                                <p>Nenhuma marcação ainda</p>
+                            </div>
+                        `;
+                    } else {
+                        renderPostsGrid();
+                    }
+                });
+            });
+        }
+
+        function openPost(postId) {
+            console.log('Opening post:', postId);
+            // Here you would open a post detail modal
+        }
+
+        // Profile interaction functions
+        function openFriendsModal() {
+            alert('🤝 Lista de Amigos\n\n' + friends.map(f => `• ${f.name} (@${f.username})`).join('\n'));
+        }
+
+        function openFollowersModal() {
+            alert('👥 Seguidores\n\n2.8k pessoas seguem este perfil\n\nRecentes:\n• Ana Maria Silva\n• João Pedro Santos\n• Maria Fernanda Costa\n• Carlos Eduardo Lima\n• Sofia Rodrigues\n• Lucas Mendes');
+        }
+
+        function openFollowingModal() {
+            alert('👤 Seguindo\n\n1.2k perfis seguidos\n\nRecentes:\n• @techleader\n• @designstudio\n• @codinglife\n• @startupbrasil\n• @devcommunity\n• @creativeagency');
+        }
+
+        function openPostsModal() {
+            alert('📊 Estatísticas de Posts\n\n342 publicações no total\n\n• Posts com imagem: 298\n• Posts de texto: 44\n• Depoimentos: 12\n• Média de curtidas: 89\n• Post mais curtido: 342 ❤️');
+        }
+
+        function openFriendProfile(username) {
+            alert(`👤 Perfil de ${username}\n\nAbrindo perfil do amigo...\n\n(Em uma versão completa, isso navegaria para o perfil do usuário)`);
+        }
+
+        // Toggle friends visibility
+        let friendsVisible = false;
+        function toggleFriendsVisibility() {
+            const friendsGrid = document.getElementById('friendsGrid');
+            const toggleBtn = document.getElementById('friendsToggleBtn');
+
+            friendsVisible = !friendsVisible;
+
+            if (friendsVisible) {
+                friendsGrid.classList.remove('collapsed');
+                friendsGrid.classList.add('expanded');
+                toggleBtn.classList.remove('expanded');
+                toggleBtn.childNodes[0].textContent = 'Ocultar';
+            } else {
+                friendsGrid.classList.remove('expanded');
+                friendsGrid.classList.add('collapsed');
+                toggleBtn.classList.add('expanded');
+                toggleBtn.childNodes[0].textContent = 'Ver todos';
+            }
+        }
+
+        // Profile view switching
+        function switchProfileView(viewType) {
+            currentProfileView = viewType;
+
+            // Update view buttons
+            document.querySelectorAll('.view-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-view="${viewType}"]`).classList.add('active');
+
+            // Show/hide views
+            const gridView = document.getElementById('postsGrid');
+            const feedView = document.getElementById('postsFeed');
+
+            if (viewType === 'grid') {
+                gridView.style.display = 'grid';
+                feedView.style.display = 'none';
+            } else {
+                gridView.style.display = 'none';
+                feedView.style.display = 'block';
+                renderPostsFeed();
+            }
+        }
+
+        function renderPostsFeed() {
+            const postsFeed = document.getElementById('postsFeed');
+            postsFeed.innerHTML = profilePosts.map(post => `
+                <div class="feed-post">
+                    <div class="feed-post-header">
+                        <div class="feed-post-avatar">
+                            <img src="https://images.pexels.com/photos/31422830/pexels-photo-31422830.png" alt="Bruno Oliveira">
+                        </div>
+                        <div class="feed-post-info">
+                            <div class="feed-post-username">brunooliveira</div>
+                            <div class="feed-post-time">${post.time}</div>
+                        </div>
+                    </div>
+                    <div class="feed-post-content">
+                        <div class="feed-post-text">${post.content}</div>
+                        <div class="feed-post-image">
+                            <img src="${post.image}" alt="Post image">
+                        </div>
+                    </div>
+                    <div class="feed-post-actions">
+                        <button class="feed-action-btn" onclick="toggleFeedLike(${post.id})">
+                            <svg viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                            </svg>
+                            ${post.likes}
+                        </button>
+                        <button class="feed-action-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+                            </svg>
+                            ${post.comments}
+                        </button>
+                        <button class="feed-action-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935-2.186 2.25 2.25 0 00-3.935 2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/>
+                            </svg>
+                            Compartilhar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFeedLike(postId) {
+            console.log('Toggled feed like for post:', postId);
+            // Here you would update the post's like status
+        }
+
+        // Render Visitors Grid
+        function renderVisitorsGrid() {
+            const visitorsGrid = document.getElementById('visitorsGrid');
+            const visitorsToShow = profileVisitors.slice(0, 8);
+
+            visitorsGrid.innerHTML = visitorsToShow.map(visitor => `
+                <div class="visitor-item" onclick="openVisitorProfile('${visitor.username}')">
+                    <div class="visitor-avatar">
+                        <img src="${visitor.photo}" alt="${visitor.name}">
+                    </div>
+                    <div class="visitor-info">
+                        <div class="visitor-name">${visitor.name.split(' ')[0]}</div>
+                        <div class="visitor-time">${visitor.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle visitors visibility
+        let visitorsVisible = false;
+        function toggleVisitorsVisibility() {
+            const visitorsGrid = document.getElementById('visitorsGrid');
+            const toggleBtn = document.getElementById('visitorsToggleBtn');
+
+            visitorsVisible = !visitorsVisible;
+
+            if (visitorsVisible) {
+                visitorsGrid.classList.remove('collapsed');
+                visitorsGrid.classList.add('expanded');
+                toggleBtn.classList.remove('expanded');
+                toggleBtn.childNodes[0].textContent = 'Ocultar';
+            } else {
+                visitorsGrid.classList.remove('expanded');
+                visitorsGrid.classList.add('collapsed');
+                toggleBtn.classList.add('expanded');
+                toggleBtn.childNodes[0].textContent = 'Ver todos';
+            }
+        }
+
+        // Setup profile visibility based on ownership
+        function setupProfileVisibility() {
+            const visitorsSection = document.getElementById('visitorsSection');
+
+            if (isOwnProfile) {
+                visitorsSection.style.display = 'block';
+            } else {
+                visitorsSection.style.display = 'none';
+            }
+        }
+
+        function openVisitorProfile(username) {
+            alert(`👤 Visitante: ${username}\n\nAbrindo perfil do visitante...\n\n(Em uma versão completa, isso navegaria para o perfil do usuário)`);
+        }
+
+        // Edit Profile Modal Functions
+        function openEditProfileModal() {
+            const modal = document.getElementById('editProfileModal');
+            populateEditForm();
+            modal.style.display = 'flex';
+        }
+
+        function closeEditProfileModal() {
+            const modal = document.getElementById('editProfileModal');
+            modal.style.display = 'none';
+        }
+
+        function populateEditForm() {
+            document.getElementById('editDisplayName').value = userProfile.displayName;
+            document.getElementById('editUsername').value = userProfile.username;
+            document.getElementById('editBio').value = userProfile.bio;
+            document.getElementById('editCity').value = userProfile.city;
+            document.getElementById('editState').value = userProfile.state;
+            document.getElementById('editBirthdate').value = userProfile.birthdate;
+            document.getElementById('editRelationship').value = userProfile.relationship;
+            document.getElementById('showBirthdate').checked = userProfile.showBirthdate;
+            document.getElementById('showRelationship').checked = userProfile.showRelationship;
+            document.getElementById('showLocation').checked = userProfile.showLocation;
+            document.getElementById('editAvatarPreview').src = userProfile.avatar;
+
+            updateBioCharCount();
+        }
+
+        function updateBioCharCount() {
+            const bioInput = document.getElementById('editBio');
+            const charCount = document.getElementById('bioCharCount');
+            const remaining = 150 - bioInput.value.length;
+            charCount.textContent = remaining + ' caracteres restantes';
+            charCount.style.color = remaining < 20 ? '#ed4956' : '#8e8e8e';
+        }
+
+        function saveProfileChanges() {
+            // Get form values
+            userProfile.displayName = document.getElementById('editDisplayName').value.trim();
+            userProfile.username = document.getElementById('editUsername').value.trim();
+            userProfile.bio = document.getElementById('editBio').value.trim();
+            userProfile.city = document.getElementById('editCity').value.trim();
+            userProfile.state = document.getElementById('editState').value.trim();
+            userProfile.birthdate = document.getElementById('editBirthdate').value;
+            userProfile.relationship = document.getElementById('editRelationship').value;
+            userProfile.showBirthdate = document.getElementById('showBirthdate').checked;
+            userProfile.showRelationship = document.getElementById('showRelationship').checked;
+            userProfile.showLocation = document.getElementById('showLocation').checked;
+
+            // Validate required fields
+            if (!userProfile.displayName || !userProfile.username) {
+                alert('Nome completo e nome de usuário são obrigatórios!');
+                return;
+            }
+
+            // Update profile display
+            updateProfileDisplay();
+            closeEditProfileModal();
+
+            // Show success message
+            alert('✅ Perfil atualizado com sucesso!');
+        }
+
+        function updateProfileDisplay() {
+            // Update profile name and username
+            document.querySelector('.profile-display-name').textContent = userProfile.displayName;
+            document.querySelector('.profile-username').textContent = '@' + userProfile.username;
+
+            // Update bio with location and relationship info
+            let bioText = userProfile.bio;
+
+            if (userProfile.showLocation && (userProfile.city || userProfile.state)) {
+                bioText += '\n📍 ' + [userProfile.city, userProfile.state].filter(Boolean).join(', ');
+            }
+
+            if (userProfile.showRelationship && userProfile.relationship) {
+                const relationshipLabels = {
+                    'single': '💙 Solteiro(a)',
+                    'relationship': '❤️ Em um relacionamento',
+                    'married': '💍 Casado(a)',
+                    'divorced': '💔 Divorciado(a)',
+                    'widowed': '🖤 Viúvo(a)'
+                };
+                bioText += '\n' + relationshipLabels[userProfile.relationship];
+            }
+
+            if (userProfile.showBirthdate && userProfile.birthdate) {
+                const birthDate = new Date(userProfile.birthdate);
+                const age = new Date().getFullYear() - birthDate.getFullYear();
+                bioText += '\n🎂 ' + age + ' anos';
+            }
+
+            document.querySelector('.profile-bio').innerHTML = bioText.replace(/\n/g, '<br>');
+
+            // Update avatar
+            document.querySelector('.avatar-image').src = userProfile.avatar;
+        }
+
+        function selectNewAvatar() {
+            alert('📷 Seleção de Avatar\n\nEm uma versão completa, isso abriria:\n• Galeria de fotos\n• Câmera\n• Avatares pré-definidos\n• Editor de imagem');
+        }
+
+        // Add bio character count listener
+        document.addEventListener('DOMContentLoaded', function() {
+            const bioInput = document.getElementById('editBio');
+            if (bioInput) {
+                bioInput.addEventListener('input', updateBioCharCount);
+            }
+        });
+
+        // Render Feed (updated to work with screen system)
+        function renderFeed() {
+            const feed = document.getElementById('homeScreen');
+
+            if (posts.length === 0) {
+                feed.innerHTML = `
+                    <div class="empty-feed">
+                        <div class="empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                        </svg>
+                        </div>
+                        <div class="empty-title">Bem-vindo ao Vibe</div>
+                        <div class="empty-subtitle">
+                            Quando você começar a seguir pessoas,<br>
+                            verá as publicações delas aqui.
+                        </div>
+                        <button class="empty-button" onclick="openCreateModal()">
+                            Compartilhar primeiro post
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            feed.innerHTML = posts.map(post => `
+                <div class="post scale-in">
+                    <div class="post-header">
+                        <div class="post-user">
+                            <div class="post-avatar">${post.initials}</div>
+                            <div class="post-info">
+                                <div class="post-username">${post.username}</div>
+                                <div class="post-location">São Paulo, Brasil</div>
+                            </div>
+                        </div>
+                        <div class="post-options">⋯</div>
+                    </div>
+
+                    <div class="post-content">
+                        ${post.content}
+                        ${post.type === 'testimonial' ? '<br><br>💝 Depoimento especial' : ''}
+                    </div>
+
+                    <div class="post-actions">
+                        <div class="action-buttons">
+                            <div class="action-btn ${post.liked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+                                <svg viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                </svg>
+                            </div>
+                            <div class="action-btn">
+                                <svg viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+                                </svg>
+                            </div>
+                            <div class="action-btn">
+                                <svg viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="action-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="post-likes">
+                        ${post.likes} curtidas
+                    </div>
+
+                    <div class="post-caption">
+                        <span class="username">${post.username}</span>
+                        ${post.content}
+                    </div>
+
+                    <div class="post-time">HÁ ${post.time.toUpperCase()}</div>
+                </div>
+            `).join('');
+        }
+
         // Initialize
         renderFeed();
-        
+        renderProfile();
+        updateProfileDisplay();
+
         // Close modal when clicking outside
         document.getElementById('createModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeCreateModal();
+            }
+        });
+
+        // Close edit profile modal when clicking outside
+        document.getElementById('editProfileModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditProfileModal();
             }
         });
     </script>
