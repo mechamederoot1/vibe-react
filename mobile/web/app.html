@@ -1832,7 +1832,7 @@
         
         // Story Creator
         function openStoryCreator() {
-            alert('✨ Story Creator Avançado!\n\n🎨 Funcionalidades:\n• Editor split-screen\n• M��ltiplos textos\n• Slider de tamanho da fonte\n• Drag & drop\n• Cores e fundos personalizáveis\n• Formatação completa\n\n📱 Disponível no app nativo React Native!');
+            alert('✨ Story Creator Avançado!\n\n🎨 Funcionalidades:\n• Editor split-screen\n• Múltiplos textos\n• Slider de tamanho da fonte\n• Drag & drop\n• Cores e fundos personalizáveis\n• Formatação completa\n\n📱 Disponível no app nativo React Native!');
         }
         
         // Navigation System
@@ -1886,13 +1886,57 @@
         }
 
         function renderFriends() {
-            const friendsGrid = document.getElementById('friendsGrid');
-            friendsGrid.innerHTML = friends.slice(0, 6).map(friend => `
-                <div class="friend-item">
-                    <div class="friend-avatar">${friend.initials}</div>
-                    <div class="friend-name">${friend.name}</div>
-                </div>
-            `).join('');
+            const friendsPreview = document.getElementById('friendsPreview');
+            const displayFriends = friends.slice(0, 6);
+            const remainingCount = friends.length - 6;
+
+            friendsPreview.innerHTML = `
+                ${displayFriends.map(friend => `
+                    <div class="friend-avatar-small" style="background: ${friend.gradient}" title="${friend.name}">
+                        ${friend.initials}
+                    </div>
+                `).join('')}
+                ${remainingCount > 0 ? `
+                    <div class="friends-more" title="Ver mais ${remainingCount} amigos">
+                        +${remainingCount}
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        // Post view switching functions
+        function switchPostView(viewType) {
+            currentPostView = viewType;
+
+            // Update view buttons
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-view="${viewType}"]`).classList.add('active');
+
+            // Show/hide views
+            const gridView = document.getElementById('profilePostsGrid');
+            const listView = document.getElementById('profilePostsList');
+
+            if (viewType === 'grid') {
+                gridView.style.display = 'grid';
+                listView.style.display = 'none';
+            } else {
+                gridView.style.display = 'none';
+                listView.style.display = 'block';
+                renderProfilePostsList();
+            }
+        }
+
+        function switchPostsTab(tabType) {
+            // Update tab buttons
+            document.querySelectorAll('.posts-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Here you would typically load different content based on tab
+            console.log('Switched to tab:', tabType);
         }
 
         function renderProfilePosts() {
