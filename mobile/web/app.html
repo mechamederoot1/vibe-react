@@ -1305,11 +1305,38 @@
                         <!-- Profile Posts -->
                         <div class="profile-posts">
                             <div class="profile-posts-header">
-                                <div class="posts-tab active">Posts</div>
-                                <div class="posts-tab">Tagged</div>
+                                <div class="posts-view-controls">
+                                    <div class="posts-tab active" onclick="switchPostsTab('posts')">Publicações</div>
+                                    <div class="posts-tab" onclick="switchPostsTab('tagged')">Marcações</div>
+                                </div>
+                                <div class="view-toggle">
+                                    <button class="view-btn active" data-view="grid" onclick="switchPostView('grid')" title="Visualização em grade">
+                                        <svg viewBox="0 0 24 24" width="18" height="18">
+                                            <rect x="3" y="3" width="7" height="7"/>
+                                            <rect x="14" y="3" width="7" height="7"/>
+                                            <rect x="14" y="14" width="7" height="7"/>
+                                            <rect x="3" y="14" width="7" height="7"/>
+                                        </svg>
+                                    </button>
+                                    <button class="view-btn" data-view="list" onclick="switchPostView('list')" title="Visualização em lista">
+                                        <svg viewBox="0 0 24 24" width="18" height="18">
+                                            <line x1="8" y1="6" x2="21" y2="6"/>
+                                            <line x1="8" y1="12" x2="21" y2="12"/>
+                                            <line x1="8" y1="18" x2="21" y2="18"/>
+                                            <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                            <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                            <line x1="3" y1="18" x2="3.01" y2="18"/>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="profile-posts-grid" id="profilePostsGrid">
-                                <!-- User posts will be populated by JavaScript -->
+                            <div class="profile-posts-content">
+                                <div class="profile-posts-grid" id="profilePostsGrid">
+                                    <!-- User posts will be populated by JavaScript -->
+                                </div>
+                                <div class="profile-posts-list" id="profilePostsList" style="display: none;">
+                                    <!-- User posts in list view will be populated by JavaScript -->
+                                </div>
                             </div>
                         </div>
                     </div>
