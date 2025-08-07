@@ -186,6 +186,9 @@ const ModernRegisterScreen: React.FC = () => {
           )}
         </div>
 
+        {/* Spacer */}
+        <div className="flex-1 min-h-[2rem]"></div>
+
         {/* Footer */}
         <div className="flex-none px-6 pb-6">
           <div className="text-center">
