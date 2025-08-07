@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibe Social Network - React Native</title>
+    <title>Vibe - Social Network</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,87 +14,174 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f9fafb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
         
-        .mobile-frame {
+        .phone-container {
             width: 375px;
             height: 812px;
-            background: white;
-            border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            overflow: hidden;
+            background: #000;
+            border-radius: 40px;
+            padding: 2px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
             position: relative;
-            border: 8px solid #1a1a1a;
         }
         
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #fafafa;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Status Bar */
         .status-bar {
             height: 44px;
-            background: #000;
+            background: linear-gradient(90deg, #000, #1a1a1a);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 24px;
             color: white;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
         }
         
-        .app-container {
-            height: calc(100% - 44px);
-            background: #f9fafb;
+        .status-left {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
         
-        /* Header */
-        .header {
+        .signal-bars {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .bar {
+            width: 3px;
             background: white;
-            padding: 16px;
-            border-bottom: 1px solid #e5e7eb;
+            border-radius: 1px;
+        }
+        
+        .bar:nth-child(1) { height: 4px; }
+        .bar:nth-child(2) { height: 6px; }
+        .bar:nth-child(3) { height: 8px; }
+        .bar:nth-child(4) { height: 10px; }
+        
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .battery {
+            width: 24px;
+            height: 12px;
+            border: 1px solid white;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .battery::after {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 3px;
+            width: 2px;
+            height: 6px;
+            background: white;
+            border-radius: 0 1px 1px 0;
+        }
+        
+        .battery-fill {
+            height: 100%;
+            width: 85%;
+            background: white;
+            border-radius: 1px;
+        }
+        
+        /* App Container */
+        .app {
+            height: calc(100% - 44px);
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+        
+        /* Header - Instagram Style */
+        .app-header {
+            background: white;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .app-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #3b82f6;
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .create-btn {
+        .header-icons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .icon-btn {
             width: 32px;
             height: 32px;
-            background: #3b82f6;
-            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
             cursor: pointer;
-            border: none;
+            transition: transform 0.2s;
         }
         
-        /* Stories Bar */
-        .stories-bar {
+        .icon-btn:active {
+            transform: scale(0.9);
+        }
+        
+        .icon-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #262626;
+            stroke-width: 1.5;
+            fill: none;
+        }
+        
+        /* Stories - Instagram Style */
+        .stories-container {
             background: white;
-            padding: 12px;
-            border-bottom: 1px solid #f3f4f6;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 16px 0;
         }
         
         .stories-scroll {
             display: flex;
-            gap: 12px;
+            gap: 16px;
+            padding: 0 16px;
             overflow-x: auto;
-            padding: 4px 0;
+            scroll-behavior: smooth;
+        }
+        
+        .stories-scroll::-webkit-scrollbar {
+            display: none;
         }
         
         .story-item {
@@ -104,54 +193,73 @@
         }
         
         .story-ring {
-            width: 66px;
-            height: 66px;
-            border: 2px solid #3b82f6;
-            border-radius: 33px;
-            padding: 2px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            transition: transform 0.2s;
         }
         
-        .story-ring.create {
-            border-color: #d1d5db;
+        .story-ring:active {
+            transform: scale(0.95);
+        }
+        
+        .story-ring.viewed {
+            background: #c7c7c7;
+        }
+        
+        .story-ring.your-story {
+            background: #fafafa;
+            border: 2px solid #dbdbdb;
         }
         
         .story-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 30px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 18px;
+            color: #405de6;
+            position: relative;
+            overflow: hidden;
         }
         
-        .add-icon {
+        .story-ring.your-story .story-avatar {
+            border: none;
+            background: #fafafa;
+        }
+        
+        .add-story-icon {
             position: absolute;
             bottom: -2px;
             right: -2px;
-            width: 20px;
-            height: 20px;
-            background: #3b82f6;
-            border: 2px solid white;
-            border-radius: 10px;
+            width: 22px;
+            height: 22px;
+            background: #0095f6;
+            border: 3px solid white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 12px;
+            font-size: 14px;
+            font-weight: bold;
         }
         
-        .story-label {
+        .story-username {
             font-size: 12px;
-            margin-top: 4px;
-            text-align: center;
+            color: #262626;
+            margin-top: 8px;
             max-width: 70px;
+            text-align: center;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -161,197 +269,271 @@
         .feed {
             flex: 1;
             overflow-y: auto;
+            background: #fafafa;
         }
         
-        .post-card {
+        .feed::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Post Card - Instagram Style */
+        .post {
             background: white;
-            margin-bottom: 1px;
-            border-bottom: 1px solid #f3f4f6;
+            border: 1px solid #dbdbdb;
+            margin-bottom: 16px;
         }
         
         .post-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
-        .post-author {
+        .post-user {
             display: flex;
             align-items: center;
             gap: 12px;
         }
         
         .post-avatar {
-            width: 40px;
-            height: 40px;
-            background: #3b82f6;
-            border-radius: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #405de6, #833ab4);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 14px;
         }
         
-        .post-info h4 {
-            font-size: 16px;
+        .post-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .post-username {
+            font-size: 14px;
             font-weight: 600;
-            color: #111827;
+            color: #262626;
         }
         
-        .post-info p {
+        .post-location {
             font-size: 12px;
-            color: #6b7280;
+            color: #8e8e8e;
         }
         
-        .post-menu {
-            color: #6b7280;
-            font-size: 20px;
+        .post-options {
             cursor: pointer;
             padding: 8px;
+            color: #262626;
         }
         
         .post-content {
-            padding: 0 16px 12px;
-        }
-        
-        .testimonial-badge {
-            background: linear-gradient(to right, #dbeafe, #eff6ff);
-            border-left: 4px solid #3b82f6;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-            border-radius: 6px;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-        
-        .testimonial-text {
-            font-size: 12px;
-            color: #1e40af;
-            font-weight: 600;
-        }
-        
-        .post-text {
-            font-size: 16px;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            padding: 24px;
             line-height: 1.4;
-            color: #111827;
         }
         
         .post-actions {
-            display: flex;
-            gap: 24px;
             padding: 12px 16px;
-            border-top: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 16px;
         }
         
         .action-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #6b7280;
-            font-size: 14px;
             cursor: pointer;
-            padding: 4px;
+            transition: transform 0.1s;
         }
         
-        .action-btn:hover {
-            color: #3b82f6;
+        .action-btn:active {
+            transform: scale(0.9);
         }
         
-        /* Bottom Tab Bar */
-        .bottom-tabs {
+        .action-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #262626;
+            stroke-width: 1.5;
+            fill: none;
+        }
+        
+        .action-btn.liked svg {
+            fill: #ed4956;
+            stroke: #ed4956;
+        }
+        
+        .post-likes {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+            margin: 8px 16px 0;
+        }
+        
+        .post-caption {
+            padding: 0 16px;
+            font-size: 14px;
+            color: #262626;
+            margin: 8px 0;
+        }
+        
+        .post-caption .username {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .post-time {
+            padding: 0 16px 12px;
+            font-size: 12px;
+            color: #8e8e8e;
+            text-transform: uppercase;
+        }
+        
+        /* Bottom Navigation - Instagram Style */
+        .bottom-nav {
             background: white;
-            border-top: 1px solid #e5e7eb;
+            border-top: 1px solid #dbdbdb;
             padding: 8px 0;
             display: flex;
             justify-content: space-around;
+            align-items: center;
         }
         
-        .tab-item {
+        .nav-item {
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.1s;
+        }
+        
+        .nav-item:active {
+            transform: scale(0.9);
+        }
+        
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            stroke: #262626;
+            stroke-width: 1.5;
+            fill: none;
+        }
+        
+        .nav-item.active svg {
+            fill: #262626;
+        }
+        
+        /* Empty State */
+        .empty-feed {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            padding: 8px;
-            cursor: pointer;
-        }
-        
-        .tab-item.active {
-            color: #3b82f6;
-        }
-        
-        .tab-icon {
-            font-size: 24px;
-        }
-        
-        .tab-label {
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .empty-state {
-            background: white;
-            padding: 64px 32px;
+            justify-content: center;
+            height: 100%;
             text-align: center;
+            padding: 40px 20px;
         }
         
         .empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-        }
-        
-        .empty-title {
-            font-size: 24px;
-            font-weight: 300;
-            color: #111827;
-            margin-bottom: 12px;
-        }
-        
-        .empty-text {
-            font-size: 14px;
-            color: #6b7280;
-            line-height: 1.4;
+            width: 96px;
+            height: 96px;
+            border: 3px solid #262626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 24px;
         }
         
-        .empty-btn {
-            background: #3b82f6;
+        .empty-icon svg {
+            width: 48px;
+            height: 48px;
+            stroke: #262626;
+            stroke-width: 1.5;
+        }
+        
+        .empty-title {
+            font-size: 28px;
+            font-weight: 300;
+            color: #262626;
+            margin-bottom: 16px;
+        }
+        
+        .empty-subtitle {
+            font-size: 14px;
+            color: #8e8e8e;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        
+        .empty-button {
+            background: #0095f6;
             color: white;
-            padding: 12px 32px;
+            border: none;
+            padding: 12px 24px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
-            border: none;
             cursor: pointer;
+            transition: background 0.2s;
         }
         
+        .empty-button:hover {
+            background: #1877f2;
+        }
+        
+        /* Modal - Instagram Style */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.7);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            backdrop-filter: blur(4px);
         }
         
-        .modal-content {
+        .modal {
             background: white;
-            border-radius: 12px;
-            width: 320px;
-            max-height: 500px;
+            border-radius: 16px;
+            width: 340px;
+            max-height: 600px;
             overflow: hidden;
+            animation: modalSlideUp 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
         
         .modal-header {
-            padding: 16px;
-            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 20px;
+            border-bottom: 1px solid #dbdbdb;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -360,141 +542,269 @@
         .modal-title {
             font-size: 18px;
             font-weight: 600;
+            color: #262626;
         }
         
-        .btn-close {
+        .close-btn {
             background: none;
             border: none;
-            font-size: 18px;
-            color: #6b7280;
+            font-size: 24px;
+            color: #8e8e8e;
             cursor: pointer;
+            padding: 4px;
         }
         
-        .btn-publish {
-            background: #3b82f6;
+        .share-btn {
+            background: #0095f6;
             color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
             border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
         }
         
-        .type-selector {
+        .share-btn:disabled {
+            background: #0095f6;
+            opacity: 0.3;
+        }
+        
+        .post-type-tabs {
             display: flex;
-            margin: 16px;
-            background: #f3f4f6;
-            border-radius: 8px;
+            margin: 16px 20px;
+            background: #fafafa;
+            border-radius: 12px;
             padding: 4px;
         }
         
-        .type-btn {
+        .type-tab {
             flex: 1;
-            padding: 8px 16px;
+            padding: 12px 16px;
             border: none;
             background: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 14px;
+            font-weight: 500;
+            color: #8e8e8e;
             cursor: pointer;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
         }
         
-        .type-btn.active {
+        .type-tab.active {
             background: white;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            color: #262626;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
-        .post-input {
-            margin: 16px;
+        .textarea {
+            margin: 0 20px 16px;
             padding: 16px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            min-height: 120px;
-            resize: none;
+            border: 1px solid #dbdbdb;
+            border-radius: 12px;
             font-size: 16px;
             font-family: inherit;
+            resize: none;
+            min-height: 120px;
+            background: #fafafa;
         }
         
-        .char-count {
+        .textarea:focus {
+            outline: none;
+            border-color: #0095f6;
+            background: white;
+        }
+        
+        .char-counter {
             text-align: right;
-            margin: 0 16px 16px;
+            margin: 0 20px 20px;
             font-size: 12px;
-            color: #6b7280;
+            color: #8e8e8e;
+        }
+        
+        .testimonial-info {
+            margin: 0 20px 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .testimonial-desc {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .scale-in {
+            animation: scaleIn 0.2s ease-out;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="mobile-frame">
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <span>9:41</span>
-            <span>🔋 100%</span>
-        </div>
-        
-        <!-- App Container -->
-        <div class="app-container">
-            <!-- Header -->
-            <div class="header">
-                <div class="app-title">Vibe</div>
-                <button class="create-btn" onclick="openCreateModal()">+</button>
-            </div>
-            
-            <!-- Stories Bar -->
-            <div class="stories-bar">
-                <div class="stories-scroll">
-                    <!-- Your Story -->
-                    <div class="story-item" onclick="openStoryCreator()">
-                        <div class="story-ring create">
-                            <div class="story-avatar">VU</div>
-                            <div class="add-icon">+</div>
-                        </div>
-                        <div class="story-label">Seu story</div>
+    <div class="phone-container">
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span>9:41</span>
+                    <div class="signal-bars">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
                     </div>
-                    
-                    <!-- Friend Stories -->
-                    <div class="story-item">
-                        <div class="story-ring">
-                            <div class="story-avatar">AM</div>
-                        </div>
-                        <div class="story-label">Ana</div>
-                    </div>
-                    <div class="story-item">
-                        <div class="story-ring">
-                            <div class="story-avatar">JS</div>
-                        </div>
-                        <div class="story-label">João</div>
+                </div>
+                <div class="status-right">
+                    <span>100%</span>
+                    <div class="battery">
+                        <div class="battery-fill"></div>
                     </div>
                 </div>
             </div>
             
-            <!-- Feed -->
-            <div class="feed" id="feed">
-                <!-- Empty State -->
-                <div class="empty-state">
-                    <div class="empty-icon">👋</div>
-                    <div class="empty-title">Bem-vindo ao Vibe!</div>
-                    <div class="empty-text">
-                        Quando você começar a seguir pessoas, verá o conteúdo delas aqui.
+            <!-- App -->
+            <div class="app">
+                <!-- Header -->
+                <div class="app-header">
+                    <div class="logo">Vibe</div>
+                    <div class="header-icons">
+                        <div class="icon-btn" onclick="openCreateModal()">
+                            <svg viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                            </svg>
+                        </div>
+                        <div class="icon-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                            </svg>
+                        </div>
+                        <div class="icon-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+                            </svg>
+                        </div>
                     </div>
-                    <button class="empty-btn" onclick="openCreateModal()">
-                        Criar sua primeira publicação
-                    </button>
                 </div>
-            </div>
-            
-            <!-- Bottom Tabs -->
-            <div class="bottom-tabs">
-                <div class="tab-item active">
-                    <div class="tab-icon">🏠</div>
-                    <div class="tab-label">Início</div>
+                
+                <!-- Stories -->
+                <div class="stories-container">
+                    <div class="stories-scroll">
+                        <!-- Your Story -->
+                        <div class="story-item" onclick="openStoryCreator()">
+                            <div class="story-ring your-story">
+                                <div class="story-avatar">VU</div>
+                                <div class="add-story-icon">+</div>
+                            </div>
+                            <div class="story-username">Seu story</div>
+                        </div>
+                        
+                        <!-- Friends Stories -->
+                        <div class="story-item">
+                            <div class="story-ring">
+                                <div class="story-avatar">AM</div>
+                            </div>
+                            <div class="story-username">ana.maria</div>
+                        </div>
+                        
+                        <div class="story-item">
+                            <div class="story-ring viewed">
+                                <div class="story-avatar">JS</div>
+                            </div>
+                            <div class="story-username">joao.silva</div>
+                        </div>
+                        
+                        <div class="story-item">
+                            <div class="story-ring">
+                                <div class="story-avatar">MF</div>
+                            </div>
+                            <div class="story-username">maria.fernanda</div>
+                        </div>
+                        
+                        <div class="story-item">
+                            <div class="story-ring">
+                                <div class="story-avatar">RC</div>
+                            </div>
+                            <div class="story-username">rodrigo.costa</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="tab-item">
-                    <div class="tab-icon">👤</div>
-                    <div class="tab-label">Perfil</div>
+                
+                <!-- Feed -->
+                <div class="feed" id="feed">
+                    <!-- Empty State -->
+                    <div class="empty-feed">
+                        <div class="empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+                            </svg>
+                        </div>
+                        <div class="empty-title">Bem-vindo ao Vibe</div>
+                        <div class="empty-subtitle">
+                            Quando você começar a seguir pessoas,<br>
+                            verá as publicações delas aqui.
+                        </div>
+                        <button class="empty-button" onclick="openCreateModal()">
+                            Compartilhar primeira foto
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Bottom Navigation -->
+                <div class="bottom-nav">
+                    <div class="nav-item active">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                        </svg>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                        </svg>
+                    </div>
+                    <div class="nav-item" onclick="openCreateModal()">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                        </svg>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                        </svg>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
@@ -502,31 +812,53 @@
     
     <!-- Create Post Modal -->
     <div class="modal-overlay" id="createModal">
-        <div class="modal-content">
+        <div class="modal">
             <div class="modal-header">
-                <button class="btn-close" onclick="closeCreateModal()">✕</button>
-                <div class="modal-title">Nova Publicação</div>
-                <button class="btn-publish" onclick="createPost()">Compartilhar</button>
+                <button class="close-btn" onclick="closeCreateModal()">✕</button>
+                <div class="modal-title">Nova publicação</div>
+                <button class="share-btn" onclick="createPost()" id="shareBtn" disabled>Compartilhar</button>
             </div>
             
-            <div class="type-selector">
-                <button class="type-btn active" onclick="selectType('text')">
-                    ✏️ Post
+            <div class="post-type-tabs">
+                <button class="type-tab active" onclick="selectType('text')" id="textTab">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10,9 9,9 8,9"/>
+                    </svg>
+                    Post
                 </button>
-                <button class="type-btn" onclick="selectType('testimonial')">
-                    ❤️ Depoimento
+                <button class="type-tab" onclick="selectType('testimonial')" id="testimonialTab">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    Depoimento
                 </button>
             </div>
             
             <textarea 
-                class="post-input" 
+                class="textarea" 
                 placeholder="O que você está pensando?"
                 maxlength="2200"
                 oninput="updateCharCount()"
                 id="postInput"
             ></textarea>
             
-            <div class="char-count" id="charCount">2200 caracteres restantes</div>
+            <div class="char-counter" id="charCount">2200 caracteres restantes</div>
+            
+            <div class="testimonial-info" id="testimonialInfo" style="display: none;">
+                <div class="testimonial-header">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    Depoimento especial
+                </div>
+                <div class="testimonial-desc">
+                    Depoimentos são uma forma especial de demonstrar carinho e reconhecimento. Seja autêntico e positivo!
+                </div>
+            </div>
         </div>
     </div>
     
@@ -534,21 +866,25 @@
         let currentPostType = 'text';
         let posts = [];
         
+        // Open/Close Modal
         function openCreateModal() {
             document.getElementById('createModal').style.display = 'flex';
+            document.getElementById('postInput').focus();
         }
         
         function closeCreateModal() {
             document.getElementById('createModal').style.display = 'none';
             document.getElementById('postInput').value = '';
             updateCharCount();
+            currentPostType = 'text';
+            updateTabs();
         }
         
+        // Post Type Selection
         function selectType(type) {
             currentPostType = type;
-            const buttons = document.querySelectorAll('.type-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            updateTabs();
+            updateCharCount();
             
             const input = document.getElementById('postInput');
             input.placeholder = type === 'testimonial' 
@@ -556,16 +892,29 @@
                 : 'O que você está pensando?';
                 
             input.maxLength = type === 'testimonial' ? 1000 : 2200;
-            updateCharCount();
+            
+            const testimonialInfo = document.getElementById('testimonialInfo');
+            testimonialInfo.style.display = type === 'testimonial' ? 'block' : 'none';
         }
         
+        function updateTabs() {
+            document.getElementById('textTab').classList.toggle('active', currentPostType === 'text');
+            document.getElementById('testimonialTab').classList.toggle('active', currentPostType === 'testimonial');
+        }
+        
+        // Character Count
         function updateCharCount() {
             const input = document.getElementById('postInput');
             const maxLength = currentPostType === 'testimonial' ? 1000 : 2200;
             const remaining = maxLength - input.value.length;
             document.getElementById('charCount').textContent = remaining + ' caracteres restantes';
+            
+            const shareBtn = document.getElementById('shareBtn');
+            shareBtn.disabled = !input.value.trim();
+            shareBtn.style.opacity = input.value.trim() ? '1' : '0.3';
         }
         
+        // Create Post
         function createPost() {
             const input = document.getElementById('postInput');
             const content = input.value.trim();
@@ -580,8 +929,11 @@
                 content: content,
                 type: currentPostType,
                 author: 'Vibe User',
+                username: 'vibeuser',
                 initials: 'VU',
-                time: 'agora'
+                time: 'agora',
+                likes: Math.floor(Math.random() * 50) + 10,
+                liked: false
             };
             
             posts.unshift(post);
@@ -589,19 +941,26 @@
             closeCreateModal();
         }
         
+        // Render Feed
         function renderFeed() {
             const feed = document.getElementById('feed');
             
             if (posts.length === 0) {
                 feed.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">👋</div>
-                        <div class="empty-title">Bem-vindo ao Vibe!</div>
-                        <div class="empty-text">
-                            Quando você começar a seguir pessoas, verá o conteúdo delas aqui.
+                    <div class="empty-feed">
+                        <div class="empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+                            </svg>
                         </div>
-                        <button class="empty-btn" onclick="openCreateModal()">
-                            Criar sua primeira publicação
+                        <div class="empty-title">Bem-vindo ao Vibe</div>
+                        <div class="empty-subtitle">
+                            Quando você começar a seguir pessoas,<br>
+                            verá as publicações delas aqui.
+                        </div>
+                        <button class="empty-button" onclick="openCreateModal()">
+                            Compartilhar primeira foto
                         </button>
                     </div>
                 `;
@@ -609,52 +968,86 @@
             }
             
             feed.innerHTML = posts.map(post => `
-                <div class="post-card">
+                <div class="post scale-in">
                     <div class="post-header">
-                        <div class="post-author">
+                        <div class="post-user">
                             <div class="post-avatar">${post.initials}</div>
                             <div class="post-info">
-                                <h4>${post.author}</h4>
-                                <p>${post.time}</p>
+                                <div class="post-username">${post.username}</div>
+                                <div class="post-location">São Paulo, Brasil</div>
                             </div>
                         </div>
-                        <div class="post-menu">⋮</div>
+                        <div class="post-options">⋯</div>
                     </div>
                     
                     <div class="post-content">
-                        ${post.type === 'testimonial' ? `
-                            <div class="testimonial-badge">
-                                <span>❤️</span>
-                                <span class="testimonial-text">Depoimento</span>
-                            </div>
-                        ` : ''}
-                        <div class="post-text">${post.content}</div>
+                        ${post.content}
+                        ${post.type === 'testimonial' ? '<br><br>💝 Depoimento especial' : ''}
                     </div>
                     
                     <div class="post-actions">
-                        <div class="action-btn">
-                            <span>❤️</span>
-                            <span>Curtir</span>
+                        <div class="action-buttons">
+                            <div class="action-btn ${post.liked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+                                <svg viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                </svg>
+                            </div>
+                            <div class="action-btn">
+                                <svg viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+                                </svg>
+                            </div>
+                            <div class="action-btn">
+                                <svg viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+                                </svg>
+                            </div>
                         </div>
                         <div class="action-btn">
-                            <span>💬</span>
-                            <span>Comentar</span>
-                        </div>
-                        <div class="action-btn">
-                            <span>📤</span>
-                            <span>Compartilhar</span>
+                            <svg viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
+                            </svg>
                         </div>
                     </div>
+                    
+                    <div class="post-likes">
+                        ${post.likes} curtidas
+                    </div>
+                    
+                    <div class="post-caption">
+                        <span class="username">${post.username}</span>
+                        ${post.content}
+                    </div>
+                    
+                    <div class="post-time">HÁ ${post.time.toUpperCase()}</div>
                 </div>
             `).join('');
         }
         
+        // Toggle Like
+        function toggleLike(postId) {
+            const post = posts.find(p => p.id === postId);
+            if (post) {
+                post.liked = !post.liked;
+                post.likes += post.liked ? 1 : -1;
+                renderFeed();
+            }
+        }
+        
+        // Story Creator
         function openStoryCreator() {
-            alert('✨ Story Creator com editor avançado disponível no app nativo!\n\n📝 Funcionalidades:\n• Múltiplos textos\n• Slider de tamanho\n• Cores e fundos\n• Drag & drop\n• Formatação completa');
+            alert('✨ Story Creator Avançado!\n\n🎨 Funcionalidades:\n• Editor split-screen\n• Múltiplos textos\n• Slider de tamanho da fonte\n• Drag & drop\n• Cores e fundos personalizáveis\n• Formatação completa\n\n📱 Disponível no app nativo React Native!');
         }
         
         // Initialize
         renderFeed();
+        
+        // Close modal when clicking outside
+        document.getElementById('createModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCreateModal();
+            }
+        });
     </script>
 </body>
 </html>
