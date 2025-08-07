@@ -2172,6 +2172,107 @@
         </div>
     </div>
     
+    <!-- Edit Profile Modal -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="edit-profile-modal">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeEditProfileModal()">✕</button>
+                <div class="modal-title">Editar Perfil</div>
+                <button class="save-btn" onclick="saveProfileChanges()" id="saveProfileBtn">Salvar</button>
+            </div>
+
+            <div class="edit-profile-content">
+                <!-- Avatar Edit Section -->
+                <div class="edit-avatar-section">
+                    <div class="edit-avatar-container">
+                        <img src="https://images.pexels.com/photos/31422830/pexels-photo-31422830.png" alt="Avatar" id="editAvatarPreview">
+                        <button class="edit-avatar-btn" onclick="selectNewAvatar()">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="edit-avatar-text">Alterar foto do perfil</p>
+                </div>
+
+                <!-- Form Fields -->
+                <div class="edit-form">
+                    <div class="form-group">
+                        <label for="editDisplayName">Nome completo</label>
+                        <input type="text" id="editDisplayName" value="Bruno Oliveira" maxlength="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editUsername">Nome de usuário</label>
+                        <input type="text" id="editUsername" value="brunooliveira" maxlength="30">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editBio">Biografia</label>
+                        <textarea id="editBio" maxlength="150" placeholder="Conte um pouco sobre você...">🚀 Desenvolvedor & Criador de Conteúdo
+🌟 Transformando ideias em realidade
+📍 São Paulo, Brasil</textarea>
+                        <div class="char-counter" id="bioCharCount">150 caracteres restantes</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="editCity">Cidade</label>
+                            <input type="text" id="editCity" value="São Paulo" maxlength="50">
+                        </div>
+                        <div class="form-group half">
+                            <label for="editState">Estado</label>
+                            <input type="text" id="editState" value="SP" maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editBirthdate">Data de nascimento</label>
+                        <input type="date" id="editBirthdate" value="1995-03-15">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editRelationship">Estado civil</label>
+                        <select id="editRelationship">
+                            <option value="">Não informado</option>
+                            <option value="single">Solteiro(a)</option>
+                            <option value="relationship" selected>Em um relacionamento</option>
+                            <option value="married">Casado(a)</option>
+                            <option value="divorced">Divorciado(a)</option>
+                            <option value="widowed">Viúvo(a)</option>
+                        </select>
+                    </div>
+
+                    <div class="privacy-settings">
+                        <h4>Configurações de Privacidade</h4>
+                        <div class="privacy-option">
+                            <label class="switch">
+                                <input type="checkbox" id="showBirthdate" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="privacy-label">Mostrar data de nascimento</span>
+                        </div>
+                        <div class="privacy-option">
+                            <label class="switch">
+                                <input type="checkbox" id="showRelationship" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="privacy-label">Mostrar estado civil</span>
+                        </div>
+                        <div class="privacy-option">
+                            <label class="switch">
+                                <input type="checkbox" id="showLocation" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="privacy-label">Mostrar localização</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Create Post Modal -->
     <div class="modal-overlay" id="createModal">
         <div class="modal">
