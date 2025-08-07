@@ -38,81 +38,97 @@ const LoginScreen: React.FC = () => {
   };
 
   return (
-    <div className="mobile-container bg-white">
-      <div className="flex flex-col h-full">
-        {/* Header with large logo */}
-        <div className="flex-1 flex items-center justify-center px-8">
-          <div className="w-full max-w-sm">
-            {/* Logo */}
-            <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold text-gradient mb-4">
-                Vibe
-              </h1>
-              <p className="text-gray-600 text-base">
-                Conecte-se com seus amigos
-              </p>
-            </div>
-
-            {/* Login Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {error && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
-                  <p className="text-red-600 text-sm text-center">{error}</p>
-                </div>
-              )}
-
-              <div className="space-y-3">
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  placeholder="Telefone, nome de usuário ou email"
-                  className="ig-input"
-                  required
-                />
-
-                <input
-                  type="password"
-                  value={formData.password}
-                  onChange={(e) => handleInputChange('password', e.target.value)}
-                  placeholder="Senha"
-                  className="ig-input"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading || !formData.email.trim() || !formData.password.trim()}
-                className="ig-button ig-button-primary w-full py-3 text-sm font-semibold disabled:opacity-50"
-              >
-                {loading ? (
-                  <div className="flex items-center justify-center">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                    Entrando...
-                  </div>
-                ) : (
-                  'Entrar'
-                )}
-              </button>
-
-              {/* Forgot password */}
-              <div className="text-center">
-                <button
-                  type="button"
-                  className="text-xs text-gray-600 hover:text-gray-800"
-                >
-                  Esqueceu a senha?
-                </button>
-              </div>
-            </form>
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        {/* Logo with custom Vibe icon */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            {/* Vibe Logo SVG */}
+            <svg width="60" height="60" viewBox="0 0 60 60" className="mr-3">
+              <defs>
+                <linearGradient id="vibeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3b82f6" />
+                  <stop offset="25%" stopColor="#1d4ed8" />
+                  <stop offset="50%" stopColor="#1e40af" />
+                  <stop offset="75%" stopColor="#1e3a8a" />
+                  <stop offset="100%" stopColor="#312e81" />
+                </linearGradient>
+              </defs>
+              {/* Outer circle */}
+              <circle cx="30" cy="30" r="28" fill="url(#vibeGradient)" />
+              {/* Inner design - stylized "V" */}
+              <path d="M18 20 L30 40 L42 20" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              {/* Three dots representing connection */}
+              <circle cx="15" cy="45" r="2" fill="white" />
+              <circle cx="30" cy="45" r="2" fill="white" />
+              <circle cx="45" cy="45" r="2" fill="white" />
+            </svg>
+            <h1 className="text-5xl font-bold text-gradient">
+              Vibe
+            </h1>
           </div>
+          <p className="text-gray-600 text-lg">
+            Conecte-se com seus amigos
+          </p>
         </div>
 
-        {/* Bottom section */}
-        <div className="flex-none px-8 pb-8">
+        {/* Login Form */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+                <p className="text-red-600 text-sm text-center">{error}</p>
+              </div>
+            )}
+
+            <div className="space-y-3">
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                placeholder="Telefone, nome de usuário ou email"
+                className="ig-input"
+                required
+              />
+
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) => handleInputChange('password', e.target.value)}
+                placeholder="Senha"
+                className="ig-input"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading || !formData.email.trim() || !formData.password.trim()}
+              className="ig-button ig-button-primary w-full py-3 text-sm font-semibold disabled:opacity-50"
+            >
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                  Entrando...
+                </div>
+              ) : (
+                'Entrar'
+              )}
+            </button>
+
+            {/* Forgot password */}
+            <div className="text-center">
+              <button
+                type="button"
+                className="text-xs text-gray-600 hover:text-gray-800"
+              >
+                Esqueceu a senha?
+              </button>
+            </div>
+          </form>
+
           {/* Sign up */}
-          <div className="text-center">
+          <div className="text-center mt-6 pt-6 border-t border-gray-100">
             <p className="text-sm text-gray-600">
               Não tem uma conta?{' '}
               <Link
@@ -121,26 +137,6 @@ const LoginScreen: React.FC = () => {
               >
                 Cadastre-se
               </Link>
-            </p>
-          </div>
-
-          {/* Footer links */}
-          <div className="text-center mt-8 space-y-2">
-            <div className="flex justify-center space-x-4 text-xs text-gray-400">
-              <button>Sobre</button>
-              <button>Ajuda</button>
-              <button>Imprensa</button>
-              <button>API</button>
-              <button>Carreiras</button>
-            </div>
-            <div className="flex justify-center space-x-4 text-xs text-gray-400">
-              <button>Privacidade</button>
-              <button>Termos</button>
-              <button>Localizações</button>
-              <button>Idioma</button>
-            </div>
-            <p className="text-xs text-gray-400 mt-4">
-              © 2025 Vibe Social Network
             </p>
           </div>
         </div>
