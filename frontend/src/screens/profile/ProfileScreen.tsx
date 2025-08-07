@@ -209,7 +209,12 @@ const ProfileScreen: React.FC = () => {
                   : 'text-gray-600 hover:text-vibe-blue-dark'
               }`}
             >
-              📝 Posts ({posts.length})
+              <div className="flex items-center space-x-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                <span>Posts ({posts.length})</span>
+              </div>
             </button>
             <button
               onClick={() => setActiveTab('testimonials')}
@@ -219,7 +224,12 @@ const ProfileScreen: React.FC = () => {
                   : 'text-gray-600 hover:text-vibe-blue-dark'
               }`}
             >
-              💝 Depoimentos ({testimonials.length})
+              <div className="flex items-center space-x-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                <span>Depoimentos ({testimonials.length})</span>
+              </div>
             </button>
           </div>
         </div>
@@ -258,7 +268,9 @@ const ProfileScreen: React.FC = () => {
               {testimonials.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="w-16 h-16 bg-vibe-light rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">💝</span>
+                    <svg className="w-8 h-8 text-vibe-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">
                     {isOwnProfile ? 'Você ainda não recebeu depoimentos' : 'Nenhum depoimento ainda'}
@@ -274,7 +286,12 @@ const ProfileScreen: React.FC = () => {
                       onClick={() => setShowTestimonialComposer(true)}
                       className="mt-4"
                     >
-                      💝 Deixar depoimento
+                      <div className="flex items-center space-x-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span>Deixar depoimento</span>
+                      </div>
                     </VibeButton>
                   )}
                 </div>
