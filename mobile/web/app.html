@@ -795,7 +795,7 @@
                 </div>
                 
                 <!-- Feed -->
-                <div class="feed" id="feed">
+                <div class="feed screen" id="homeScreen">
                     <!-- Empty State -->
                     <div class="empty-feed">
                         <div class="empty-icon">
@@ -812,6 +812,133 @@
                         <button class="empty-button" onclick="openCreateModal()">
                             Compartilhar primeira foto
                         </button>
+                    </div>
+                </div>
+
+                <!-- Profile Screen -->
+                <div class="screen" id="profileScreen" style="display: none;">
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <div class="profile-cover">
+                            <div class="profile-cover-gradient"></div>
+                            <div class="profile-info">
+                                <div class="profile-avatar-large">
+                                    <div class="profile-avatar-ring">
+                                        <div class="profile-avatar-image">VU</div>
+                                    </div>
+                                </div>
+                                <div class="profile-name">Vibe User</div>
+                                <div class="profile-username">@vibeuser</div>
+                                <div class="profile-bio">🌟 Apaixonado por momentos únicos<br>📍 São Paulo, Brasil</div>
+                            </div>
+                        </div>
+
+                        <!-- Profile Stats -->
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">127</div>
+                                <div class="stat-label">Posts</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">1.2k</div>
+                                <div class="stat-label">Seguidores</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">834</div>
+                                <div class="stat-label">Seguindo</div>
+                            </div>
+                        </div>
+
+                        <!-- Profile Actions -->
+                        <div class="profile-actions">
+                            <button class="profile-action-btn primary">Editar Perfil</button>
+                            <button class="profile-action-btn secondary">Compartilhar</button>
+                            <button class="profile-action-btn icon">
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Profile Content -->
+                    <div class="profile-content">
+                        <!-- Friends Section -->
+                        <div class="friends-section">
+                            <div class="section-header">
+                                <h3>Amigos</h3>
+                                <button class="see-all-btn">Ver todos</button>
+                            </div>
+                            <div class="friends-grid" id="friendsGrid">
+                                <!-- Friends will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Profile Posts -->
+                        <div class="profile-posts">
+                            <div class="profile-posts-header">
+                                <div class="posts-tab active">Posts</div>
+                                <div class="posts-tab">Tagged</div>
+                            </div>
+                            <div class="profile-posts-grid" id="profilePostsGrid">
+                                <!-- User posts will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Screen -->
+                <div class="screen" id="searchScreen" style="display: none;">
+                    <div class="search-container">
+                        <div class="search-bar">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                            </svg>
+                            <input type="text" placeholder="Pesquisar usuários, posts..." />
+                        </div>
+                        <div class="search-results">
+                            <div class="search-empty">
+                                <svg viewBox="0 0 24 24" width="48" height="48">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                                </svg>
+                                <p>Digite algo para pesquisar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Screen -->
+                <div class="screen" id="notificationsScreen" style="display: none;">
+                    <div class="notifications-container">
+                        <div class="notifications-header">
+                            <h2>Atividades</h2>
+                        </div>
+                        <div class="notifications-list">
+                            <div class="notification-item">
+                                <div class="notification-avatar">AM</div>
+                                <div class="notification-content">
+                                    <span class="notification-user">ana.maria</span> curtiu sua foto
+                                    <div class="notification-time">2h</div>
+                                </div>
+                                <div class="notification-post-thumb"></div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-avatar">JS</div>
+                                <div class="notification-content">
+                                    <span class="notification-user">joao.silva</span> começou a seguir você
+                                    <div class="notification-time">5h</div>
+                                </div>
+                                <button class="follow-back-btn">Seguir</button>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-avatar">MF</div>
+                                <div class="notification-content">
+                                    <span class="notification-user">maria.fernanda</span> comentou: "Que foto incrível! 😍"
+                                    <div class="notification-time">1d</div>
+                                </div>
+                                <div class="notification-post-thumb"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
