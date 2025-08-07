@@ -17,6 +17,7 @@ import { storyService } from '../../services/storyService';
 import PostCard from '../../components/PostCard';
 import StoriesBar from '../../components/StoriesBar';
 import AdvancedStoryCreator from '../../components/AdvancedStoryCreator';
+import CreatePostModal from '../../components/CreatePostModal';
 import { globalStyles } from '../../styles/globalStyles';
 import { colors, spacing, typography } from '../../styles/theme';
 
