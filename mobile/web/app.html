@@ -2685,6 +2685,60 @@
             // Here you would update the post's like status
         }
 
+        // Render Visitors Grid
+        function renderVisitorsGrid() {
+            const visitorsGrid = document.getElementById('visitorsGrid');
+            const visitorsToShow = profileVisitors.slice(0, 8);
+
+            visitorsGrid.innerHTML = visitorsToShow.map(visitor => `
+                <div class="visitor-item" onclick="openVisitorProfile('${visitor.username}')">
+                    <div class="visitor-avatar">
+                        <img src="${visitor.photo}" alt="${visitor.name}">
+                    </div>
+                    <div class="visitor-info">
+                        <div class="visitor-name">${visitor.name.split(' ')[0]}</div>
+                        <div class="visitor-time">${visitor.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle visitors visibility
+        let visitorsVisible = false;
+        function toggleVisitorsVisibility() {
+            const visitorsGrid = document.getElementById('visitorsGrid');
+            const toggleBtn = document.getElementById('visitorsToggleBtn');
+
+            visitorsVisible = !visitorsVisible;
+
+            if (visitorsVisible) {
+                visitorsGrid.classList.remove('collapsed');
+                visitorsGrid.classList.add('expanded');
+                toggleBtn.classList.remove('expanded');
+                toggleBtn.childNodes[0].textContent = 'Ocultar';
+            } else {
+                visitorsGrid.classList.remove('expanded');
+                visitorsGrid.classList.add('collapsed');
+                toggleBtn.classList.add('expanded');
+                toggleBtn.childNodes[0].textContent = 'Ver todos';
+            }
+        }
+
+        // Setup profile visibility based on ownership
+        function setupProfileVisibility() {
+            const visitorsSection = document.getElementById('visitorsSection');
+
+            if (isOwnProfile) {
+                visitorsSection.style.display = 'block';
+            } else {
+                visitorsSection.style.display = 'none';
+            }
+        }
+
+        function openVisitorProfile(username) {
+            alert(`👤 Visitante: ${username}\n\nAbrindo perfil do visitante...\n\n(Em uma versão completa, isso navegaria para o perfil do usuário)`);
+        }
+
         // Render Feed (updated to work with screen system)
         function renderFeed() {
             const feed = document.getElementById('homeScreen');
