@@ -1637,26 +1637,30 @@
 
         // Sample friends data
         const friends = [
-            { name: 'Ana Maria', username: 'ana.maria', initials: 'AM' },
-            { name: 'João Silva', username: 'joao.silva', initials: 'JS' },
-            { name: 'Maria F.', username: 'maria.fernanda', initials: 'MF' },
-            { name: 'Rodrigo C.', username: 'rodrigo.costa', initials: 'RC' },
-            { name: 'Carla S.', username: 'carla.santos', initials: 'CS' },
-            { name: 'Pedro L.', username: 'pedro.lima', initials: 'PL' }
+            { name: 'Ana Maria', username: 'ana.maria', initials: 'AM', gradient: 'linear-gradient(45deg, #405de6, #833ab4)' },
+            { name: 'João Silva', username: 'joao.silva', initials: 'JS', gradient: 'linear-gradient(45deg, #f09433, #e6683c)' },
+            { name: 'Maria F.', username: 'maria.fernanda', initials: 'MF', gradient: 'linear-gradient(45deg, #dc2743, #cc2366)' },
+            { name: 'Rodrigo C.', username: 'rodrigo.costa', initials: 'RC', gradient: 'linear-gradient(45deg, #667eea, #764ba2)' },
+            { name: 'Carla S.', username: 'carla.santos', initials: 'CS', gradient: 'linear-gradient(45deg, #f093fb, #f5576c)' },
+            { name: 'Pedro L.', username: 'pedro.lima', initials: 'PL', gradient: 'linear-gradient(45deg, #4facfe, #00f2fe)' },
+            { name: 'Lucas M.', username: 'lucas.mendes', initials: 'LM', gradient: 'linear-gradient(45deg, #43e97b, #38f9d7)' },
+            { name: 'Sofia R.', username: 'sofia.reis', initials: 'SR', gradient: 'linear-gradient(45deg, #fa709a, #fee140)' }
         ];
 
         // Sample profile posts
         const profilePosts = [
-            { id: 1, content: 'Momento incrível no pôr do sol 🌅' },
-            { id: 2, content: 'Café da manhã perfeito ☕' },
-            { id: 3, content: 'Nova aventura começando! 🎯' },
-            { id: 4, content: 'Gratidão por mais um dia 🙏' },
-            { id: 5, content: 'Trabalhando nos sonhos 💻' },
-            { id: 6, content: 'Final de semana relaxante 🌿' },
-            { id: 7, content: 'Amigos que são família ❤️' },
-            { id: 8, content: 'Conhecimento nunca é demais 📚' },
-            { id: 9, content: 'Arte em cada detalhe 🎨' }
+            { id: 1, content: 'Começando a semana com energia total! 💪 Nada como um bom café para dar aquela motivação extra. #segunda #café #energia', likes: 47, comments: 12, time: '2h' },
+            { id: 2, content: 'Momento de reflexão no pôr do sol de hoje 🌅 Às vezes precisamos parar e apreciar as pequenas coisas da vida. #sunset #reflexao #vida', likes: 89, comments: 23, time: '5h' },
+            { id: 3, content: 'Projeto novo saindo do forno! 🚀 Muito animado para compartilhar o que estamos construindo. Em breve mais novidades! #projeto #inovacao #tecnologia', likes: 156, comments: 34, time: '1d' },
+            { id: 4, content: 'Gratidão define o meu dia de hoje 🙏 Quando olhamos ao redor, sempre há motivos para agradecer. #gratidao #positividade #bem', likes: 73, comments: 18, time: '2d' },
+            { id: 5, content: 'Noite de estudos e muito aprendizado 📚💻 Investir em conhecimento é sempre o melhor caminho. #estudos #programacao #crescimento', likes: 92, comments: 15, time: '3d' },
+            { id: 6, content: 'Final de semana perfeito em contato com a natureza 🌿 Nada como recarregar as energias ao ar livre! #natureza #weekend #paz', likes: 128, comments: 27, time: '4d' },
+            { id: 7, content: 'Time reunido para mais um brainstorm! 🧠✨ As melhores ideias surgem quando estamos juntos. #teamwork #inovacao #criatividade', likes: 64, comments: 9, time: '5d' },
+            { id: 8, content: 'Arte em cada detalhe do dia a dia 🎨 Inspiração está em todos os lugares, basta saber observar. #arte #inspiracao #criatividade', likes: 105, comments: 21, time: '6d' },
+            { id: 9, content: 'Novo desafio aceito! 💪 Sempre em busca de evolução e crescimento pessoal. #desafio #crescimento #determinacao', likes: 87, comments: 16, time: '1sem' }
         ];
+
+        let currentPostView = 'grid';
         
         // Open/Close Modal
         function openCreateModal() {
@@ -1828,7 +1832,7 @@
         
         // Story Creator
         function openStoryCreator() {
-            alert('✨ Story Creator Avançado!\n\n🎨 Funcionalidades:\n• Editor split-screen\n• Múltiplos textos\n• Slider de tamanho da fonte\n• Drag & drop\n• Cores e fundos personalizáveis\n• Formatação completa\n\n📱 Disponível no app nativo React Native!');
+            alert('✨ Story Creator Avançado!\n\n🎨 Funcionalidades:\n• Editor split-screen\n• M��ltiplos textos\n• Slider de tamanho da fonte\n• Drag & drop\n• Cores e fundos personalizáveis\n• Formatação completa\n\n📱 Disponível no app nativo React Native!');
         }
         
         // Navigation System
